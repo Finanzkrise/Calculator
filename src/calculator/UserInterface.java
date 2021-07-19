@@ -4,6 +4,20 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
+    private static final String VALID_OPERATORS = "[+-]";
+
+    public void useProgram(){
+        Decimal number1 = getNumber();
+        String operatorSign = getOperator();
+        Decimal number2 = getNumber();
+        switch (operatorSign){
+            case "+":
+                new Addition(number1, number2);
+                break;
+            case "-":
+                new Substraction(number1, number2);
+        }
+    }
 
 
     public Decimal getNumber() {
@@ -18,7 +32,7 @@ public class UserInterface {
     public String getOperator() {
         String input;
         System.out.println("Please enter an operator");
-        input = readInput("[+]", "operator");
+        input = readInput(VALID_OPERATORS, "operator");
         System.out.println("input: " + input);
         return input;
     }
