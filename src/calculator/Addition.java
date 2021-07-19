@@ -8,8 +8,8 @@ public class Addition extends Operation {
     private static final int AFTER_COMMA = 0;
     private static final int BEFORE_COMMA = 1;
 
-    public Addition(Decimal number1, Decimal number2){
-        operate(number1,number2);
+    public Addition(Decimal number1, Decimal number2) {
+        operate(number1, number2);
     }
 
     @Override
@@ -58,7 +58,5 @@ public class Addition extends Operation {
         result = setOverflow(result);
         return result;
     }
-
-
 
 }

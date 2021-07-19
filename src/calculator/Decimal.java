@@ -11,7 +11,7 @@ public class Decimal {
     private static final int BEFORE_COMMA = 1;
     private boolean isNumberPositive = true;
 
-    public Decimal(String ...numbers) {
+    public Decimal(String... numbers) {
         for (String number : numbers) {
             setNumberListFromString(number);
         }
@@ -37,8 +37,9 @@ public class Decimal {
             numberList.get(BEFORE_COMMA).add(0, Integer.parseInt(numberAsStringBeforeComma[numberAsStringBeforeComma.length - i - 1]));
         }
     }
-    public String getVorzeichen(){
-        if (!isNumberPositive){
+
+    public String getVorzeichen() {
+        if (!isNumberPositive) {
             return "-";
         }
         return "";

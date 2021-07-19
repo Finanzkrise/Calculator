@@ -6,11 +6,11 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
     private static final String VALID_OPERATORS = "[+-]";
 
-    public void useProgram(){
+    public void useProgram() {
         Decimal number1 = getNumber();
         String operatorSign = getOperator();
         Decimal number2 = getNumber();
-        switch (operatorSign){
+        switch (operatorSign) {
             case "+":
                 new Addition(number1, number2);
                 break;
@@ -18,7 +18,6 @@ public class UserInterface {
                 new Substraction(number1, number2);
         }
     }
-
 
     public Decimal getNumber() {
         Decimal decimal = new Decimal();

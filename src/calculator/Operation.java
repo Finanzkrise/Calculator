@@ -2,8 +2,8 @@ package calculator;
 
 public abstract class Operation {
 
-
     abstract Decimal operate(Decimal number1, Decimal number2);
+
     abstract int setOverflow(int number);
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
@@ -36,13 +36,6 @@ public abstract class Operation {
     public void printResult(Decimal result) {
         System.out.println(result);
     }
-
-
-
-
-
-
-
 
 
 }

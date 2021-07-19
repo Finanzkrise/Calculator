@@ -12,7 +12,7 @@ public class Substraction extends Operation {
     private Decimal subtrahend;
     private boolean isResultPositive = true;
 
-    public Substraction(Decimal minuend, Decimal subtrahend){
+    public Substraction(Decimal minuend, Decimal subtrahend) {
         operate(minuend, subtrahend);
     }
 
@@ -37,8 +37,7 @@ public class Substraction extends Operation {
                 int tempResult = substractTwoDigits(getDigitAfterCommaAt(lengthOfLongerNumber, i, minuend, AFTER_COMMA), getDigitAfterCommaAt(lengthOfLongerNumber, i, substrahend, AFTER_COMMA));
                 resultAfterComma.add(0, tempResult);
             }
-        }
-        else {
+        } else {
             result.setIsPositive(false);
             int lengthOfLongerNumber = getLengthOfLongerNumberSection(BEFORE_COMMA);
             for (int i = 0; lengthOfLongerNumber > i; i++) {
@@ -99,7 +98,7 @@ public class Substraction extends Operation {
 
     public int setOverflow(int number) {
 
-        if(overflow = number < 0){
+        if (overflow = number < 0) {
             return number += 10;
         }
         return number;
