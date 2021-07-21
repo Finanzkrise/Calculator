@@ -1,14 +1,11 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Substraction extends Operation implements ListLocation {
     boolean overflow = false;
-    int lengthOfLongerNumber;
     private Decimal minuend;
     private Decimal subtrahend;
-    private boolean isResultPositive = true;
 
     public Substraction(Decimal minuend, Decimal subtrahend) {
         operate(minuend, subtrahend);
@@ -19,28 +16,26 @@ public class Substraction extends Operation implements ListLocation {
         setMinuend(minuend);
         setSubtrahend(subtrahend);
         Decimal result = new Decimal();
-        List<Integer> resultBeforeComma = new ArrayList<>();
-        List<Integer> resultAfterComma = new ArrayList<>();
-        boolean isMinuendHigher = isMinuendHigherThanSubtrahend(minuend, subtrahend);
 
-        result = substract(minuend, subtrahend, resultBeforeComma, resultAfterComma );
+        result = substract(minuend, subtrahend, getResultRightOfComma(), getResultLeftOfComma() );
 
-        printResult(result);
+        System.out.println(result);
         return result;
     }
 
-    public Decimal substract(Decimal minuend, Decimal subtrahend, List<Integer> resultBeforeComma, List<Integer> resultAfterComma){
+    public Decimal substract(Decimal minuend, Decimal subtrahend, List<Integer> resultRightOfComma, List<Integer> resultLeftOfComma){
         Decimal result = new Decimal();
         if (isMinuendHigherThanSubtrahend(minuend, subtrahend)) {
-            substractNumbersRightOfComma(minuend, subtrahend, resultBeforeComma);
-            substractNumbersLeftOfComma(minuend, subtrahend, resultAfterComma);
+            substractNumbersRightOfComma(minuend, subtrahend, resultRightOfComma);
+            substractNumbersLeftOfComma(minuend, subtrahend, resultLeftOfComma);
         } else {
             result.setIsPositive(false);
-            substractNumbersRightOfComma(subtrahend, minuend, resultBeforeComma);
-            substractNumbersLeftOfComma(subtrahend, minuend, resultAfterComma);
+            substractNumbersRightOfComma(subtrahend, minuend, resultRightOfComma);
+            substractNumbersLeftOfComma(subtrahend, minuend, resultLeftOfComma);
         }
-        result.getNumberList().add(resultAfterComma);
-        result.getNumberList().add(resultBeforeComma);
+
+        result.getNumberList().add(getResultLeftOfComma());
+        result.getNumberList().add(getResultRightOfComma());
         return  result;
     }
 
@@ -56,6 +51,7 @@ public class Substraction extends Operation implements ListLocation {
     private boolean isMinuendHigherThanSubtrahend(Decimal minuend, Decimal subtrahend) {
         // same size
         if (minuend.getNumberList().get(LEFT_OF_COMMA).size() == subtrahend.getNumberList().get(LEFT_OF_COMMA).size()) {
+            // compare digit on index i
             for (int i = 0; getLengthOfLongerNumberSection(minuend, subtrahend, LEFT_OF_COMMA) > i; i++) {
                 // minuend bigger
                 if (minuend.getNumberList().get(LEFT_OF_COMMA).get(i) > subtrahend.getNumberList().get(LEFT_OF_COMMA).get(i)) {
@@ -69,11 +65,11 @@ public class Substraction extends Operation implements ListLocation {
                 else {
                     for (int j = 0; getLengthOfLongerNumberSection(minuend, subtrahend, RIGHT_OF_COMMA) > j; j++) {
                         // minuend bigger
-                        if (minuend.getNumberList().get(LEFT_OF_COMMA).get(j) > subtrahend.getNumberList().get(LEFT_OF_COMMA).get(j)) {
+                        if (minuend.getNumberList().get(RIGHT_OF_COMMA).get(j) > subtrahend.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
                             System.out.println("true");
                             return true;
                             //subtrahend bigger
-                        } else if (minuend.getNumberList().get(LEFT_OF_COMMA).get(j) < subtrahend.getNumberList().get(LEFT_OF_COMMA).get(j)) {
+                        } else if (minuend.getNumberList().get(RIGHT_OF_COMMA).get(j) < subtrahend.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
                             return false;
                         }
                     }
@@ -95,7 +91,7 @@ public class Substraction extends Operation implements ListLocation {
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend, List<Integer> resultAfterComma) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(LEFT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitAfterCommaAt(lengthOfLongerNumber, i, minuend, LEFT_OF_COMMA), getDigitAfterCommaAt(lengthOfLongerNumber, i, substrahend, LEFT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, LEFT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, LEFT_OF_COMMA));
             resultAfterComma.add(0, tempResult);
         }
     }
@@ -103,7 +99,7 @@ public class Substraction extends Operation implements ListLocation {
     private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend, List<Integer> resultBeforeComma) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(RIGHT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitBeforeCommaAt(lengthOfLongerNumber, i, minuend, RIGHT_OF_COMMA), getDigitBeforeCommaAt(lengthOfLongerNumber, i, substrahend, RIGHT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, RIGHT_OF_COMMA), getDigitLeftOfComma(i, substrahend, RIGHT_OF_COMMA));
             resultBeforeComma.add(0, tempResult);
         }
     }
