@@ -1,7 +1,7 @@
 package calculator.test;
 
 import calculator.Decimal;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,5 +21,18 @@ public class DecimalTest {
         Decimal decimal = new Decimal("1,123");
         assertEquals(1, decimal.getNumberList().get(0).size());
         assertEquals(3, decimal.getNumberList().get(1).size());
+    }
+
+    @Test
+    void testConstructorWithTwoLists(){
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(0);
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(0);
+        Decimal decimal = new Decimal(list1, list2);
+        assertEquals(1, decimal.getNumberList().get(0).size());
+        assertEquals(1, decimal.getNumberList().get(1).size());
+        assertEquals(0, decimal.getNumberList().get(0).get(0));
+        assertEquals(0, decimal.getNumberList().get(1).get(0));
     }
 }
