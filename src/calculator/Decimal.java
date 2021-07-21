@@ -14,21 +14,22 @@ public class Decimal implements ListLocation {
             setNumberListFromString(number);
         }
     }
-    public Decimal(Decimal decimal){
+
+    public Decimal(Decimal decimal) {
         rightOfComma = decimal.numberList.get(RIGHT_OF_COMMA);
         leftOfComma = decimal.numberList.get(LEFT_OF_COMMA);
         this.numberList.add(leftOfComma);
         this.numberList.add(rightOfComma);
     }
-    public Decimal(boolean isListRightOfComma, List<Integer> list){
-        if (isListRightOfComma){
+
+    public Decimal(boolean isListRightOfComma, List<Integer> list) {
+        if (isListRightOfComma) {
             this.leftOfComma = new ArrayList<>();
             this.leftOfComma.add(0);
             this.rightOfComma = list;
             this.numberList.add(leftOfComma);
             this.numberList.add(list);
-        }
-        else{
+        } else {
             this.rightOfComma = new ArrayList<>();
             this.rightOfComma.add(0);
             this.leftOfComma = list;
@@ -36,14 +37,15 @@ public class Decimal implements ListLocation {
             this.numberList.add(rightOfComma);
         }
     }
-    public Decimal(List<Integer> listLeftOfComma, List<Integer> listRightOfComma){
-        if (!listLeftOfComma.isEmpty()){
+
+    public Decimal(List<Integer> listLeftOfComma, List<Integer> listRightOfComma) {
+        if (!listLeftOfComma.isEmpty()) {
             this.leftOfComma = listLeftOfComma;
-        }else
+        } else
             this.leftOfComma.add(0);
-        if (!listRightOfComma.isEmpty()){
+        if (!listRightOfComma.isEmpty()) {
             this.rightOfComma = listRightOfComma;
-        }else
+        } else
             this.rightOfComma.add(0);
         this.numberList.add(leftOfComma);
         this.numberList.add(rightOfComma);
@@ -90,6 +92,10 @@ public class Decimal implements ListLocation {
         }
         Zahl = getVorzeichen() + Zahl;
         return Zahl;
+    }
+
+    public boolean isNumberPositive() {
+        return isNumberPositive;
     }
 
     public void setIsPositive(boolean isPositive) {

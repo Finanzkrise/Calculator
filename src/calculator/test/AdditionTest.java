@@ -15,12 +15,22 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionDecimals(){
+    void testAdditionDecimalsSamePosition(){
         Decimal decimal1 = new Decimal("0,1");
         Decimal decimal2 = new Decimal("0,8");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
         assertEquals(0, ergebnis.getNumberList().get(0).get(0));
         assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+    }
+
+    @Test
+    void testAdditionDecimalsNotSamePosition(){
+        Decimal decimal1 = new Decimal("0,1");
+        Decimal decimal2 = new Decimal("0,08");
+        Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(0, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(1).get(1));
     }
 
     @Test
@@ -55,12 +65,16 @@ public class AdditionTest {
     @Test
     void testAdditionOverFlowMixed(){
         Decimal decimal1 = new Decimal("9,9");
-        Decimal decimal2 = new Decimal("0,1");
+        Decimal decimal2 = new Decimal("1,1");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
-        assertEquals(0, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
+
+
+
+
 
 
 }

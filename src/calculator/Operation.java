@@ -5,10 +5,7 @@ import java.util.List;
 
 public abstract class Operation {
 
-
     protected List<Integer> resultRightOfComma = new ArrayList<>();
-
-
     protected List<Integer> resultLeftOfComma = new ArrayList<>();
 
     public List<Integer> getResultLeftOfComma() {
@@ -49,7 +46,6 @@ public abstract class Operation {
     public boolean isIndexInBounds(int index, Decimal number, int location) {
         return index >= 0 && index < number.getNumberList().get(location).size();
     }
-
 
 
 }

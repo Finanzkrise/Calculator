@@ -18,11 +18,13 @@ public class SubstractionTest {
 
     @Test
     void testSubstractionIntFromSmallerInt(){
+        Substraction substraction = new Substraction();
         Decimal decimal1 = new Decimal("1,0");
         Decimal decimal2 = new Decimal("2,0");
-        Decimal ergebnis = new Decimal(new Substraction().operate(decimal1, decimal2));
+        Decimal ergebnis = substraction.operate(decimal1, decimal2);
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
         assertEquals("-1,0", ergebnis.toString());
     }
 
