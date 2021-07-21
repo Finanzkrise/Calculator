@@ -7,6 +7,10 @@ public class Substraction extends Operation implements ListLocation {
     private Decimal minuend;
     private Decimal subtrahend;
 
+    public Substraction(){
+
+    }
+
     public Substraction(Decimal minuend, Decimal subtrahend) {
         operate(minuend, subtrahend);
     }
@@ -91,7 +95,7 @@ public class Substraction extends Operation implements ListLocation {
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend, List<Integer> resultAfterComma) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(LEFT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, LEFT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, LEFT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, LEFT_OF_COMMA), getDigitLeftOfComma(i, substrahend, LEFT_OF_COMMA));
             resultAfterComma.add(0, tempResult);
         }
     }
@@ -99,7 +103,7 @@ public class Substraction extends Operation implements ListLocation {
     private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend, List<Integer> resultBeforeComma) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(RIGHT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, RIGHT_OF_COMMA), getDigitLeftOfComma(i, substrahend, RIGHT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, RIGHT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, RIGHT_OF_COMMA));
             resultBeforeComma.add(0, tempResult);
         }
     }
