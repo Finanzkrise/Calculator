@@ -6,9 +6,14 @@ import java.util.List;
 public class Multiplication extends Operation implements ListLocation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
+    Decimal result;
+
+    public Decimal getResult() {
+        return result;
+    }
 
     public Multiplication(Decimal number1, Decimal number2) {
-        operate(number1, number2);
+        result = operate(number1, number2);
     }
 
     public Decimal operate(Decimal number1, Decimal number2) {

@@ -1,15 +1,15 @@
 package calculator;
 
-public class Substraction extends Operation implements ListLocation {
+public class Subtraction extends Operation implements ListLocation {
     boolean overflow = false;
     private Decimal minuend;
     private Decimal subtrahend;
     private Decimal result;
 
-    public Substraction() {
+    public Subtraction() {
     }
 
-    public Substraction(Decimal minuend, Decimal subtrahend) {
+    public Subtraction(Decimal minuend, Decimal subtrahend) {
         result = operate(minuend, subtrahend);
     }
 

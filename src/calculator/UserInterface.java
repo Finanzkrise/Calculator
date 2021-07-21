@@ -15,7 +15,7 @@ public class UserInterface {
                 new Addition(number1, number2);
                 break;
             case "-":
-                new Substraction(number1, number2);
+                new Subtraction(number1, number2);
                 break;
             case "*":
                 new Multiplication(number1, number2);
@@ -27,7 +27,7 @@ public class UserInterface {
         Decimal decimal = new Decimal();
         String input;
         System.out.println("Please enter a number");
-        input = readInput("\\d*[,.]?\\d*", "number");
+        input = readInput("-?[\\d?]*[,.]?[\\d?]*", "number");
         decimal.setNumberListFromString(input);
         return decimal;
     }
