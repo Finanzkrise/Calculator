@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
-    private static final String VALID_OPERATORS = "[+-]";
+    private static final String VALID_OPERATORS = "[*+-]";
 
     public void useProgram() {
         Decimal number1 = getNumber();
@@ -16,6 +16,10 @@ public class UserInterface {
                 break;
             case "-":
                 new Substraction(number1, number2);
+                break;
+            case "*":
+                new Multiplication(number1, number2);
+                break;
         }
     }
 

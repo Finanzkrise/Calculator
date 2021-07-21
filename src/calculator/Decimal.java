@@ -14,6 +14,40 @@ public class Decimal implements ListLocation {
             setNumberListFromString(number);
         }
     }
+    public Decimal(Decimal decimal){
+        rightOfComma = decimal.numberList.get(RIGHT_OF_COMMA);
+        leftOfComma = decimal.numberList.get(LEFT_OF_COMMA);
+        this.numberList.add(leftOfComma);
+        this.numberList.add(rightOfComma);
+    }
+    public Decimal(boolean isListRightOfComma, List<Integer> list){
+        if (isListRightOfComma){
+            this.leftOfComma = new ArrayList<>();
+            this.leftOfComma.add(0);
+            this.rightOfComma = list;
+            this.numberList.add(leftOfComma);
+            this.numberList.add(list);
+        }
+        else{
+            this.rightOfComma = new ArrayList<>();
+            this.rightOfComma.add(0);
+            this.leftOfComma = list;
+            this.numberList.add(list);
+            this.numberList.add(rightOfComma);
+        }
+    }
+    public Decimal(List<Integer> listLeftOfComma, List<Integer> listRightOfComma){
+        if (!listLeftOfComma.isEmpty()){
+            this.leftOfComma = listLeftOfComma;
+        }else
+            this.leftOfComma.add(0);
+        if (!listRightOfComma.isEmpty()){
+            this.rightOfComma = listRightOfComma;
+        }else
+            this.rightOfComma.add(0);
+        this.numberList.add(leftOfComma);
+        this.numberList.add(rightOfComma);
+    }
 
     public List<List<Integer>> getNumberList() {
         return numberList;
@@ -23,16 +57,16 @@ public class Decimal implements ListLocation {
         numberList.add(leftOfComma);
         numberList.add(rightOfComma);
         String[] splitAtComma = input.split("[,.]");
-        String[] numberAsStringAfterComma = splitAtComma[0].split("");
-        String[] numberAsStringBeforeComma = splitAtComma[1].split("");
+        String[] numberAsStringLeftOfComma = splitAtComma[LEFT_OF_COMMA].split("");
+        String[] numberAsStringRightOfComma = splitAtComma[RIGHT_OF_COMMA].split("");
 
         // 0
-        for (int i = 0; i < numberAsStringAfterComma.length; i++) {
-            numberList.get(LEFT_OF_COMMA).add(0, Integer.parseInt(numberAsStringAfterComma[numberAsStringAfterComma.length - i - 1]));
+        for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
+            numberList.get(LEFT_OF_COMMA).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
         }
         // 1
-        for (int i = 0; i < numberAsStringBeforeComma.length; i++) {
-            numberList.get(RIGHT_OF_COMMA).add(0, Integer.parseInt(numberAsStringBeforeComma[numberAsStringBeforeComma.length - i - 1]));
+        for (int i = 0; i < numberAsStringRightOfComma.length; i++) {
+            numberList.get(RIGHT_OF_COMMA).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
         }
     }
 
@@ -45,14 +79,16 @@ public class Decimal implements ListLocation {
 
     @Override
     public String toString() {
-        String Zahl = getVorzeichen();
+        String Zahl = "";
         for (int i = 0; numberList.get(LEFT_OF_COMMA).size() > i; i++) {
             Zahl += numberList.get(0).get(i);
         }
+        Zahl = new Integer(Zahl).toString();
         Zahl += ",";
         for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
             Zahl += numberList.get(1).get(i);
         }
+        Zahl = getVorzeichen() + Zahl;
         return Zahl;
     }
 
