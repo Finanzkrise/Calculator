@@ -119,7 +119,7 @@ public class Multiplication extends Operation implements ListLocation {
                 );
                 System.out.println(getDigit(number1.getNumberList().get(RIGHT_OF_COMMA).size() - 1 - numberOneIndex, number1, RIGHT_OF_COMMA) + " * " + getDigit(numberTwoIndex, number2, LEFT_OF_COMMA));
 
-                if (numberOneIndex <= numberTwoIndex) {
+                if (numberOneIndex >= numberTwoIndex) {
                     getResultRightOfComma().add(0, tempResult);
 
                 } else {
