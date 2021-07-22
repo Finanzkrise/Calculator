@@ -55,6 +55,14 @@ public class Decimal implements ListLocation {
         return numberList;
     }
 
+    public boolean isNumberPositive() {
+        return isNumberPositive;
+    }
+
+    public void setIsPositive(boolean isPositive) {
+        this.isNumberPositive = isPositive;
+    }
+
     public void setNumberListFromString(String input) {
         numberList.add(leftOfComma);
         numberList.add(rightOfComma);
@@ -77,8 +85,7 @@ public class Decimal implements ListLocation {
             for (int i = 0; i < numberAsStringRightOfComma.length; i++) {
                 numberList.get(RIGHT_OF_COMMA).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
             }
-        }
-        else{
+        } else {
             numberAsStringLeftOfComma = input.split("");
             // left of comma
             for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
@@ -116,11 +123,4 @@ public class Decimal implements ListLocation {
         return zahl;
     }
 
-    public boolean isNumberPositive() {
-        return isNumberPositive;
-    }
-
-    public void setIsPositive(boolean isPositive) {
-        this.isNumberPositive = isPositive;
-    }
 }

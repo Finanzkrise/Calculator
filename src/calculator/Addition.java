@@ -3,9 +3,10 @@ package calculator;
 public class Addition extends Operation implements ListLocation {
     boolean overflow = false;
 
-    public Addition(){
+    public Addition() {
 
     }
+
     public Addition(Decimal number1, Decimal number2) {
         operate(number1, number2);
     }
@@ -23,7 +24,6 @@ public class Addition extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
-        System.out.println(result);
         return result;
     }
 
@@ -38,9 +38,15 @@ public class Addition extends Operation implements ListLocation {
     private void addNumbersRightOfComma(Decimal number1, Decimal number2) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = addTwoDigits(getDigitRightOfComma(lengthOfLongerNumber,i, number1, RIGHT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, number2, RIGHT_OF_COMMA));
+            int tempResult = addTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, number1, RIGHT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, number2, RIGHT_OF_COMMA));
             getResultRightOfComma().add(0, tempResult);
         }
+    }
+
+    public int addTwoDigits(int number1, int number2) {
+        int result = number1 + number2 + getOverflow();
+        result = setOverflow(result);
+        return result;
     }
 
     public int setOverflow(int number) {
@@ -54,12 +60,6 @@ public class Addition extends Operation implements ListLocation {
             return 1;
         }
         return 0;
-    }
-
-    public int addTwoDigits(int number1, int number2) {
-        int result = number1 + number2 + getOverflow();
-        result = setOverflow(result);
-        return result;
     }
 
 }

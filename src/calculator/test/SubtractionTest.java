@@ -3,12 +3,13 @@ package calculator.test;
 import calculator.Decimal;
 import calculator.Subtraction;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SubtractionTest {
 
     @Test
-    void testSubstractionFromBiggerInt(){
+    void testSubstractionFromBiggerInt() {
         Decimal decimal1 = new Decimal("2,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
@@ -17,7 +18,7 @@ public class SubtractionTest {
     }
 
     @Test
-    void testSubstractionIntFromSmallerInt(){
+    void testSubstractionIntFromSmallerInt() {
         Subtraction subtraction = new Subtraction();
         Decimal decimal1 = new Decimal("1,0");
         Decimal decimal2 = new Decimal("2,0");
@@ -29,7 +30,7 @@ public class SubtractionTest {
     }
 
     @Test
-    void testSubstractionFromBiggerDecimals(){
+    void testSubstractionFromBiggerDecimals() {
         Decimal decimal1 = new Decimal("0,6");
         Decimal decimal2 = new Decimal("0,4");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
@@ -38,7 +39,7 @@ public class SubtractionTest {
     }
 
     @Test
-    void testSubstractionFromBiggerIntOverflow(){
+    void testSubstractionFromBiggerIntOverflow() {
         Decimal decimal1 = new Decimal("10,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
@@ -47,7 +48,7 @@ public class SubtractionTest {
     }
 
     @Test
-    void testSubstractionFromBiggerDecimalOverflow(){
+    void testSubstractionFromBiggerDecimalOverflow() {
         Decimal decimal1 = new Decimal("10,0");
         Decimal decimal2 = new Decimal("0,1");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));

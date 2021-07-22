@@ -13,6 +13,10 @@ public class Subtraction extends Operation implements ListLocation {
         result = operate(minuend, subtrahend);
     }
 
+    public Decimal getResult() {
+        return result;
+    }
+
     @Override
     public Decimal operate(Decimal minuend, Decimal subtrahend) {
         Decimal result;
@@ -115,10 +119,6 @@ public class Subtraction extends Operation implements ListLocation {
             return 1;
         }
         return 0;
-    }
-
-    public Decimal getResult() {
-        return result;
     }
 
     public int getLengthOfLongerNumberSection(int location) {

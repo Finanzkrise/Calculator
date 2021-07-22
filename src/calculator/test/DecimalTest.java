@@ -67,6 +67,7 @@ public class DecimalTest {
         Decimal decimal = new Decimal("12");
         assertEquals(true, decimal.isNumberPositive());
     }
+
     @Test
     void testNegativity() {
         Decimal decimal = new Decimal("-12");

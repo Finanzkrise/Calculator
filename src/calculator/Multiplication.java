@@ -8,20 +8,19 @@ public class Multiplication extends Operation implements ListLocation {
     List<Decimal> decimalList = new ArrayList<>();
     Decimal result;
 
-    public Decimal getResult() {
-        return result;
-    }
 
     public Multiplication(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
+    }
+
+    public Decimal getResult() {
+        return result;
     }
 
     public Decimal operate(Decimal number1, Decimal number2) {
         Decimal result = new Decimal();
         result = multiply(number1, number2);
         result.getNumberList().get(LEFT_OF_COMMA).add(0, multiplyTwoDigits(0, 0));
-
-        System.out.println(result);
         return result;
     }
 
@@ -40,7 +39,7 @@ public class Multiplication extends Operation implements ListLocation {
                 );
                 getResultRightOfComma().add(0, tempResult);
             }
-            for (int i = 0; numberTwoIndex >= i; i++ ){
+            for (int i = 0; numberTwoIndex >= i; i++) {
                 getResultRightOfComma().add(0, multiplyTwoDigits(0, 0));
             }
             decimalList.add(new Decimal(true, getResultRightOfComma()));
@@ -53,7 +52,6 @@ public class Multiplication extends Operation implements ListLocation {
                         getDigit(number1.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, number1, LEFT_OF_COMMA),
                         getDigit(numberTwoIndex, number2, RIGHT_OF_COMMA)
                 );
-                System.out.println(getDigit(number1.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, number1, LEFT_OF_COMMA) + " * " + getDigit(numberTwoIndex, number2, RIGHT_OF_COMMA));
                 if (numberOneIndex <= numberTwoIndex) {
                     getResultRightOfComma().add(0, tempResult);
                 } else {
@@ -75,7 +73,6 @@ public class Multiplication extends Operation implements ListLocation {
                         getDigit(number1.getNumberList().get(RIGHT_OF_COMMA).size() - 1 - numberOneIndex, number1, RIGHT_OF_COMMA),
                         getDigit(numberTwoIndex, number2, LEFT_OF_COMMA)
                 );
-                System.out.println(getDigit(number1.getNumberList().get(RIGHT_OF_COMMA).size() - 1 - numberOneIndex, number1, RIGHT_OF_COMMA) + " * " + getDigit(numberTwoIndex, number2, LEFT_OF_COMMA));
                 if (numberOneIndex >= numberTwoIndex) {
                     getResultRightOfComma().add(0, tempResult);
                 } else {
@@ -90,13 +87,13 @@ public class Multiplication extends Operation implements ListLocation {
             // verbessern
             for (int numberOneIndex = 0; number1.getNumberList().get(LEFT_OF_COMMA).size() > numberOneIndex; numberOneIndex++) {
                 int tempResult = multiplyTwoDigits(
-                    getDigit(number1.getNumberList().get(LEFT_OF_COMMA).size() -1-numberOneIndex, number1, LEFT_OF_COMMA),
-                    getDigit(numberTwoIndex, number2, LEFT_OF_COMMA)
+                        getDigit(number1.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, number1, LEFT_OF_COMMA),
+                        getDigit(numberTwoIndex, number2, LEFT_OF_COMMA)
                 );
                 getResultLeftOfComma().add(0, tempResult);
             }
-            getResultLeftOfComma().add(0, multiplyTwoDigits(0,0));
-            for (int i = number2.getNumberList().get(LEFT_OF_COMMA).size() -1 - numberTwoIndex; 0 < i; i--){
+            getResultLeftOfComma().add(0, multiplyTwoDigits(0, 0));
+            for (int i = number2.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberTwoIndex; 0 < i; i--) {
                 getResultLeftOfComma().add(0);
             }
             decimalList.add(new Decimal(false, getResultLeftOfComma()));
@@ -107,16 +104,16 @@ public class Multiplication extends Operation implements ListLocation {
         }
 
 
-        while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0){
+        while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
             result.getNumberList().get(LEFT_OF_COMMA).remove(0);
-            if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1){
+            if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
                 break;
             }
         }
 
-        while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size()-1) == 0) {
-            result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() -1);
-            if (result.getNumberList().get(RIGHT_OF_COMMA).size() == 1){
+        while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
+            result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
+            if (result.getNumberList().get(RIGHT_OF_COMMA).size() == 1) {
                 break;
             }
         }

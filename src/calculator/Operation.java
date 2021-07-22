@@ -17,6 +17,7 @@ public abstract class Operation {
     }
 
     abstract int setOverflow(int number);
+
     abstract Decimal operate(Decimal number1, Decimal number2);
 
 

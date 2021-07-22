@@ -1,12 +1,14 @@
 package calculator.test;
+
 import calculator.Addition;
 import calculator.Decimal;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AdditionTest {
     @Test
-    void testAdditionInt(){
+    void testAdditionInt() {
         Decimal decimal1 = new Decimal("1,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -15,7 +17,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionDecimalsSamePosition(){
+    void testAdditionDecimalsSamePosition() {
         Decimal decimal1 = new Decimal("0,1");
         Decimal decimal2 = new Decimal("0,8");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -24,7 +26,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionDecimalsNotSamePosition(){
+    void testAdditionDecimalsNotSamePosition() {
         Decimal decimal1 = new Decimal("0,1");
         Decimal decimal2 = new Decimal("0,08");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -34,7 +36,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionMixed(){
+    void testAdditionMixed() {
         Decimal decimal1 = new Decimal("11,0");
         Decimal decimal2 = new Decimal("0,9");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -44,7 +46,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionOverFlowInt(){
+    void testAdditionOverFlowInt() {
         Decimal decimal1 = new Decimal("9,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -54,7 +56,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionOverFlowDecimals(){
+    void testAdditionOverFlowDecimals() {
         Decimal decimal1 = new Decimal("0,9");
         Decimal decimal2 = new Decimal("0,1");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -63,7 +65,7 @@ public class AdditionTest {
     }
 
     @Test
-    void testAdditionOverFlowMixed(){
+    void testAdditionOverFlowMixed() {
         Decimal decimal1 = new Decimal("9,9");
         Decimal decimal2 = new Decimal("1,1");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
@@ -71,10 +73,6 @@ public class AdditionTest {
         assertEquals(1, ergebnis.getNumberList().get(0).get(1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
-
-
-
-
 
 
 }
