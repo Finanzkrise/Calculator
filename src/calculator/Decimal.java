@@ -58,27 +58,41 @@ public class Decimal implements ListLocation {
     public void setNumberListFromString(String input) {
         numberList.add(leftOfComma);
         numberList.add(rightOfComma);
-        setNumberIsPositive(input);
-        String[] splitAtComma = input.split("[,.]");
-        String[] numberAsStringLeftOfComma = splitAtComma[LEFT_OF_COMMA].split("");
-        String[] numberAsStringRightOfComma = splitAtComma[RIGHT_OF_COMMA].split("");
+        String[] numberAsStringLeftOfComma;
+        String[] numberAsStringRightOfComma;
+        String[] splitAtComma;
 
-        // 0
-        for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
-            numberList.get(LEFT_OF_COMMA).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
+        input = setNumberIsPositive(input);
+        if (input.matches("[\\d?]*[,.][\\d?][\\d?]*")) {
+            splitAtComma = input.split("[,.]");
+            numberAsStringLeftOfComma = splitAtComma[LEFT_OF_COMMA].split("");
+            numberAsStringRightOfComma = splitAtComma[RIGHT_OF_COMMA].split("");
+
+            for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
+                if (numberAsStringLeftOfComma[0].equals("")) {
+                    numberAsStringLeftOfComma = new String[]{"0"};
+                }
+                numberList.get(LEFT_OF_COMMA).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
+            }
+            for (int i = 0; i < numberAsStringRightOfComma.length; i++) {
+                numberList.get(RIGHT_OF_COMMA).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
+            }
         }
-        // 1
-        for (int i = 0; i < numberAsStringRightOfComma.length; i++) {
-            numberList.get(RIGHT_OF_COMMA).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
+        else{
+            numberAsStringLeftOfComma = input.split("");
+            // left of comma
+            for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
+                numberList.get(LEFT_OF_COMMA).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
+            }
         }
     }
 
-    private void setNumberIsPositive(String input) {
-        String sign = String.valueOf(input.charAt(0));
-        if (sign.equals("-")) {
+    private String setNumberIsPositive(String input) {
+        if (String.valueOf(input.charAt(0)).equals("-")) {
             setIsPositive(false);
-            input.replace("-", "");
         }
+        input = input.replace("-", "");
+        return input;
     }
 
     public String getVorzeichen() {
@@ -90,17 +104,16 @@ public class Decimal implements ListLocation {
 
     @Override
     public String toString() {
-        String Zahl = "";
+        String zahl = "";
         for (int i = 0; numberList.get(LEFT_OF_COMMA).size() > i; i++) {
-            Zahl += numberList.get(0).get(i);
+            zahl += numberList.get(0).get(i);
         }
-        Zahl = new Integer(Zahl).toString();
-        Zahl += ",";
+        zahl += ",";
         for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
-            Zahl += numberList.get(1).get(i);
+            zahl += numberList.get(1).get(i);
         }
-        Zahl = getVorzeichen() + Zahl;
-        return Zahl;
+        zahl = getVorzeichen() + zahl;
+        return zahl;
     }
 
     public boolean isNumberPositive() {

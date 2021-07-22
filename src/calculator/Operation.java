@@ -16,9 +16,9 @@ public abstract class Operation {
         return resultRightOfComma;
     }
 
+    abstract int setOverflow(int number);
     abstract Decimal operate(Decimal number1, Decimal number2);
 
-    abstract int setOverflow(int number);
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
         if (number1.getNumberList().get(location).size() > number2.getNumberList().get(location).size()) {

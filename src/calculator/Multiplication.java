@@ -105,6 +105,21 @@ public class Multiplication extends Operation implements ListLocation {
         for (Decimal tempResult : decimalList) {
             result = new Addition().operate(result, tempResult);
         }
+
+
+        while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0){
+            result.getNumberList().get(LEFT_OF_COMMA).remove(0);
+            if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1){
+                break;
+            }
+        }
+
+        while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size()-1) == 0) {
+            result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() -1);
+            if (result.getNumberList().get(RIGHT_OF_COMMA).size() == 1){
+                break;
+            }
+        }
         return result;
     }
 
