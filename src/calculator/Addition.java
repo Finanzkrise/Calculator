@@ -31,21 +31,81 @@ public class Addition extends Operation implements ListLocation {
         return result;
     }
 
-    @Override
     void setPositivityOfResult(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
-          result.setIsPositive(true);
-
+            result.setIsPositive(true);
+        } else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
+            result.setIsPositive(false);
+        } else {
+            if (isNumberOneHigherThanNumberTwo(number1, number2)) {
+                if (number1.isNumberPositive() && !number2.isNumberPositive()) {
+                    Decimal changedNumber2 = number2;
+                    changedNumber2.setIsPositive(true);
+                    result = new Subtraction().operate(number1, changedNumber2);
+                    result.setIsPositive(true);
+                } else if (!number1.isNumberPositive() && number2.isNumberPositive()) {
+                    Decimal changedNumber1 = number1;
+                    changedNumber1.setIsPositive(true);
+                    result = new Subtraction().operate(changedNumber1, number2);
+                    result.setIsPositive(false);
+                }
+            } else {
+                if (number1.isNumberPositive() && !number2.isNumberPositive()) {
+                    Decimal changedNumber2 = number2;
+                    changedNumber2.setIsPositive(true);
+                    result = new Subtraction().operate(changedNumber2, number1);
+                    result.setIsPositive(false);
+                } else if (!number1.isNumberPositive() && number2.isNumberPositive()) {
+                    Decimal changedNumber1 = number1;
+                    changedNumber1.setIsPositive(true);
+                    result = new Subtraction().operate(number2, changedNumber1);
+                    result.setIsPositive(true);
+                }
+            }
         }
-        else if (number1.isNumberPositive() || number2.isNumberPositive()){
-           result = new Subtraction().operate(number1, number2);
-
-        }
-        else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
-        result.setIsPositive(false);
-        }
-
     }
+
+
+    @Override
+    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
+        // same size
+        if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+            // compare left of comma
+            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
+                // minuend bigger
+                if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                    return true;
+                    //subtrahend bigger
+                } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                    return false;
+                }
+                // compare RIGHT_OF_COMMA
+                else {
+                    for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
+                        // minuend bigger
+                        if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                            System.out.println("true");
+                            return true;
+                            //subtrahend bigger
+                        } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        //minuend bigger
+        else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+            System.out.println("true");
+            return true;
+        }
+        // subtrahend bigger
+        else {
+            return false;
+        }
+        return false;
+    }
+
 
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA);

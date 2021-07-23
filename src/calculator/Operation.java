@@ -31,6 +31,8 @@ public abstract class Operation {
 
     abstract void setPositivityOfResult(Decimal number1, Decimal number2);
 
+    public abstract boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2);
+
     public Decimal trimResult(Decimal result) {
         Decimal trimmedResult = result;
 

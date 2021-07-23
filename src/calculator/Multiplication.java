@@ -7,6 +7,10 @@ public class Multiplication extends Operation implements ListLocation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
 
+    public Multiplication() {
+
+    }
+
     public Multiplication(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
     }
@@ -21,6 +25,11 @@ public class Multiplication extends Operation implements ListLocation {
     @Override
     void setPositivityOfResult(Decimal number1, Decimal number2) {
 
+    }
+
+    @Override
+    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
+        return false;
     }
 
     private Decimal multiply(Decimal number1, Decimal number2) {
@@ -71,6 +80,7 @@ public class Multiplication extends Operation implements ListLocation {
         }
 
         for (Decimal tempResult : decimalList) {
+            System.out.println("current result to add: " + tempResult);
             result = new Addition().operate(result, tempResult);
         }
 

@@ -151,4 +151,43 @@ public class AdditionTest {
         assertEquals(false, ergebnis.isNumberPositive());
     }
 
+    @Test
+    void testAdditionNegativeDecPositiveInt(){
+        Decimal decimal1 = new Decimal("-0,5");
+        Decimal decimal2 = new Decimal("3");
+        Decimal ergebnis = new Addition().operate(decimal1, decimal2);
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+        System.out.println(ergebnis);
+
+        decimal1 = new Decimal("-0,5");
+        decimal2 = new Decimal("3");
+        ergebnis = new Addition().operate(decimal2, decimal1);
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testAdditionPositiveMixedNegativeMixed(){
+        Decimal decimal1 = new Decimal("10,15");
+        Decimal decimal2 = new Decimal("-3,7");
+        Decimal ergebnis = new Addition().operate(decimal1, decimal2);
+        assertEquals(6, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(4, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+        System.out.println(ergebnis);
+
+        decimal1 = new Decimal("10,15");
+        decimal2 = new Decimal("-3,7");
+        ergebnis = new Addition().operate(decimal2, decimal1);
+        assertEquals(6, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(4, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+
 }

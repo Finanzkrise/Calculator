@@ -13,13 +13,11 @@ public class MultiplicationTest {
     void testMultiplicationIntInt() {
         Decimal decimal1 = new Decimal("2,0");
         Decimal decimal2 = new Decimal("1,0");
-        Multiplication multiplication = new Multiplication(decimal1, decimal2);
-        Decimal ergebnis = multiplication.getResult();
+        Decimal ergebnis = new Multiplication().operate(decimal1, decimal2);
         assertEquals(2, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
 
-        multiplication = new Multiplication(decimal2, decimal1);
-        ergebnis = multiplication.getResult();
+        ergebnis = new Multiplication().operate(decimal2, decimal1);
         assertEquals(2, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
