@@ -20,6 +20,7 @@ public class Decimal implements ListLocation {
         leftOfComma = decimal.numberList.get(LEFT_OF_COMMA);
         this.numberList.add(leftOfComma);
         this.numberList.add(rightOfComma);
+        this.isNumberPositive = decimal.isNumberPositive;
     }
 
     public Decimal(boolean isListRightOfComma, List<Integer> list) {

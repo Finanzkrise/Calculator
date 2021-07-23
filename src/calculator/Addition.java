@@ -14,8 +14,7 @@ public class Addition extends Operation implements ListLocation {
 
     @Override
     public Decimal operate(Decimal number1, Decimal number2) {
-        Decimal result = new Decimal();
-
+        result = new Decimal();
         addNumbersRightOfComma(number1, number2);
         addNumbersLeftOfComma(number1, number2);
 
@@ -25,7 +24,26 @@ public class Addition extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
-        result = trimResult(result);
+        result = new Decimal(resultLeftOfComma, resultRightOfComma);
+        setPositivityOfResult(number1, number2);
+        System.out.println(result.isNumberPositive());
+        //result = trimResult(result);
+        return result;
+    }
+
+    @Override
+    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
+        if (number1.isNumberPositive() && number2.isNumberPositive()) {
+          result.setIsPositive(true);
+
+        }
+        else if (number1.isNumberPositive() || number2.isNumberPositive()){
+           result = new Subtraction().operate(number1, number2);
+
+        }
+        else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
+        result.setIsPositive(false);
+        }
         return result;
     }
 

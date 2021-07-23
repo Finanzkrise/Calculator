@@ -18,6 +18,11 @@ public class Multiplication extends Operation implements ListLocation {
         return result;
     }
 
+    @Override
+    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
+        return null;
+    }
+
     private Decimal multiply(Decimal number1, Decimal number2) {
         Decimal result = new Decimal("0,0");
 

@@ -23,6 +23,11 @@ public class Subtraction extends Operation implements ListLocation {
         return result;
     }
 
+    @Override
+    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
+        return null;
+    }
+
     public Decimal subtract(Decimal minuend, Decimal subtrahend) {
         Decimal result = new Decimal();
         if (isMinuendHigherThanSubtrahend(minuend, subtrahend)) {
@@ -36,7 +41,8 @@ public class Subtraction extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
-        result = trimResult(result);
+
+        //result = trimResult(result);
         return result;
     }
 

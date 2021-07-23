@@ -7,7 +7,7 @@ public abstract class Operation {
 
     protected List<Integer> resultRightOfComma = new ArrayList<>();
     protected List<Integer> resultLeftOfComma = new ArrayList<>();
-    Decimal result;
+    protected Decimal result;
 
     public List<Integer> getResultLeftOfComma() {
         return resultLeftOfComma;
@@ -21,9 +21,15 @@ public abstract class Operation {
         return result;
     }
 
+    public void setResult(Decimal result) {
+        this.result = result;
+    }
+
     abstract int setOverflow(int number);
 
     abstract Decimal operate(Decimal number1, Decimal number2);
+
+    abstract Decimal setPositivityOfResult(Decimal number1, Decimal number2);
 
     public Decimal trimResult(Decimal result) {
         Decimal trimmedResult = result;

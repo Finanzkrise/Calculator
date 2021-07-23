@@ -14,6 +14,10 @@ public class AdditionTest {
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
         assertEquals(2, ergebnis.getNumberList().get(0).get(0));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
 
     @Test
@@ -23,6 +27,10 @@ public class AdditionTest {
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
         assertEquals(0, ergebnis.getNumberList().get(0).get(0));
         assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(0, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
     }
 
     @Test
@@ -30,6 +38,11 @@ public class AdditionTest {
         Decimal decimal1 = new Decimal("0,1");
         Decimal decimal2 = new Decimal("0,08");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(0, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(1).get(1));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
         assertEquals(0, ergebnis.getNumberList().get(0).get(0));
         assertEquals(1, ergebnis.getNumberList().get(1).get(0));
         assertEquals(8, ergebnis.getNumberList().get(1).get(1));
@@ -43,6 +56,11 @@ public class AdditionTest {
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(1, ergebnis.getNumberList().get(0).get(1));
         assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
     }
 
     @Test
@@ -50,6 +68,11 @@ public class AdditionTest {
         Decimal decimal1 = new Decimal("9,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(0, ergebnis.getNumberList().get(0).get(1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
@@ -62,6 +85,10 @@ public class AdditionTest {
         Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
 
     @Test
@@ -72,7 +99,56 @@ public class AdditionTest {
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(1, ergebnis.getNumberList().get(0).get(1));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
 
+    @Test
+    void testAdditionNegativeIntNegativeInt(){
+        Decimal decimal1 = new Decimal("-1");
+        Decimal decimal2 = new Decimal("-1");
+        Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testAdditionNegativeDecNegativeInt(){
+        Decimal decimal1 = new Decimal("-0,5");
+        Decimal decimal2 = new Decimal("-1");
+        Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testAdditionNegativeDecNegativeDec(){
+        Decimal decimal1 = new Decimal("-0,5");
+        Decimal decimal2 = new Decimal("-0,5");
+        Decimal ergebnis = new Decimal(new Addition().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        ergebnis = new Decimal(new Addition().operate(decimal2, decimal1));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
 
 }
