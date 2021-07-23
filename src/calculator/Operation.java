@@ -3,7 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Operation {
+public abstract class Operation implements ListLocation {
 
     protected List<Integer> resultRightOfComma = new ArrayList<>();
     protected List<Integer> resultLeftOfComma = new ArrayList<>();
@@ -40,22 +40,23 @@ public abstract class Operation {
 
 
         // remove 0's at end of RIGHT_OF_COMMA
-/*
-        while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
-            result.getNumberList().get(LEFT_OF_COMMA).remove(0);
-            if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
+
+        if (trimmedResult.getNumberList().get(LEFT_OF_COMMA).size() > 1)
+        while (trimmedResult.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
+            trimmedResult.getNumberList().get(LEFT_OF_COMMA).remove(0);
+            if (trimmedResult.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
                 break;
             }
         }
 
-
-        while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0 ){
-                result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
-            if (result.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-                break;
+        if (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() >1) {
+            while (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).get(trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
+                trimmedResult.getNumberList().get(RIGHT_OF_COMMA).remove(trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
+                if (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
+                    break;
+                }
             }
         }
-*/
 
         return trimmedResult;
     }

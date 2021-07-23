@@ -15,19 +15,24 @@ public class Addition extends Operation implements ListLocation {
     @Override
     public Decimal operate(Decimal number1, Decimal number2) {
         result = new Decimal();
+
+        result = add(number1, number2);
+        setPositivityOfResult(number1, number2);
+
+        result = trimResult(result);
+        return result;
+    }
+
+    public Decimal add(Decimal number1, Decimal number2){
+        Decimal result = new Decimal();
         addNumbersRightOfComma(number1, number2);
         addNumbersLeftOfComma(number1, number2);
-
         if (overflow) {
             getResultLeftOfComma().add(0, addTwoDigits(0, 0));
         }
-
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
-        setPositivityOfResult(number1, number2);
-        System.out.println(result.isNumberPositive());
-        //result = trimResult(result);
         return result;
     }
 

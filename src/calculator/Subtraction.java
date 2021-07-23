@@ -86,7 +86,7 @@ public class Subtraction extends Operation implements ListLocation {
         result.getNumberList().add(getResultRightOfComma());
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
 
-        //result = trimResult(result);
+        result = trimResult(result);
         return result;
     }
 

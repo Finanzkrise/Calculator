@@ -43,7 +43,7 @@ public class SubtractionTest {
         Decimal decimal1 = new Decimal("10,0");
         Decimal decimal2 = new Decimal("1,0");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
-        assertEquals(9, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(9, ergebnis.getNumberList().get(0).get(0));
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
 
@@ -52,7 +52,7 @@ public class SubtractionTest {
         Decimal decimal1 = new Decimal("10,0");
         Decimal decimal2 = new Decimal("0,1");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
-        assertEquals(9, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(9, ergebnis.getNumberList().get(0).get(0));
         assertEquals(9, ergebnis.getNumberList().get(1).get(0));
     }
 

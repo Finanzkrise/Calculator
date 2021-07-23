@@ -174,7 +174,7 @@ public class AdditionTest {
         Decimal decimal1 = new Decimal("10,15");
         Decimal decimal2 = new Decimal("-3,7");
         Decimal ergebnis = new Addition().operate(decimal1, decimal2);
-        assertEquals(6, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(6, ergebnis.getNumberList().get(0).get(0));
         assertEquals(4, ergebnis.getNumberList().get(1).get(0));
         assertEquals(5, ergebnis.getNumberList().get(1).get(1));
         assertEquals(true, ergebnis.isNumberPositive());
@@ -183,7 +183,7 @@ public class AdditionTest {
         decimal1 = new Decimal("10,15");
         decimal2 = new Decimal("-3,7");
         ergebnis = new Addition().operate(decimal2, decimal1);
-        assertEquals(6, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(6, ergebnis.getNumberList().get(0).get(0));
         assertEquals(4, ergebnis.getNumberList().get(1).get(0));
         assertEquals(5, ergebnis.getNumberList().get(1).get(1));
         assertEquals(true, ergebnis.isNumberPositive());

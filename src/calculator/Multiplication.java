@@ -19,6 +19,7 @@ public class Multiplication extends Operation implements ListLocation {
         Decimal result = new Decimal();
         result = multiply(number1, number2);
         result.getNumberList().get(LEFT_OF_COMMA).add(0, multiplyTwoDigits(0, 0));
+        result = trimResult(result);
         return result;
     }
 
