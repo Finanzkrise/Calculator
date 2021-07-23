@@ -29,36 +29,26 @@ public abstract class Operation implements ListLocation {
 
     abstract Decimal operate(Decimal number1, Decimal number2);
 
-    abstract void setPositivityOfResult(Decimal number1, Decimal number2);
+    abstract void executeOperation(Decimal number1, Decimal number2);
 
     public abstract boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2);
 
-    public Decimal trimResult(Decimal result) {
-        Decimal trimmedResult = result;
-
-        // remove 0's at beginning of LEFT_OF_COMMA
-
-
-        // remove 0's at end of RIGHT_OF_COMMA
-
-        if (trimmedResult.getNumberList().get(LEFT_OF_COMMA).size() > 1)
-        while (trimmedResult.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
-            trimmedResult.getNumberList().get(LEFT_OF_COMMA).remove(0);
-            if (trimmedResult.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
-                break;
+    public void trimResult() {
+        if (result.getNumberList().get(LEFT_OF_COMMA).size() > 1)
+            while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
+                result.getNumberList().get(LEFT_OF_COMMA).remove(0);
+                if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
+                    break;
+                }
             }
-        }
-
-        if (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() >1) {
-            while (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).get(trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
-                trimmedResult.getNumberList().get(RIGHT_OF_COMMA).remove(trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
-                if (trimmedResult.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
+        if (result.getNumberList().get(RIGHT_OF_COMMA).size() > 1) {
+            while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
+                result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
+                if (result.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
                     break;
                 }
             }
         }
-
-        return trimmedResult;
     }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {

@@ -2,8 +2,6 @@ package calculator;
 
 public class Subtraction extends Operation implements ListLocation {
     boolean overflow = false;
-    private Decimal minuend;
-    private Decimal subtrahend;
 
     public Subtraction() {
     }
@@ -14,62 +12,9 @@ public class Subtraction extends Operation implements ListLocation {
 
     @Override
     public Decimal operate(Decimal minuend, Decimal subtrahend) {
-        result = new Decimal();
-        this.minuend = minuend;
-        this.subtrahend = subtrahend;
-
-        result = subtract(minuend, subtrahend);
-        setPositivityOfResult(minuend, subtrahend);
+        executeOperation(minuend, subtrahend);
+        trimResult();
         return result;
-    }
-
-    @Override
-    void setPositivityOfResult(Decimal minuend, Decimal subtrahend) {
-        if (isNumberOneHigherThanNumberTwo(minuend, subtrahend)) {
-            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
-                result.setIsPositive(true);
-            }
-            else if (minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
-                Decimal changedSubtrahend = subtrahend;
-                changedSubtrahend.setIsPositive(true);
-                result = new Addition().operate(minuend, changedSubtrahend);
-            }
-            else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
-                Decimal changedMinuend = minuend;
-                changedMinuend.setIsPositive(true);
-                result = new Addition().operate(subtrahend, changedMinuend);
-                result.setIsPositive(false);
-            }
-            else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
-                Decimal changedMinuend = minuend;
-                changedMinuend.setIsPositive(true);
-                Decimal changedSubtrahend = subtrahend;
-                changedSubtrahend.setIsPositive(true);
-                result = new Addition().operate(changedMinuend, changedSubtrahend);
-                result.setIsPositive(false);
-            }
-        }
-        else {
-            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
-                // funktioniert, aber anders als der rest
-                result.setIsPositive(false);
-            }
-            else if (minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
-                Decimal changedSubtrahend = subtrahend;
-                changedSubtrahend.setIsPositive(true);
-                result = new Addition().operate(minuend, changedSubtrahend);
-                result.setIsPositive(true);
-            }
-            else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
-                Decimal changedMinuend = minuend;
-                changedMinuend.setIsPositive(true);
-                result = new Addition().operate(changedMinuend, subtrahend);
-                result.setIsPositive(false);
-            }
-            else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
-                result.setIsPositive(true);
-            }
-        }
     }
 
     public Decimal subtract(Decimal minuend, Decimal subtrahend) {
@@ -86,8 +31,56 @@ public class Subtraction extends Operation implements ListLocation {
         result.getNumberList().add(getResultRightOfComma());
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
 
-        result = trimResult(result);
+
         return result;
+    }
+
+    @Override
+    void executeOperation(Decimal minuend, Decimal subtrahend) {
+        if (isNumberOneHigherThanNumberTwo(minuend, subtrahend)) {
+            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result = subtract(minuend, subtrahend);
+                result.setIsPositive(true);
+            } else if (minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                Decimal changedSubtrahend = subtrahend;
+                changedSubtrahend.setIsPositive(true);
+                result = new Addition().operate(minuend, changedSubtrahend);
+            } else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                Decimal changedMinuend = minuend;
+                changedMinuend.setIsPositive(true);
+                result = new Addition().operate(subtrahend, changedMinuend);
+                result.setIsPositive(false);
+            } else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                Decimal changedMinuend = minuend;
+                changedMinuend.setIsPositive(true);
+                Decimal changedSubtrahend = subtrahend;
+                changedSubtrahend.setIsPositive(true);
+                result = new Addition().operate(changedMinuend, changedSubtrahend);
+                result.setIsPositive(false);
+            }
+        } else {
+            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result = subtract(subtrahend, minuend);
+                result.setIsPositive(false);
+            } else if (minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                Decimal changedSubtrahend = subtrahend;
+                changedSubtrahend.setIsPositive(true);
+                result = new Addition().operate(minuend, changedSubtrahend);
+                result.setIsPositive(true);
+            } else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                Decimal changedMinuend = minuend;
+                changedMinuend.setIsPositive(true);
+                result = new Addition().operate(changedMinuend, subtrahend);
+                result.setIsPositive(false);
+            } else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                Decimal changedMinuend = minuend;
+                changedMinuend.setIsPositive(true);
+                Decimal changedSubtrahend = subtrahend;
+                changedSubtrahend.setIsPositive(true);
+                result = subtract(changedSubtrahend, changedMinuend);
+                result.setIsPositive(true);
+            }
+        }
     }
 
     public boolean isNumberOneHigherThanNumberTwo(Decimal minuend, Decimal subtrahend) {
@@ -132,7 +125,7 @@ public class Subtraction extends Operation implements ListLocation {
     }
 
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(LEFT_OF_COMMA);
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, LEFT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
             int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, LEFT_OF_COMMA), getDigitLeftOfComma(i, substrahend, LEFT_OF_COMMA));
             getResultLeftOfComma().add(0, tempResult);
@@ -140,7 +133,7 @@ public class Subtraction extends Operation implements ListLocation {
     }
 
     private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(RIGHT_OF_COMMA);
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, RIGHT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
             int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, RIGHT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, RIGHT_OF_COMMA));
             getResultRightOfComma().add(0, tempResult);
@@ -168,7 +161,7 @@ public class Subtraction extends Operation implements ListLocation {
         return 0;
     }
 
-    public int getLengthOfLongerNumberSection(int location) {
+    public int getLengthOfLongerNumberSection(Decimal minuend, Decimal subtrahend, int location) {
         if (minuend.getNumberList().get(location).size() > subtrahend.getNumberList().get(location).size()) {
             return minuend.getNumberList().get(location).size();
         }

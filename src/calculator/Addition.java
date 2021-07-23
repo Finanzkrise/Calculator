@@ -3,9 +3,7 @@ package calculator;
 public class Addition extends Operation implements ListLocation {
     boolean overflow = false;
 
-
     public Addition() {
-
     }
 
     public Addition(Decimal number1, Decimal number2) {
@@ -14,16 +12,12 @@ public class Addition extends Operation implements ListLocation {
 
     @Override
     public Decimal operate(Decimal number1, Decimal number2) {
-        result = new Decimal();
-
-        result = add(number1, number2);
-        setPositivityOfResult(number1, number2);
-
-        result = trimResult(result);
+        executeOperation(number1, number2);
+        trimResult();
         return result;
     }
 
-    public Decimal add(Decimal number1, Decimal number2){
+    public Decimal addPositiveNumbers(Decimal number1, Decimal number2) {
         Decimal result = new Decimal();
         addNumbersRightOfComma(number1, number2);
         addNumbersLeftOfComma(number1, number2);
@@ -36,10 +30,12 @@ public class Addition extends Operation implements ListLocation {
         return result;
     }
 
-    void setPositivityOfResult(Decimal number1, Decimal number2) {
+    void executeOperation(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
+            result = addPositiveNumbers(number1, number2);
             result.setIsPositive(true);
         } else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
+            result = addPositiveNumbers(number1, number2);
             result.setIsPositive(false);
         } else {
             if (isNumberOneHigherThanNumberTwo(number1, number2)) {
@@ -69,7 +65,6 @@ public class Addition extends Operation implements ListLocation {
             }
         }
     }
-
 
     @Override
     public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
@@ -110,7 +105,6 @@ public class Addition extends Operation implements ListLocation {
         }
         return false;
     }
-
 
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA);

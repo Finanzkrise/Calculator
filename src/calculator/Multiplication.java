@@ -18,13 +18,13 @@ public class Multiplication extends Operation implements ListLocation {
     public Decimal operate(Decimal number1, Decimal number2) {
         result = multiply(number1, number2);
         result.getNumberList().get(LEFT_OF_COMMA).add(0, multiplyTwoDigits(0, 0));
-        setPositivityOfResult(number1, number2);
-        result = trimResult(result);
+        executeOperation(number1, number2);
+        trimResult();
         return result;
     }
 
     @Override
-    void setPositivityOfResult(Decimal number1, Decimal number2) {
+    void executeOperation(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
             result.setIsPositive(true);
         } else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
