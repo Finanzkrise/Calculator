@@ -4,17 +4,12 @@ public class Subtraction extends Operation implements ListLocation {
     boolean overflow = false;
     private Decimal minuend;
     private Decimal subtrahend;
-    private Decimal result;
 
     public Subtraction() {
     }
 
     public Subtraction(Decimal minuend, Decimal subtrahend) {
         result = operate(minuend, subtrahend);
-    }
-
-    public Decimal getResult() {
-        return result;
     }
 
     @Override
@@ -41,6 +36,7 @@ public class Subtraction extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
+        result = trimResult(result);
         return result;
     }
 

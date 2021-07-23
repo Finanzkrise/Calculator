@@ -7,6 +7,7 @@ public abstract class Operation {
 
     protected List<Integer> resultRightOfComma = new ArrayList<>();
     protected List<Integer> resultLeftOfComma = new ArrayList<>();
+    Decimal result;
 
     public List<Integer> getResultLeftOfComma() {
         return resultLeftOfComma;
@@ -16,10 +17,40 @@ public abstract class Operation {
         return resultRightOfComma;
     }
 
+    public Decimal getResult() {
+        return result;
+    }
+
     abstract int setOverflow(int number);
 
     abstract Decimal operate(Decimal number1, Decimal number2);
 
+    public Decimal trimResult(Decimal result) {
+        Decimal trimmedResult = result;
+
+        // remove 0's at beginning of LEFT_OF_COMMA
+
+
+        // remove 0's at end of RIGHT_OF_COMMA
+/*
+        while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
+            result.getNumberList().get(LEFT_OF_COMMA).remove(0);
+            if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
+                break;
+            }
+        }
+
+
+        while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0 ){
+                result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
+            if (result.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+                break;
+            }
+        }
+*/
+
+        return trimmedResult;
+    }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
         if (number1.getNumberList().get(location).size() > number2.getNumberList().get(location).size()) {

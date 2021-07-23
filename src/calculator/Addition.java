@@ -3,12 +3,13 @@ package calculator;
 public class Addition extends Operation implements ListLocation {
     boolean overflow = false;
 
+
     public Addition() {
 
     }
 
     public Addition(Decimal number1, Decimal number2) {
-        operate(number1, number2);
+        result = operate(number1, number2);
     }
 
     @Override
@@ -24,6 +25,7 @@ public class Addition extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
+        result = trimResult(result);
         return result;
     }
 

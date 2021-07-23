@@ -12,13 +12,13 @@ public class UserInterface {
         Decimal number2 = getNumber();
         switch (operatorSign) {
             case "+":
-                new Addition(number1, number2);
+                System.out.println(new Addition(number1, number2).getResult());
                 break;
             case "-":
-                new Subtraction(number1, number2);
+                System.out.println(new Subtraction(number1, number2).getResult());
                 break;
             case "*":
-                new Multiplication(number1, number2);
+                System.out.println(new Multiplication(number1, number2).getResult());
                 break;
         }
     }
