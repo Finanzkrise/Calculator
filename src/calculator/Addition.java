@@ -32,7 +32,7 @@ public class Addition extends Operation implements ListLocation {
     }
 
     @Override
-    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
+    void setPositivityOfResult(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
           result.setIsPositive(true);
 
@@ -44,7 +44,7 @@ public class Addition extends Operation implements ListLocation {
         else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
         result.setIsPositive(false);
         }
-        return result;
+
     }
 
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {

@@ -14,18 +14,45 @@ public class Subtraction extends Operation implements ListLocation {
 
     @Override
     public Decimal operate(Decimal minuend, Decimal subtrahend) {
-        Decimal result;
+        result = new Decimal();
         this.minuend = minuend;
         this.subtrahend = subtrahend;
 
         result = subtract(minuend, subtrahend);
-        System.out.println(result);
+        setPositivityOfResult(minuend, subtrahend);
         return result;
     }
 
     @Override
-    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
-        return null;
+    void setPositivityOfResult(Decimal minuend, Decimal subtrahend) {
+        if (isMinuendHigherThanSubtrahend(minuend, subtrahend)) {
+            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result.setIsPositive(true);
+            }
+            else if (minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                result.setIsPositive(true);
+            }
+            else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result.setIsPositive(false);
+            }
+            else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                result.setIsPositive(false);
+            }
+        }
+        else {
+            if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result.setIsPositive(false);
+            }
+            else if (minuend.isNumberPositive() || !subtrahend.isNumberPositive()) {
+                result.setIsPositive(true);
+            }
+            else if (!minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
+                result.setIsPositive(false);
+            }
+            else if (!minuend.isNumberPositive() && !subtrahend.isNumberPositive()) {
+                result.setIsPositive(true);
+            }
+        }
     }
 
     public Decimal subtract(Decimal minuend, Decimal subtrahend) {
@@ -41,6 +68,7 @@ public class Subtraction extends Operation implements ListLocation {
 
         result.getNumberList().add(getResultLeftOfComma());
         result.getNumberList().add(getResultRightOfComma());
+        result = new Decimal(resultLeftOfComma, resultRightOfComma);
 
         //result = trimResult(result);
         return result;

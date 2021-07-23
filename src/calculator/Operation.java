@@ -29,7 +29,7 @@ public abstract class Operation {
 
     abstract Decimal operate(Decimal number1, Decimal number2);
 
-    abstract Decimal setPositivityOfResult(Decimal number1, Decimal number2);
+    abstract void setPositivityOfResult(Decimal number1, Decimal number2);
 
     public Decimal trimResult(Decimal result) {
         Decimal trimmedResult = result;

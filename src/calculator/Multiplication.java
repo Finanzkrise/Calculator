@@ -19,8 +19,8 @@ public class Multiplication extends Operation implements ListLocation {
     }
 
     @Override
-    Decimal setPositivityOfResult(Decimal number1, Decimal number2) {
-        return null;
+    void setPositivityOfResult(Decimal number1, Decimal number2) {
+
     }
 
     private Decimal multiply(Decimal number1, Decimal number2) {
