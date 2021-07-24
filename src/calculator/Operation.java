@@ -31,7 +31,44 @@ public abstract class Operation implements ListLocation {
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 
-    public abstract boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2);
+    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
+        // same size
+        if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+            // compare left of comma
+            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
+                // minuend bigger
+                if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                    return true;
+                    //subtrahend bigger
+                } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                    return false;
+                }
+                // compare RIGHT_OF_COMMA
+                else {
+                    for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
+                        // minuend bigger
+                        if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                            System.out.println("true");
+                            return true;
+                            //subtrahend bigger
+                        } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        //minuend bigger
+        else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+            System.out.println("true");
+            return true;
+        }
+        // subtrahend bigger
+        else {
+            return false;
+        }
+        return false;
+    }
 
     public void trimResult() {
         if (result.getNumberList().get(LEFT_OF_COMMA).size() > 1)

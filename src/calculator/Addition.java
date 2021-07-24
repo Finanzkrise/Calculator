@@ -18,14 +18,11 @@ public class Addition extends Operation implements ListLocation {
     }
 
     public Decimal addPositiveNumbers(Decimal number1, Decimal number2) {
-        Decimal result = new Decimal();
         addNumbersRightOfComma(number1, number2);
         addNumbersLeftOfComma(number1, number2);
         if (overflow) {
             getResultLeftOfComma().add(0, addTwoDigits(0, 0));
         }
-        result.getNumberList().add(getResultLeftOfComma());
-        result.getNumberList().add(getResultRightOfComma());
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
         return result;
     }
@@ -66,46 +63,6 @@ public class Addition extends Operation implements ListLocation {
         }
     }
 
-    @Override
-    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
-        // same size
-        if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
-            // compare left of comma
-            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
-                // minuend bigger
-                if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
-                    return true;
-                    //subtrahend bigger
-                } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
-                    return false;
-                }
-                // compare RIGHT_OF_COMMA
-                else {
-                    for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
-                        // minuend bigger
-                        if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                            System.out.println("true");
-                            return true;
-                            //subtrahend bigger
-                        } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        //minuend bigger
-        else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
-            System.out.println("true");
-            return true;
-        }
-        // subtrahend bigger
-        else {
-            return false;
-        }
-        return false;
-    }
-
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA);
         for (int i = 0; lengthOfLongerNumber > i; i++) {
@@ -140,5 +97,7 @@ public class Addition extends Operation implements ListLocation {
         }
         return 0;
     }
+
+
 
 }

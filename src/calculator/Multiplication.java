@@ -34,11 +34,6 @@ public class Multiplication extends Operation implements ListLocation {
             }
     }
 
-    @Override
-    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
-        return false;
-    }
-
     private Decimal multiply(Decimal number1, Decimal number2) {
         Decimal result = new Decimal("0,0");
 
