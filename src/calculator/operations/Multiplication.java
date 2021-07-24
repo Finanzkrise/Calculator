@@ -46,7 +46,7 @@ public class Multiplication extends Operation implements ListLocation {
         multiplyDecimalDecimal(number1, number2);
 
         for (Decimal tempResult : decimalList) {
-            System.out.println("current result to add: " + tempResult);
+            //System.out.println("current result to add: " + tempResult);
             result = new Addition().operate(result, tempResult);
         }
         return result;
@@ -105,15 +105,15 @@ public class Multiplication extends Operation implements ListLocation {
                         getDigit(integer.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, integer, LEFT_OF_COMMA),
                         getDigit(numberTwoIndex, decimal, RIGHT_OF_COMMA)
                 );
-                System.out.println("digit1 int : " + getDigit(integer.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, integer, LEFT_OF_COMMA));
-                System.out.println("digit2 dec : " + getDigit(numberTwoIndex, decimal, RIGHT_OF_COMMA));
-                System.out.println("result : " + tempResult);
+                //System.out.println("digit1 int : " + getDigit(integer.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, integer, LEFT_OF_COMMA));
+               // System.out.println("digit2 dec : " + getDigit(numberTwoIndex, decimal, RIGHT_OF_COMMA));
+               // System.out.println("result : " + tempResult);
 
                 if (numberTwoIndex >= numberOneIndex) {
                     resultRightOfComma.add(0, tempResult);
-                    System.out.println("right!");
+                    //System.out.println("right!");
                 } else {
-                    System.out.println("left!");
+                    //System.out.println("left!");
                     resultLeftOfComma.add(0, tempResult);
                 }
             }
@@ -123,7 +123,7 @@ public class Multiplication extends Operation implements ListLocation {
             } else {
                 resultLeftOfComma.add(0, multiplyTwoDigits(0, 0));
             }
-            System.out.println(resultLeftOfComma + "," + resultRightOfComma);
+            //System.out.println(resultLeftOfComma + "," + resultRightOfComma);
             decimalList.add(new Decimal(resultLeftOfComma, resultRightOfComma));
         }
     }

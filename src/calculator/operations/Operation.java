@@ -51,7 +51,7 @@ public abstract class Operation implements ListLocation {
                     for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
                         // minuend bigger
                         if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                            System.out.println("true");
+
                             return true;
                             //subtrahend bigger
                         } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
@@ -63,7 +63,6 @@ public abstract class Operation implements ListLocation {
         }
         //minuend bigger
         else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
-            System.out.println("true");
             return true;
         }
         // subtrahend bigger

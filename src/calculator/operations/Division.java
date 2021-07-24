@@ -66,7 +66,9 @@ public class Division extends Operation implements ListLocation {
 
 
     }
-    public void calcOverflow()
+    public void calcOverflow(){
+
+    }
 
     @Override
     public int setOverflow(int number) {
