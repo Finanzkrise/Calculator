@@ -85,4 +85,48 @@ public class MultiplicationTest {
         assertEquals(9, ergebnis.getNumberList().get(1).get(1));
     }
 
+    @Test
+    void testMultiplicationNegativeMixed() {
+        Decimal decimal1 = new Decimal("-4,2");
+        Decimal decimal2 = new Decimal("-10,95");
+        Multiplication multiplication = new Multiplication(decimal1, decimal2);
+        Decimal ergebnis = multiplication.getResult();
+        assertEquals(5, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
+        assertEquals(4, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 2));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+
+        multiplication = new Multiplication(decimal2, decimal1);
+        ergebnis = multiplication.getResult();
+        assertEquals(5, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
+        assertEquals(4, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 2));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testMultiplicationNegativeNegativePositiveMixed() {
+        Decimal decimal1 = new Decimal("-4,2");
+        Decimal decimal2 = new Decimal("10,95");
+        Multiplication multiplication = new Multiplication(decimal1, decimal2);
+        Decimal ergebnis = multiplication.getResult();
+        assertEquals(5, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
+        assertEquals(4, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 2));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        multiplication = new Multiplication(decimal2, decimal1);
+        ergebnis = multiplication.getResult();
+        assertEquals(5, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 1));
+        assertEquals(4, ergebnis.getNumberList().get(0).get(ergebnis.getNumberList().get(0).size() - 2));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(9, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+
+
 }

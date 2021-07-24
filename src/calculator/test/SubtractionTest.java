@@ -67,6 +67,16 @@ public class SubtractionTest {
     }
 
     @Test
+    void testSubtractionNegativeIntPositiveInt(){
+        Decimal decimal1 = new Decimal("-1");
+        Decimal decimal2 = new Decimal("1");
+        Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
+        assertEquals(2, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
     void testSubtractionNegativIntNegativInt(){
         Decimal decimal1 = new Decimal("-1");
         Decimal decimal2 = new Decimal("-1");
@@ -79,7 +89,7 @@ public class SubtractionTest {
     @Test
     void testSubtractionPositiveDecNegativeInt(){
         Decimal decimal1 = new Decimal("0,5");
-        Decimal decimal2 = new Decimal("-1,0");
+        Decimal decimal2 = new Decimal("-1");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
         assertEquals(5, ergebnis.getNumberList().get(1).get(0));
@@ -89,12 +99,62 @@ public class SubtractionTest {
     @Test
     void testSubtractionNegativeDecPositiveDec(){
         Decimal decimal1 = new Decimal("-,5");
-        Decimal decimal2 = new Decimal(",5");
+        Decimal decimal2 = new Decimal("1");
         Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
         assertEquals(1, ergebnis.getNumberList().get(0).get(0));
-        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(5, ergebnis.getNumberList().get(1).get(0));
         assertEquals(false, ergebnis.isNumberPositive());
     }
+
+    @Test
+    void testSubtractionPositiveMixedBigNegativeMixed(){
+        Decimal decimal1 = new Decimal("5,7");
+        Decimal decimal2 = new Decimal("-12,31");
+        Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testSubtractionNegativeMixedBigPositiveMixed(){
+        Decimal decimal1 = new Decimal("-5,7");
+        Decimal decimal2 = new Decimal("12,31");
+        Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testSubtractionBigNegativeMixedPositiveMixed(){
+        Decimal decimal1 = new Decimal("-12,31");
+        Decimal decimal2 = new Decimal("5,7");
+        Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testSubtractionBigPositiveMixedNegativeMixed(){
+        Decimal decimal1 = new Decimal("12,31");
+        Decimal decimal2 = new Decimal("-5,7");
+        Decimal ergebnis = new Decimal(new Subtraction().operate(decimal1, decimal2));
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(0, ergebnis.getNumberList().get(1).get(0));
+        assertEquals(1, ergebnis.getNumberList().get(1).get(1));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+
 
 
 }
