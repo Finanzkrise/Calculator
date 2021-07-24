@@ -28,7 +28,7 @@ public abstract class Operation implements ListLocation {
         this.result = result;
     }
 
-    abstract int setOverflow(int number);
+    public abstract int setOverflow(int number);
 
     abstract Decimal operate(Decimal number1, Decimal number2);
 
