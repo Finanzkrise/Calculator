@@ -98,6 +98,4 @@ public class Addition extends Operation implements ListLocation {
         return 0;
     }
 
-
-
 }
