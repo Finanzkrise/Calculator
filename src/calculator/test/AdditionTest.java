@@ -1,6 +1,6 @@
 package calculator.test;
 
-import calculator.Addition;
+import calculator.operations.Addition;
 import calculator.Decimal;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,7 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Decimal;
+import calculator.ListLocation;
 
 import java.util.ArrayList;
 import java.util.List;

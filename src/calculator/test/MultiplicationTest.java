@@ -1,8 +1,7 @@
 package calculator.test;
 
 import calculator.Decimal;
-import calculator.Multiplication;
-import calculator.Subtraction;
+import calculator.operations.Multiplication;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

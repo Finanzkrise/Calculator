@@ -1,4 +1,7 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Decimal;
+import calculator.ListLocation;
 
 public class Addition extends Operation implements ListLocation {
     boolean overflow = false;

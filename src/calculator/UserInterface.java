@@ -1,5 +1,9 @@
 package calculator;
 
+import calculator.operations.Addition;
+import calculator.operations.Multiplication;
+import calculator.operations.Subtraction;
+
 import java.util.Scanner;
 
 public class UserInterface {
