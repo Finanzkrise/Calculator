@@ -1,4 +1,7 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Decimal;
+import calculator.ListLocation;
 
 public class Subtraction extends Operation implements ListLocation {
     boolean overflow = false;
@@ -13,7 +16,7 @@ public class Subtraction extends Operation implements ListLocation {
     @Override
     public Decimal operate(Decimal minuend, Decimal subtrahend) {
         executeOperation(minuend, subtrahend);
-        trimResult();
+        result = trimDecimal(result);
         return result;
     }
 
@@ -49,7 +52,7 @@ public class Subtraction extends Operation implements ListLocation {
                 changedMinuend.setIsPositive(true);
                 Decimal changedSubtrahend = subtrahend;
                 changedSubtrahend.setIsPositive(true);
-                result = new Addition().operate(changedMinuend, changedSubtrahend);
+                result = new Subtraction().operate(changedMinuend, changedSubtrahend);
                 result.setIsPositive(false);
             }
         // minuend < subtrahend

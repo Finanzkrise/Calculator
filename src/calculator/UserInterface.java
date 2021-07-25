@@ -1,10 +1,15 @@
 package calculator;
 
+import calculator.operations.Addition;
+import calculator.operations.Division;
+import calculator.operations.Multiplication;
+import calculator.operations.Subtraction;
+
 import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
-    private static final String VALID_OPERATORS = "[*+-]";
+    private static final String VALID_OPERATORS = "[*+-/]";
 
     public void useProgram() {
         Decimal number1 = getNumber();
@@ -12,13 +17,16 @@ public class UserInterface {
         Decimal number2 = getNumber();
         switch (operatorSign) {
             case "+":
-                System.out.println(new Addition(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Addition(number1, number2).getResult());
                 break;
             case "-":
-                System.out.println(new Subtraction(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Subtraction(number1, number2).getResult());
                 break;
             case "*":
-                System.out.println(new Multiplication(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Multiplication(number1, number2).getResult());
+                break;
+            case "/":
+                System.out.println("Ergebnis: " + new Division(number1, number2).getResult());
                 break;
         }
     }
