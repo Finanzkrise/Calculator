@@ -6,12 +6,17 @@ import java.util.List;
 public class Decimal implements ListLocation {
     List<Integer> leftOfComma = new ArrayList<>();
     List<Integer> rightOfComma = new ArrayList<>();
-    List<List<Integer>> numberList = new ArrayList<>();
+    List<List<Integer>> numberList = new ArrayList<>(2);
     private boolean isNumberPositive = true;
+    private boolean isNumberDecimal;
+
 
     public Decimal(String... numbers) {
+        numberList.add(leftOfComma);
+        numberList.add(rightOfComma);
         for (String number : numbers) {
             setNumberListFromString(number);
+
         }
     }
 
@@ -30,12 +35,14 @@ public class Decimal implements ListLocation {
             this.rightOfComma = list;
             this.numberList.add(leftOfComma);
             this.numberList.add(list);
+            this.isNumberDecimal = true;
         } else {
             this.rightOfComma = new ArrayList<>();
             this.rightOfComma.add(0);
             this.leftOfComma = list;
             this.numberList.add(list);
             this.numberList.add(rightOfComma);
+            this.isNumberDecimal = false;
         }
     }
 
@@ -112,15 +119,16 @@ public class Decimal implements ListLocation {
 
     @Override
     public String toString() {
-        String zahl = "";
+        String zahl = getVorzeichen();
         for (int i = 0; numberList.get(LEFT_OF_COMMA).size() > i; i++) {
             zahl += numberList.get(0).get(i);
         }
-        zahl += ",";
-        for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
-            zahl += numberList.get(1).get(i);
+        if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)){
+            zahl += ",";
+            for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
+                zahl += numberList.get(1).get(i);
+            }
         }
-        zahl = getVorzeichen() + zahl;
         return zahl;
     }
 

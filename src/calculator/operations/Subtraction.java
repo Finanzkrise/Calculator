@@ -16,7 +16,7 @@ public class Subtraction extends Operation implements ListLocation {
     @Override
     public Decimal operate(Decimal minuend, Decimal subtrahend) {
         executeOperation(minuend, subtrahend);
-        trimResult();
+        result = trimDecimal(result);
         return result;
     }
 

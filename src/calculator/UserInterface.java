@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.operations.Addition;
+import calculator.operations.Division;
 import calculator.operations.Multiplication;
 import calculator.operations.Subtraction;
 
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
-    private static final String VALID_OPERATORS = "[*+-]";
+    private static final String VALID_OPERATORS = "[*+-/]";
 
     public void useProgram() {
         Decimal number1 = getNumber();
@@ -23,6 +24,9 @@ public class UserInterface {
                 break;
             case "*":
                 System.out.println(new Multiplication(number1, number2).getResult());
+                break;
+            case "/":
+                System.out.println(new Division(number1, number2).getResult());
                 break;
         }
     }

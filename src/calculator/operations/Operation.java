@@ -72,23 +72,26 @@ public abstract class Operation implements ListLocation {
         return false;
     }
 
-    public void trimResult() {
-        if (result.getNumberList().get(LEFT_OF_COMMA).size() > 1)
-            while (result.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
-                result.getNumberList().get(LEFT_OF_COMMA).remove(0);
-                if (result.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
-                    break;
-                }
-            }
-        if (result.getNumberList().get(RIGHT_OF_COMMA).size() > 1) {
-            while (result.getNumberList().get(RIGHT_OF_COMMA).get(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
-                result.getNumberList().get(RIGHT_OF_COMMA).remove(result.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
-                if (result.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
+    public Decimal trimDecimal(Decimal number) {
+        if (number.getNumberList().get(LEFT_OF_COMMA).size() > 1) {
+            while (number.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
+                number.getNumberList().get(LEFT_OF_COMMA).remove(0);
+                if (number.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
                     break;
                 }
             }
         }
+        if (number.getNumberList().get(RIGHT_OF_COMMA).size() > 1) {
+            while (number.getNumberList().get(RIGHT_OF_COMMA).get(number.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
+                number.getNumberList().get(RIGHT_OF_COMMA).remove(number.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
+                if (number.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
+                    break;
+                }
+            }
+        }
+        return number;
     }
+
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
         if (number1.getNumberList().get(location).size() > number2.getNumberList().get(location).size()) {

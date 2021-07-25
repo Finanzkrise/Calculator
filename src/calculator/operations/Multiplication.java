@@ -19,7 +19,7 @@ public class Multiplication extends Operation implements ListLocation {
 
     public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
-        trimResult();
+        result = trimDecimal(result);
         return result;
     }
 
