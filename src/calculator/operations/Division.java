@@ -14,7 +14,7 @@ public class Division extends Operation implements ListLocation {
     }
 
     @Override
-    Decimal operate(Decimal number1, Decimal number2) {
+    public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
         result = trimDecimal(result);
         return result;
@@ -29,6 +29,9 @@ public class Division extends Operation implements ListLocation {
         Decimal tempDividend;
         int digitOfResult = 0;
         int numbersWritten = 0;
+        tempDividend = new Decimal();
+        int dividendInitialLength;
+
         System.out.println(dividend);
         System.out.println(divisor);
 
@@ -36,28 +39,28 @@ public class Division extends Operation implements ListLocation {
         divisorAsList = trimDecimal(divisorAsList);
         Decimal dividendAsList = getDecimalAsList(dividend);
         dividendAsList = trimDecimal(dividendAsList);
+        adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
+        dividendInitialLength = dividendAsList.getNumberList().get(LEFT_OF_COMMA).size();
 
-        // initial Dividend füllen
-        tempDividend = new Decimal();
-        // initial tempDividend
-        tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
-        dividendAsList.getNumberList().get(LEFT_OF_COMMA).remove(0);
-        while (tempDividend.getNumberList().get(LEFT_OF_COMMA).size() > divisorAsList.getNumberList().get(LEFT_OF_COMMA).size()) {
+        System.out.println("dividend as List: " + dividendAsList);
+        System.out.println("divisor as List: " + divisorAsList);
+
+        // set initail tempDividend
+        for (int i = 1; divisorAsList.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
         }
-        System.out.println("initial tempDividend: " + tempDividend);
 
         // solange Divison noch nicht aus ist:
         while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             digitOfResult = 0;
 
             //tempDividend = new Addition().operate(tempDividend, overflow);
-            tempDividend = trimDecimal(tempDividend);
+
 
             //add next digit of dividend
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
+            tempDividend = trimDecimal(tempDividend);
             System.out.println("tempDividend: " + tempDividend);
-            System.out.println("divisiorAsList : " + divisorAsList);
 
             // subtract divisor from tempDividend, result ++
             while (!isNumberOneHigherThanNumberTwo(divisorAsList, tempDividend)) {
@@ -68,7 +71,7 @@ public class Division extends Operation implements ListLocation {
             overflow = tempDividend;
             System.out.println("result digit : " + digitOfResult);
 
-            writeResult(dividend, divisor, digitOfResult, numbersWritten);
+            numbersWritten = writeResult(dividendInitialLength, divisorAsList, digitOfResult, numbersWritten);
         }
 
 
@@ -87,13 +90,17 @@ public class Division extends Operation implements ListLocation {
         }
     }
 
-    private void writeResult(Decimal dividend, Decimal divisor, int tempResult, int numbersWritten) {
-        if (numbersWritten <= dividend.getNumberList().get(LEFT_OF_COMMA).size() - divisor.getNumberList().get(LEFT_OF_COMMA).size()) {
+    private int writeResult(int dividendInitialLength, Decimal divisorAsList, int tempResult, int numbersWritten) {
+        // if not right yet
+
+        if (numbersWritten <=  dividendInitialLength - divisorAsList.getNumberList().get(LEFT_OF_COMMA).size()) {
             resultLeftOfComma.add(tempResult);
         } else {
+            System.out.println("switch to right of comma!!");
             resultRightOfComma.add(tempResult);
         }
         numbersWritten++;
+        return  numbersWritten;
     }
 
     private Decimal getDecimalAsList(Decimal divisor) {
@@ -104,7 +111,21 @@ public class Division extends Operation implements ListLocation {
         for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
             divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(RIGHT_OF_COMMA).get(i));
         }
+
         return divisorAsList;
+    }
+
+    private void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
+        if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() > dividend.getNumberList().get(RIGHT_OF_COMMA).size()){
+            for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++){
+                dividendAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+        }
+        else if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() < dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
+            for (int i = 0; dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++){
+                divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+        }
     }
 
     @Override
@@ -151,6 +172,13 @@ public class Division extends Operation implements ListLocation {
             return false;
         }
         return false;
+    }
+
+    public int offset(Decimal number1, Decimal number2){
+        if (isNumberOneHigherThanNumberTwo(number1, number2)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

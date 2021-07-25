@@ -13,7 +13,7 @@ public class DecimalTest {
     @Test
     void testConstructor() {
         Decimal decimal = new Decimal();
-        assertEquals(0, decimal.getNumberList().size());
+        assertEquals(2, decimal.getNumberList().size());
     }
 
     @Test

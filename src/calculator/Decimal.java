@@ -6,7 +6,7 @@ import java.util.List;
 public class Decimal implements ListLocation {
     List<Integer> leftOfComma = new ArrayList<>();
     List<Integer> rightOfComma = new ArrayList<>();
-    List<List<Integer>> numberList = new ArrayList<>(2);
+    List<List<Integer>> numberList = new ArrayList<>();
     private boolean isNumberPositive = true;
     private boolean isNumberDecimal;
 
@@ -68,7 +68,12 @@ public class Decimal implements ListLocation {
     }
 
     public void setIsPositive(boolean isPositive) {
-        this.isNumberPositive = isPositive;
+        if (this.toString().equals("0,0")){
+            this.isNumberPositive = true;
+        }
+        else {
+            this.isNumberPositive = isPositive;
+        }
     }
 
     public void setNumberListFromString(String input) {
