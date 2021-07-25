@@ -27,52 +27,38 @@ public class Division extends Operation implements ListLocation {
 
     public void dividePositiveNumbers(Decimal dividend, Decimal divisor) {
         Decimal tempDividend;
-        int tempResult;
-        int digitOfResult;
+        int digitOfResult = 0;
         int numbersWritten = 0;
         System.out.println(dividend);
         System.out.println(divisor);
-
 
         Decimal divisorAsList = getDecimalAsList(divisor);
         divisorAsList = trimDecimal(divisorAsList);
         Decimal dividendAsList = getDecimalAsList(dividend);
         dividendAsList = trimDecimal(dividendAsList);
 
-
-        // temp Dividend zurücksetzen und befüllen
+        // initial Dividend füllen
         tempDividend = new Decimal();
+        // initial tempDividend
+        tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
+        dividendAsList.getNumberList().get(LEFT_OF_COMMA).remove(0);
+        while (tempDividend.getNumberList().get(LEFT_OF_COMMA).size() > divisorAsList.getNumberList().get(LEFT_OF_COMMA).size()) {
+            moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
+        }
+        System.out.println("initial tempDividend: " + tempDividend);
+
+        // solange Divison noch nicht aus ist:
         while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             digitOfResult = 0;
 
             //tempDividend = new Addition().operate(tempDividend, overflow);
-            System.out.println("tempDividend after overflow-Addition: " + tempDividend);
-            while (tempDividend.getNumberList().get(LEFT_OF_COMMA).size() < divisorAsList.getNumberList().get(LEFT_OF_COMMA).size()) {
-                tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
-                dividendAsList.getNumberList().get(LEFT_OF_COMMA).remove(0);
-            }
-
             tempDividend = trimDecimal(tempDividend);
 
-            //not possible to divide? -> add next digit from dividend
-            if (isNumberOneHigherThanNumberTwo(divisorAsList, tempDividend)) {
-                System.out.println("triggered divisor > dividend");
-                tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
-                dividendAsList.getNumberList().get(LEFT_OF_COMMA).remove(0);
-/*
-                if (numbersWritten <= dividend.getNumberList().get(LEFT_OF_COMMA).size() - divisor.getNumberList().get(LEFT_OF_COMMA).size()) {
-                    resultLeftOfComma.add(0);
-
-                } else {
-                    resultRightOfComma.add(0);
-
-                }
-
- */
-            }
-
+            //add next digit of dividend
+            moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
             System.out.println("tempDividend: " + tempDividend);
             System.out.println("divisiorAsList : " + divisorAsList);
+
             // subtract divisor from tempDividend, result ++
             while (!isNumberOneHigherThanNumberTwo(divisorAsList, tempDividend)) {
                 tempDividend = new Subtraction().operate(tempDividend, divisorAsList);
@@ -80,20 +66,34 @@ public class Division extends Operation implements ListLocation {
                 System.out.println("tempDividend: " + tempDividend);
             }
             overflow = tempDividend;
-            tempResult = digitOfResult;
             System.out.println("result digit : " + digitOfResult);
 
-            if (numbersWritten <= dividend.getNumberList().get(LEFT_OF_COMMA).size() - divisor.getNumberList().get(LEFT_OF_COMMA).size()) {
-                resultLeftOfComma.add(tempResult);
-            } else {
-                resultRightOfComma.add(tempResult);
-            }
+            writeResult(dividend, divisor, digitOfResult, numbersWritten);
         }
 
 
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
 
 
+    }
+
+    private void moveDigitFromDividendListToTempDividend(Decimal tempDividend, Decimal dividendAsList) {
+        if (dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
+            tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
+            dividendAsList.getNumberList().get(LEFT_OF_COMMA).remove(0);
+        }
+        else {
+            tempDividend.getNumberList().get(LEFT_OF_COMMA).add(0);
+        }
+    }
+
+    private void writeResult(Decimal dividend, Decimal divisor, int tempResult, int numbersWritten) {
+        if (numbersWritten <= dividend.getNumberList().get(LEFT_OF_COMMA).size() - divisor.getNumberList().get(LEFT_OF_COMMA).size()) {
+            resultLeftOfComma.add(tempResult);
+        } else {
+            resultRightOfComma.add(tempResult);
+        }
+        numbersWritten++;
     }
 
     private Decimal getDecimalAsList(Decimal divisor) {
