@@ -22,10 +22,19 @@ public class Division extends Operation implements ListLocation {
 
     @Override
     void executeOperation(Decimal number1, Decimal number2) {
-        dividePositiveNumbers(number1, number2);
+        if (number1.isNumberPositive() && number2.isNumberPositive()) {
+            result = dividePositiveNumbers(number1, number2);
+            result.setIsPositive(true);
+        } else if (!number1.isNumberPositive() && !number2.isNumberPositive()) {
+            result = dividePositiveNumbers(number1, number2);
+            result.setIsPositive(true);
+        } else {
+            result = dividePositiveNumbers(number1, number2);
+            result.setIsPositive(false);
+        }
     }
 
-    public void dividePositiveNumbers(Decimal dividend, Decimal divisor) {
+    public Decimal dividePositiveNumbers(Decimal dividend, Decimal divisor) {
         Decimal tempDividend;
         int digitOfResult = 0;
         int numbersWritten = 0;
@@ -77,6 +86,7 @@ public class Division extends Operation implements ListLocation {
 
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
 
+        return result;
 
     }
 

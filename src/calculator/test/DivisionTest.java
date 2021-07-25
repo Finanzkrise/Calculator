@@ -94,7 +94,83 @@ public class DivisionTest  {
         assertEquals(0, ergebnis.getNumberList().get(1).get(0));
     }
 
+    @Test
+    void testDivisionNegativityIntNegativPositive() {
+        Decimal decimal1 = new Decimal("-3");
+        Decimal decimal2 = new Decimal("3");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
 
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testDivisionNegativityIntNegativeNegative() {
+        Decimal decimal1 = new Decimal("-3");
+        Decimal decimal2 = new Decimal("-3");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testDivisionNegativityDecNegativePositive() {
+        Decimal decimal1 = new Decimal("-0,3");
+        Decimal decimal2 = new Decimal("0,3");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testDivisionNegativityDecNegativeNegative() {
+        Decimal decimal1 = new Decimal("-0,4");
+        Decimal decimal2 = new Decimal("-0,4");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testDivisionNegativityMixedNegativePositive() {
+        Decimal decimal1 = new Decimal("-12,43");
+        Decimal decimal2 = new Decimal("12,43");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
+
+    @Test
+    void testDivisionNegativityMixedNegativeNegative() {
+        Decimal decimal1 = new Decimal("-12,43");
+        Decimal decimal2 = new Decimal("-12,43");
+        Decimal ergebnis = new Division().operate(decimal1, decimal2);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+
+        ergebnis = new Division().operate(decimal2, decimal1);
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(true, ergebnis.isNumberPositive());
+    }
 
 
 
