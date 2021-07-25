@@ -48,15 +48,24 @@ public abstract class Operation implements ListLocation {
                 }
                 // compare RIGHT_OF_COMMA
                 else {
-                    for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
-                        // minuend bigger
-                        if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                    if (number1.getNumberList().get(RIGHT_OF_COMMA).size() > 0 && number2.getNumberList().get(RIGHT_OF_COMMA).size() > 0) {
+                        for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
 
-                            return true;
-                            //subtrahend bigger
-                        } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                            return false;
+                            // minuend bigger
+                            if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+
+                                return true;
+                                //subtrahend bigger
+                            } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                                return false;
+                            }
                         }
+                    }
+                    else if (!(number1.getNumberList().size() > 1) && number2.getNumberList().size() > 1){
+                        return false;
+                    }
+                    else {
+                        return true;
                     }
                 }
             }

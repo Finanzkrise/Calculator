@@ -123,11 +123,14 @@ public class Decimal implements ListLocation {
         for (int i = 0; numberList.get(LEFT_OF_COMMA).size() > i; i++) {
             zahl += numberList.get(0).get(i);
         }
-        if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)){
-            zahl += ",";
-            for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
-                zahl += numberList.get(1).get(i);
-            }
+        /*
+        if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)) {
+            return zahl;
+        }
+         */
+        zahl += ",";
+        for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
+            zahl += numberList.get(1).get(i);
         }
         return zahl;
     }

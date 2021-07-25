@@ -17,16 +17,16 @@ public class UserInterface {
         Decimal number2 = getNumber();
         switch (operatorSign) {
             case "+":
-                System.out.println(new Addition(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Addition(number1, number2).getResult());
                 break;
             case "-":
-                System.out.println(new Subtraction(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Subtraction(number1, number2).getResult());
                 break;
             case "*":
-                System.out.println(new Multiplication(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Multiplication(number1, number2).getResult());
                 break;
             case "/":
-                System.out.println(new Division(number1, number2).getResult());
+                System.out.println("Ergebnis: " + new Division(number1, number2).getResult());
                 break;
         }
     }
