@@ -46,7 +46,6 @@ public class Multiplication extends Operation implements ListLocation {
         multiplyDecimalDecimal(number1, number2);
 
         for (Decimal tempResult : decimalList) {
-            //System.out.println("current result to add: " + tempResult);
             result = new Addition().operate(result, tempResult);
         }
         return result;
@@ -56,9 +55,7 @@ public class Multiplication extends Operation implements ListLocation {
         // for length of number2 Right of Comma
         for (int numberTwoIndex = 0; number2.getNumberList().get(RIGHT_OF_COMMA).size() > numberTwoIndex; numberTwoIndex++) {
             resultRightOfComma = new ArrayList<>();
-            resultLeftOfComma = new ArrayList<>();
 
-            resultRightOfComma = new ArrayList<>();
             for (int numberOneIndex = 0; number1.getNumberList().get(RIGHT_OF_COMMA).size() > numberOneIndex; numberOneIndex++) {
                 int tempResult = multiplyTwoDigits(
                         getDigit(number1.getNumberList().get(RIGHT_OF_COMMA).size() - 1 - numberOneIndex, number1, RIGHT_OF_COMMA),
@@ -105,15 +102,9 @@ public class Multiplication extends Operation implements ListLocation {
                         getDigit(integer.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, integer, LEFT_OF_COMMA),
                         getDigit(numberTwoIndex, decimal, RIGHT_OF_COMMA)
                 );
-                //System.out.println("digit1 int : " + getDigit(integer.getNumberList().get(LEFT_OF_COMMA).size() - 1 - numberOneIndex, integer, LEFT_OF_COMMA));
-               // System.out.println("digit2 dec : " + getDigit(numberTwoIndex, decimal, RIGHT_OF_COMMA));
-               // System.out.println("result : " + tempResult);
-
                 if (numberTwoIndex >= numberOneIndex) {
                     resultRightOfComma.add(0, tempResult);
-                    //System.out.println("right!");
                 } else {
-                    //System.out.println("left!");
                     resultLeftOfComma.add(0, tempResult);
                 }
             }
@@ -123,7 +114,6 @@ public class Multiplication extends Operation implements ListLocation {
             } else {
                 resultLeftOfComma.add(0, multiplyTwoDigits(0, 0));
             }
-            //System.out.println(resultLeftOfComma + "," + resultRightOfComma);
             decimalList.add(new Decimal(resultLeftOfComma, resultRightOfComma));
         }
     }

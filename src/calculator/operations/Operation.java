@@ -35,42 +35,39 @@ public abstract class Operation implements ListLocation {
     abstract void executeOperation(Decimal number1, Decimal number2);
 
     public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
-        // same size
+        // left of comma same size
         if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
             // compare left of comma
             for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
                 // minuend bigger
                 if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return true;
-                    //subtrahend bigger
+                //subtrahend bigger
                 } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return false;
                 }
+            }
+            //
+            if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
                 // compare RIGHT_OF_COMMA
-                else {
-                    if (number1.getNumberList().get(RIGHT_OF_COMMA).size() > 0 && number2.getNumberList().get(RIGHT_OF_COMMA).size() > 0) {
-                        for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
+                for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
 
-                            // minuend bigger
-                            if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-
-                                return true;
-                                //subtrahend bigger
-                            } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                                return false;
-                            }
-                        }
-                    }
-                    else if (!(number1.getNumberList().size() > 1) && number2.getNumberList().size() > 1){
+                    // minuend bigger
+                    if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                        return true;
+                        //subtrahend bigger
+                    } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
                         return false;
                     }
-                    else {
-                        return true;
-                    }
                 }
+            }else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+                return true;
+            }
+            else {
+                return false;
             }
         }
-        //minuend bigger
+        //minuend left of comma size bigger
         else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
             return true;
         }

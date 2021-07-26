@@ -23,9 +23,6 @@ public class Addition extends Operation implements ListLocation {
     public Decimal addPositiveNumbers(Decimal number1, Decimal number2) {
         addNumbersRightOfComma(number1, number2);
         addNumbersLeftOfComma(number1, number2);
-        if (overflow) {
-            getResultLeftOfComma().add(0, addTwoDigits(0, 0));
-        }
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
         return result;
     }
@@ -71,6 +68,9 @@ public class Addition extends Operation implements ListLocation {
         for (int i = 0; lengthOfLongerNumber > i; i++) {
             int tempResult = addTwoDigits(getDigitLeftOfComma(i, number1, LEFT_OF_COMMA), getDigitLeftOfComma(i, number2, LEFT_OF_COMMA));
             getResultLeftOfComma().add(0, tempResult);
+        }
+        if (overflow) {
+            getResultLeftOfComma().add(0, addTwoDigits(0, 0));
         }
     }
 
