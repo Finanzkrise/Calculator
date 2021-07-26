@@ -4,59 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Decimal implements ListLocation {
-    List<Integer> leftOfComma = new ArrayList<>();
-    List<Integer> rightOfComma = new ArrayList<>();
-    List<List<Integer>> numberList = new ArrayList<>();
+    List<List<Integer>> numberList = new ArrayList<>(2);
     private boolean isNumberPositive = true;
-    private boolean isNumberDecimal;
-
 
     public Decimal(String... numbers) {
-        numberList.add(leftOfComma);
-        numberList.add(rightOfComma);
+        numberList.add(new ArrayList<>());
+        numberList.add(new ArrayList<>());
         for (String number : numbers) {
             setNumberListFromString(number);
-
         }
     }
 
     public Decimal(Decimal decimal) {
-        rightOfComma = decimal.numberList.get(RIGHT_OF_COMMA);
-        leftOfComma = decimal.numberList.get(LEFT_OF_COMMA);
-        this.numberList.add(leftOfComma);
-        this.numberList.add(rightOfComma);
+        this.numberList = decimal.numberList;
         this.isNumberPositive = decimal.isNumberPositive;
     }
 
     public Decimal(boolean isListRightOfComma, List<Integer> list) {
         if (isListRightOfComma) {
-            this.leftOfComma = new ArrayList<>();
-            this.leftOfComma.add(0);
-            this.rightOfComma = list;
-            this.numberList.add(leftOfComma);
+            this.numberList.add(new ArrayList<>());
+            this.numberList.get(LEFT_OF_COMMA).add(0);
             this.numberList.add(list);
-            this.isNumberDecimal = true;
         } else {
-            this.rightOfComma = new ArrayList<>();
-            this.rightOfComma.add(0);
-            this.leftOfComma = list;
             this.numberList.add(list);
-            this.numberList.add(rightOfComma);
-            this.isNumberDecimal = false;
+            this.numberList.add(new ArrayList<>());
+            this.numberList.get(RIGHT_OF_COMMA).add(0);
         }
     }
 
     public Decimal(List<Integer> listLeftOfComma, List<Integer> listRightOfComma) {
         if (!listLeftOfComma.isEmpty()) {
-            this.leftOfComma = listLeftOfComma;
-        } else
-            this.leftOfComma.add(0);
+           numberList.add(listLeftOfComma);
+        } else {
+            List<Integer> list = new ArrayList<>();
+            list.add(0);
+            this.numberList.add(list);
+        }
         if (!listRightOfComma.isEmpty()) {
-            this.rightOfComma = listRightOfComma;
-        } else
-            this.rightOfComma.add(0);
-        this.numberList.add(leftOfComma);
-        this.numberList.add(rightOfComma);
+            this.numberList.add(listRightOfComma);
+        }
+        else{
+            List<Integer> list = new ArrayList<>();
+            list.add(0);
+            this.numberList.add(list);
+        }
     }
 
     public List<List<Integer>> getNumberList() {
@@ -77,8 +68,8 @@ public class Decimal implements ListLocation {
     }
 
     public void setNumberListFromString(String input) {
-        numberList.add(leftOfComma);
-        numberList.add(rightOfComma);
+        numberList.add(new ArrayList<>());
+        numberList.add(new ArrayList<>());
         String[] numberAsStringLeftOfComma;
         String[] numberAsStringRightOfComma;
         String[] splitAtComma;
@@ -126,7 +117,7 @@ public class Decimal implements ListLocation {
     public String toString() {
         String zahl = getVorzeichen();
         for (int i = 0; numberList.get(LEFT_OF_COMMA).size() > i; i++) {
-            zahl += numberList.get(0).get(i);
+            zahl += numberList.get(LEFT_OF_COMMA).get(i);
         }
         /*
         if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)) {
@@ -135,7 +126,7 @@ public class Decimal implements ListLocation {
          */
         zahl += ",";
         for (int i = 0; numberList.get(RIGHT_OF_COMMA).size() > i; i++) {
-            zahl += numberList.get(1).get(i);
+            zahl += numberList.get(RIGHT_OF_COMMA).get(i);
         }
         return zahl;
     }

@@ -98,7 +98,6 @@ public abstract class Operation implements ListLocation {
         return number;
     }
 
-
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
         if (number1.getNumberList().get(location).size() > number2.getNumberList().get(location).size()) {
             return number1.getNumberList().get(location).size();

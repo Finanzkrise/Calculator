@@ -8,6 +8,7 @@ import org.apache.log4j.LogManager;
 
 public class Division extends Operation implements ListLocation {
     Logger logger = LogManager.getLogger(Division.class);
+
     public Division() {
     }
 
@@ -94,7 +95,6 @@ public class Division extends Operation implements ListLocation {
         while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             digitOfResult = 0;
 
-            //add next digit of dividend
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
             tempDividend = trimDecimal(tempDividend);
             logger.info("tempDividend before division: " + tempDividend);
@@ -103,7 +103,7 @@ public class Division extends Operation implements ListLocation {
                 tempDividend = new Subtraction().operate(tempDividend, divisorAsList);
                 tempDividend = trimDecimal(tempDividend);
                 digitOfResult++;
-                logger.info("tempDividend after "+ digitOfResult + " cycles: " + tempDividend);
+                logger.info("tempDividend after " + digitOfResult + " cycles: " + tempDividend);
             }
             logger.info("remainder: " + tempDividend);
             numbersWritten = writeResult(dividendInitialLength, divisorAsList, digitOfResult, numbersWritten);
@@ -133,54 +133,6 @@ public class Division extends Operation implements ListLocation {
         logger.info("numbersWritten: " + numbersWritten);
         return numbersWritten;
     }
-/*
-    @Override
-    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
-        // same size
-        number1 = trimDecimal(number1);
-        number2 = trimDecimal(number2);
-        if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
-            // compare left of comma
-            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
-                // minuend bigger
-                if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
-                    return true;
-                    //subtrahend bigger
-                } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
-                    return false;
-                }
-                // compare RIGHT_OF_COMMA
-                else {
-                    if (number1.getNumberList().get(RIGHT_OF_COMMA).size() > 0 && number2.getNumberList().get(RIGHT_OF_COMMA).size() > 0) {
-                        for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
-                            // minuend bigger
-                            if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                                return true;
-                                //subtrahend bigger
-                            } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
-                                return false;
-                            }
-                        }
-                    } else if (number1.getNumberList().size() > 1 && !(number2.getNumberList().size() > 1)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-        }
-        //minuend bigger
-        else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
-            return true;
-        }
-        // subtrahend bigger
-        else {
-            return false;
-        }
-        return false;
-    }
-
- */
 
     @Override
     public int setOverflow(int number) {
