@@ -34,7 +34,7 @@ public class Decimal implements ListLocation {
 
     public Decimal(List<Integer> listLeftOfComma, List<Integer> listRightOfComma) {
         if (!listLeftOfComma.isEmpty()) {
-           numberList.add(listLeftOfComma);
+            numberList.add(listLeftOfComma);
         } else {
             List<Integer> list = new ArrayList<>();
             list.add(0);
@@ -42,8 +42,7 @@ public class Decimal implements ListLocation {
         }
         if (!listRightOfComma.isEmpty()) {
             this.numberList.add(listRightOfComma);
-        }
-        else{
+        } else {
             List<Integer> list = new ArrayList<>();
             list.add(0);
             this.numberList.add(list);
@@ -59,10 +58,9 @@ public class Decimal implements ListLocation {
     }
 
     public void setIsPositive(boolean isPositive) {
-        if (this.toString().equals("0,0")){
+        if (this.toString().equals("0,0")) {
             this.isNumberPositive = true;
-        }
-        else {
+        } else {
             this.isNumberPositive = isPositive;
         }
     }

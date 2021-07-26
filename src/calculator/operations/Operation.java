@@ -8,8 +8,8 @@ import java.util.List;
 
 public abstract class Operation implements ListLocation {
 
-    protected List<Integer> resultRightOfComma = new ArrayList<>();
-    protected List<Integer> resultLeftOfComma = new ArrayList<>();
+    protected List<Integer> resultRightOfComma = new ArrayList<>(); // unnötig?
+    protected List<Integer> resultLeftOfComma = new ArrayList<>(); // unnötig?
     protected Decimal result;
 
     public List<Integer> getResultLeftOfComma() {
@@ -41,7 +41,6 @@ public abstract class Operation implements ListLocation {
                     return false;
                 }
             }
-            //
             if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
                 // compare RIGHT_OF_COMMA
                 for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
