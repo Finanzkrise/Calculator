@@ -6,7 +6,7 @@ import calculator.ListLocation;
 public class Addition extends Operation implements ListLocation {
     boolean overflow = false;
 
-    public Addition() {
+    public Addition(Decimal ...numbers) {
     }
 
     public Addition(Decimal number1, Decimal number2) {
@@ -20,13 +20,7 @@ public class Addition extends Operation implements ListLocation {
         return result;
     }
 
-    public Decimal addPositiveNumbers(Decimal number1, Decimal number2) {
-        addNumbersRightOfComma(number1, number2);
-        addNumbersLeftOfComma(number1, number2);
-        result = new Decimal(resultLeftOfComma, resultRightOfComma);
-        return result;
-    }
-
+    @Override
     void executeOperation(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
             result = addPositiveNumbers(number1, number2);
@@ -35,7 +29,7 @@ public class Addition extends Operation implements ListLocation {
             result = addPositiveNumbers(number1, number2);
             result.setIsPositive(false);
         } else {
-            if (isNumberOneHigherThanNumberTwo(number1, number2)) {
+            if (isDecimalHigherThanDecimal(number1, number2)) {
                 if (number1.isNumberPositive() && !number2.isNumberPositive()) {
                     Decimal changedNumber2 = number2;
                     changedNumber2.setIsPositive(true);
@@ -61,6 +55,13 @@ public class Addition extends Operation implements ListLocation {
                 }
             }
         }
+    }
+
+    public Decimal addPositiveNumbers(Decimal number1, Decimal number2) {
+        addNumbersRightOfComma(number1, number2);
+        addNumbersLeftOfComma(number1, number2);
+        result = new Decimal(resultLeftOfComma, resultRightOfComma);
+        return result;
     }
 
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {

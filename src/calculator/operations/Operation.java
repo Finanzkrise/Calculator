@@ -24,17 +24,11 @@ public abstract class Operation implements ListLocation {
         return result;
     }
 
-    public void setResult(Decimal result) {
-        this.result = result;
-    }
-
-    public abstract int setOverflow(int number);
-
     abstract Decimal operate(Decimal number1, Decimal number2);
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 
-    public boolean isNumberOneHigherThanNumberTwo(Decimal number1, Decimal number2) {
+    public boolean isDecimalHigherThanDecimal(Decimal number1, Decimal number2) {
         // left of comma same size
         if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
             // compare left of comma

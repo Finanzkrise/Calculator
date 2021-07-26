@@ -133,7 +133,6 @@ public class Multiplication extends Operation implements ListLocation {
         return result % 10;
     }
 
-    @Override
     public int setOverflow(int product) {
         int overflow = product / 10;
         return overflow;

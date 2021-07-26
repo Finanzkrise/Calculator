@@ -99,7 +99,7 @@ public class Division extends Operation implements ListLocation {
             tempDividend = trimDecimal(tempDividend);
             logger.info("tempDividend before division: " + tempDividend);
             // subtract divisor from tempDividend, result ++
-            while (!isNumberOneHigherThanNumberTwo(divisorAsList, tempDividend)) {
+            while (!isDecimalHigherThanDecimal(divisorAsList, tempDividend)) {
                 tempDividend = new Subtraction().operate(tempDividend, divisorAsList);
                 tempDividend = trimDecimal(tempDividend);
                 digitOfResult++;
@@ -132,10 +132,5 @@ public class Division extends Operation implements ListLocation {
         numbersWritten++;
         logger.info("numbersWritten: " + numbersWritten);
         return numbersWritten;
-    }
-
-    @Override
-    public int setOverflow(int number) {
-        return 0;
     }
 }

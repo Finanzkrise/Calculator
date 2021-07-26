@@ -30,7 +30,7 @@ public class Subtraction extends Operation implements ListLocation {
     @Override
     void executeOperation(Decimal minuend, Decimal subtrahend) {
         // minuend > subtrahend
-        if (!isNumberOneHigherThanNumberTwo(subtrahend, minuend)) {
+        if (!isDecimalHigherThanDecimal(subtrahend, minuend)) {
             if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
                 result = subtract(minuend, subtrahend);
                 result.setIsPositive(true);
