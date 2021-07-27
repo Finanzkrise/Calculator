@@ -23,8 +23,15 @@ public class RootExtraction extends Operation implements ListLocation {
 
     private Decimal extractRoot(Decimal number1, Decimal number2) {
 
+        // Integer
+        while (!number1.toString().equals("0,")) {
+
+        }
+
         return null;
     }
+
+
 
     public Decimal generatePrime(int count){
         Decimal result = null;
