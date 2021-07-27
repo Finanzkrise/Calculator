@@ -11,20 +11,27 @@ public class RootExtraction extends Operation implements ListLocation {
 
     @Override
     Decimal operate(Decimal number1, Decimal number2) {
-
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
         return null;
     }
 
     @Override
     void executeOperation(Decimal number1, Decimal number2) {
-
+        result = extractRoot(number1, number2);
     }
 
-   public Decimal generatePrime(int count){
+    private Decimal extractRoot(Decimal number1, Decimal number2) {
+
+        return null;
+    }
+
+    public Decimal generatePrime(int count){
         Decimal result = null;
         int prime = 3;
         int divisor = 3;
         int primesFound = 1;
+
         if (count == 1) {
             return new Decimal("2");
         }
