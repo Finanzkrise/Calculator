@@ -3,8 +3,11 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.ListLocation;
 
-public class Modulo extends DivisionHelper implements ListLocation {
+import org.apache.log4j.Logger;
+import org.apache.log4j.LogManager;
 
+public class Modulo extends DivisionHelper implements ListLocation {
+    Logger logger = LogManager.getLogger(Modulo.class);
     public Modulo(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
     }

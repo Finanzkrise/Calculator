@@ -10,13 +10,6 @@ public class Exponentiation extends  Operation implements ListLocation {
     }
 
     @Override
-    Decimal operate(Decimal number1, Decimal number2) {
-        executeOperation(number1, number2);
-        result = trimDecimal(result);
-        return result;
-    }
-
-    @Override
     void executeOperation(Decimal number1, Decimal number2) {
         result = exponantiate(number1,number2);
     }

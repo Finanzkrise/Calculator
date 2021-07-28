@@ -24,7 +24,11 @@ public abstract class Operation implements ListLocation {
         return result;
     }
 
-    abstract Decimal operate(Decimal number1, Decimal number2);
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
+    }
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 

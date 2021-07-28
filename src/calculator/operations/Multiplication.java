@@ -17,12 +17,6 @@ public class Multiplication extends Operation implements ListLocation {
         result = operate(number1, number2);
     }
 
-    public Decimal operate(Decimal number1, Decimal number2) {
-        executeOperation(number1, number2);
-        result = trimDecimal(result);
-        return result;
-    }
-
     @Override
     void executeOperation(Decimal number1, Decimal number2) {
         if (number1.isNumberPositive() && number2.isNumberPositive()) {
