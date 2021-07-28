@@ -71,6 +71,31 @@ public abstract class Operation implements ListLocation {
         return false;
     }
 
+    protected Decimal getDecimalAsList(Decimal divisor) {
+        Decimal divisorAsList = new Decimal();
+        for (int i = 0; divisor.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(LEFT_OF_COMMA).get(i));
+        }
+        for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(RIGHT_OF_COMMA).get(i));
+        }
+        return divisorAsList;
+    }
+
+    protected void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
+        if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() > dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
+            for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                dividendAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+            //logger.info(divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to dividendAsList");
+        } else if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() < dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
+            for (int i = 0; dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+            //logger.info(dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to divisorAsList");
+        }
+    }
+
     public Decimal trimDecimal(Decimal number) {
         if (number.getNumberList().get(LEFT_OF_COMMA).size() > 1) {
             while (number.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
