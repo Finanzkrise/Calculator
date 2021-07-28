@@ -1,10 +1,7 @@
 package calculator.test;
 
 import calculator.Decimal;
-import calculator.ListLocation;
 import calculator.operations.Division;
-import calculator.operations.Operation;
-import calculator.operations.Subtraction;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

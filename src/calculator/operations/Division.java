@@ -58,39 +58,14 @@ public class Division extends Operation implements ListLocation {
         return result;
     }
 
-    private Decimal getDecimalAsList(Decimal divisor) {
-        Decimal divisorAsList = new Decimal();
-        for (int i = 0; divisor.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(LEFT_OF_COMMA).get(i));
-        }
-        for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(RIGHT_OF_COMMA).get(i));
-        }
-        return divisorAsList;
-    }
-
-    private void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
-        if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() > dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
-            for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                dividendAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
-            }
-            logger.info(divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to dividendAsList");
-        } else if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() < dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
-            for (int i = 0; dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
-            }
-            logger.info(dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to divisorAsList");
-        }
-    }
-
-    private void initializeTempDividend(Decimal tempDividend, Decimal divisorAsList, Decimal dividendAsList) {
+    protected void initializeTempDividend(Decimal tempDividend, Decimal divisorAsList, Decimal dividendAsList) {
         for (int i = 1; divisorAsList.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
         }
         logger.info("tempDividend intitialized as: " + tempDividend);
     }
 
-    private void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
+    protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
         int digitOfResult;
         while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             digitOfResult = 0;
@@ -110,7 +85,7 @@ public class Division extends Operation implements ListLocation {
         }
     }
 
-    private void moveDigitFromDividendListToTempDividend(Decimal tempDividend, Decimal dividendAsList) {
+    protected void moveDigitFromDividendListToTempDividend(Decimal tempDividend, Decimal dividendAsList) {
         if (dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
             tempDividend.getNumberList().get(LEFT_OF_COMMA).add(dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0));
             logger.info("'" + dividendAsList.getNumberList().get(LEFT_OF_COMMA).get(0) + "'" + " moved from dividendAsList to tempDividend");
@@ -121,7 +96,7 @@ public class Division extends Operation implements ListLocation {
         }
     }
 
-    private int writeResult(int dividendInitialLength, Decimal divisorAsList, int tempResult, int numbersWritten) {
+    protected int writeResult(int dividendInitialLength, Decimal divisorAsList, int tempResult, int numbersWritten) {
         if (numbersWritten <= dividendInitialLength - divisorAsList.getNumberList().get(LEFT_OF_COMMA).size()) {
             resultLeftOfComma.add(tempResult);
             logger.info("Result: " + tempResult + " written to resultLeftOfComma");
