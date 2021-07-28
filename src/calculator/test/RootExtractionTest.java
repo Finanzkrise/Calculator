@@ -8,6 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RootExtractionTest {
 
     @Test
+    void rootExtractionTest100() {
+        Decimal number1 = new Decimal("4");
+        Decimal number2 = new Decimal("2");
+        Decimal result = new RootExtraction(number1, number2).getResult();
+        assertEquals(1, result.getNumberList().get(0).get(0));
+        assertEquals(0, result.getNumberList().get(0).get(1));
+        assertEquals(0, result.getNumberList().get(1).get(0));
+    }
+
+    @Test
     void generatePrimeFirstTest() {
         Decimal prime = new RootExtraction().generatePrime(1);
         assertEquals(2, prime.getNumberList().get(0).get(0));
