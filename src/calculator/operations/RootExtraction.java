@@ -30,23 +30,22 @@ public class RootExtraction extends Operation implements ListLocation {
     }
 
     private Decimal extractRoot(Decimal number1, Decimal number2) {
-        Decimal result = new Decimal("1");
+        Decimal result = new Decimal("1,0");
         List<Decimal> primeList = new ArrayList<>();
+        int nthPrime;
         // Integer
-        // while dividend not 0
-        while (!number1.toString().equals("1,")) {
-            int nthPrime = 1;
+        // while dividend not 1
+        while (!number1.toString().equals("1,0")) {
+            nthPrime = 0;
             // while dividend % prime != 0
-            while (!(new Modulo(number1, generatePrime(nthPrime)).toString().equals("0,0"))) {
-
+            while (!isDecimalHigherThanDecimal(new Modulo(number1, generatePrime(nthPrime)).getResult(), new Decimal("0,0")) && !isDecimalHigherThanDecimal(new Decimal("0,0"), new Modulo(number1, generatePrime(nthPrime)).getResult())) {
+                nthPrime++;
                 if (nthPrime > primeList.size()) {
                     primeList.add(new Decimal("0"));
                 }
-                nthPrime++;
             }
             number1 = new Division(number1, generatePrime(nthPrime)).getResult();
             primeList.set(nthPrime-1, new Addition(primeList.get(nthPrime-1), new Decimal("1")).getResult());
-
         }
         // divide exponent by root(number2
         int index = 0;
@@ -64,12 +63,8 @@ public class RootExtraction extends Operation implements ListLocation {
             }
             index++;
         }
-
         return result;
     }
-
-
-
 
     public Decimal generatePrime(int count){
 

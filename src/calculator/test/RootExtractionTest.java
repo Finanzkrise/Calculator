@@ -9,8 +9,8 @@ public class RootExtractionTest {
 
     @Test
     void rootExtractionTest100() {
-        Decimal number1 = new Decimal("4");
-        Decimal number2 = new Decimal("2");
+        Decimal number1 = new Decimal("100,0");
+        Decimal number2 = new Decimal("2,0");
         Decimal result = new RootExtraction(number1, number2).getResult();
         assertEquals(1, result.getNumberList().get(0).get(0));
         assertEquals(0, result.getNumberList().get(0).get(1));

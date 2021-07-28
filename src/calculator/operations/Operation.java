@@ -71,13 +71,13 @@ public abstract class Operation implements ListLocation {
         return false;
     }
 
-    protected Decimal getDecimalAsList(Decimal divisor) {
+    protected Decimal getDecimalAsList(Decimal number) {
         Decimal divisorAsList = new Decimal();
-        for (int i = 0; divisor.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(LEFT_OF_COMMA).get(i));
+        for (int i = 0; number.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(LEFT_OF_COMMA).get(i));
         }
-        for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(divisor.getNumberList().get(RIGHT_OF_COMMA).get(i));
+        for (int i = 0; number.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(RIGHT_OF_COMMA).get(i));
         }
         return divisorAsList;
     }

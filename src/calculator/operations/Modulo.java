@@ -2,12 +2,18 @@ package calculator.operations;
 
 import calculator.Decimal;
 import calculator.ListLocation;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class Modulo extends Division implements ListLocation {
+
+    public Modulo() {
+    }
 
     public Modulo(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
     }
+
     @Override
     public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
@@ -34,23 +40,11 @@ public class Modulo extends Division implements ListLocation {
 
         initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
         divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);
+        result = new Decimal(resultLeftOfComma, resultRightOfComma);
+        result = new Subtraction(dividend, new Multiplication(new Decimal(false, result.getNumberList().get(LEFT_OF_COMMA)), divisor).getResult()).getResult();
+        System.out.println(result);
         return result;
 
-    }
-
-    protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
-        while (!dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
-            moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
-            tempDividend = trimDecimal(tempDividend);
-            logger.info("tempDividend before division: " + tempDividend);
-
-            while (!isDecimalHigherThanDecimal(divisorAsList, tempDividend)) {
-                tempDividend = new Subtraction().operate(tempDividend, divisorAsList);
-                tempDividend = trimDecimal(tempDividend);
-            }
-            logger.info("remainder: " + tempDividend);
-            result = tempDividend;
-        }
     }
 
 
