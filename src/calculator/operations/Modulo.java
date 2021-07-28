@@ -3,7 +3,7 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.ListLocation;
 
-public class Modulo extends Division implements ListLocation {
+public class Modulo extends DivisionHelper implements ListLocation {
 
     public Modulo(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
