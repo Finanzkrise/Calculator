@@ -2,10 +2,8 @@ package calculator.operations;
 
 import calculator.Decimal;
 import calculator.ListLocation;
-import org.apache.logging.log4j.Logger;
 
-public abstract  class DivisionHelper extends Operation implements ListLocation {
-    Logger logger;
+public abstract class DivisionHelper extends Operation implements ListLocation {
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 
@@ -13,7 +11,6 @@ public abstract  class DivisionHelper extends Operation implements ListLocation 
         for (int i = 1; divisorAsList.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
         }
-
     }
 
     protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {

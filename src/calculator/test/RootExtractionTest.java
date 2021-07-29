@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RootExtractionTest {
-
+/*
     @Test
     void rootExtractionTest100() {
         Decimal number1 = new Decimal("100,0");
@@ -62,4 +62,6 @@ public class RootExtractionTest {
         assertEquals(4, prime.getNumberList().get(0).get(1));
         assertEquals(1, prime.getNumberList().get(0).get(2));
     }
+
+ */
 }

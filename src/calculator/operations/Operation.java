@@ -5,6 +5,7 @@ import calculator.ListLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public abstract class Operation implements ListLocation {
 
@@ -118,6 +119,20 @@ public abstract class Operation implements ListLocation {
             }
         }
         return number;
+    }
+
+    public boolean isEqualTo(Decimal number) {
+        for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, LEFT_OF_COMMA); i++) {
+            if (this.getResult().getNumberList().get(LEFT_OF_COMMA).get(i) != number.getNumberList().get(LEFT_OF_COMMA).get(i))  {
+                return false;
+            }
+        }
+        for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, RIGHT_OF_COMMA); i++) {
+            if (this.getResult().getNumberList().get(RIGHT_OF_COMMA).get(i) != number.getNumberList().get(RIGHT_OF_COMMA).get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
