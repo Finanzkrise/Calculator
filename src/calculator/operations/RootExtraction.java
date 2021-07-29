@@ -20,7 +20,7 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
         result = extractRoot(number1, number2);
     }
 
-    public Decimal extractRoot(Decimal number1, Decimal number2) {
+    public Decimal extractRoot(Decimal radicand, Decimal degree) {
         Decimal result = new Decimal();
         Decimal tempDividend = new Decimal();
         Decimal tempDividendBuffer = new Decimal();
@@ -28,22 +28,25 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
         Decimal index = new Decimal("1");
         int numbersWritten = 0;
 
-        Decimal dividendAsList = getDecimalAsList(number1);
-        Decimal divisorAsList = getDecimalAsList(number2);
+        Decimal dividendAsList = getDecimalAsList(radicand);
+        Decimal divisorAsList = getDecimalAsList(degree);
 
+        // erster Schritt
         initializeTempDividend(tempDividend, dividendAsList, divisorAsList);
-
         tempSubtrahend = findFirstSubtrahend(tempDividend);
         result.getNumberList().get(LEFT_OF_COMMA).add(tempSubtrahend.getNumberList().get(LEFT_OF_COMMA).get(0));
         tempDividend = new Subtraction(tempDividend, new Multiplication(tempSubtrahend, tempSubtrahend).getResult()).getResult();
 
-        while (!tempDividend.toString().equals("0,0") && !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
+        // nach dem ersten Schritt
+        while (!tempDividend.toString().equals("0,0") || dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
+            // tempIndex füllen
             index = new Decimal("1");
-            while (isDecimalHigherThanDecimal(number2, index)) {
+            while (isDecimalHigherThanDecimal(degree, index)) {
                 moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
                 index = new Addition(index, new Decimal("1")).getResult();
             }
             moveDigitFromDividendListToTempDividend(tempDividendBuffer, dividendAsList);
+
             Decimal tempDivisor = findDivisor(tempDividend, tempSubtrahend);
             moveDigitFromDividendListToTempDividend(tempDividend, tempDividendBuffer);
 
@@ -62,22 +65,24 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
     }
 
     private Decimal findDivisor(Decimal tempDividend, Decimal tempDivisor) {
-        Decimal result = new Decimal("1");
-        //tempDividend <= result *2,
-        while (!isDecimalHigherThanDecimal(new Multiplication(result, new Multiplication(tempDivisor, new Decimal("2")).getResult()).getResult(), tempDividend)) {
-            result = new Addition(result, new Decimal(("1"))).getResult();
+        Decimal divisor = new Decimal("0");
+        //tempDividend <= result*2 * X,
+        tempDividend = trimDecimal(tempDividend);
+        while (!isDecimalHigherThanDecimal(new Multiplication(divisor, new Multiplication(tempDivisor, new Decimal("2")).getResult()).getResult(), tempDividend)) {
+            divisor = new Addition(divisor, new Decimal(("1"))).getResult();
         }
-
-        return result;
+        if (isDecimalHigherThanDecimal(divisor, new Decimal("9"))) {
+            divisor =  new Decimal("9");
+        }
+        return divisor;
     }
 
     private Decimal findFirstSubtrahend(Decimal tempDividend) {
         Decimal result = new Decimal("1");
         // tempDividend <= result²
-        while (isDecimalHigherThanDecimal(tempDividend, new Multiplication(result, result).getResult())) {
+        while (!isDecimalHigherThanDecimal(new Multiplication(result, result).getResult(), tempDividend)) {
             result = new Addition(result, new Decimal(("1"))).getResult();
         }
-        result = new Subtraction(result, new Decimal("1")).getResult();
         return result;
     }
 
@@ -87,9 +92,11 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
     }
 
     private void adjustTempDividend(Decimal tempDividend, Decimal dividendAsList, Decimal degree) {
-        if (!new Modulo(new Decimal(String.valueOf(dividendAsList.getNumberList().get(LEFT_OF_COMMA).size())), degree).isEqualTo(new Decimal("0,0"))) {
-            moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
-            adjustTempDividend(tempDividend, dividendAsList, degree);
+        if (dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
+            if (!(new Modulo(new Decimal(String.valueOf(dividendAsList.getNumberList().get(LEFT_OF_COMMA).size())), degree).isEqualTo(new Decimal("0,0")))) {
+                moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
+                adjustTempDividend(tempDividend, dividendAsList, degree);
+            }
         }
     }
 }

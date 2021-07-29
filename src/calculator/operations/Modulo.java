@@ -8,9 +8,11 @@ import org.apache.log4j.LogManager;
 
 public class Modulo extends DivisionHelper implements ListLocation {
     Logger logger = LogManager.getLogger(Modulo.class);
+
     public Modulo(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
     }
+
     @Override
     public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
@@ -28,20 +30,25 @@ public class Modulo extends DivisionHelper implements ListLocation {
         int numbersWritten = 0;
         int dividendInitialLength;
 
-        Decimal divisorAsList = getDecimalAsList(divisor);
-        divisorAsList = trimDecimal(divisorAsList);
-        Decimal dividendAsList = getDecimalAsList(dividend);
-        dividendAsList = trimDecimal(dividendAsList);
-        adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
-        dividendInitialLength = dividendAsList.getNumberList().get(LEFT_OF_COMMA).size();
+        if (isDecimalHigherThanDecimal(divisor, dividend)) {
+            result = dividend;
+        }
+        else {
+            Decimal divisorAsList = getDecimalAsList(divisor);
+            divisorAsList = trimDecimal(divisorAsList);
+            Decimal dividendAsList = getDecimalAsList(dividend);
+            dividendAsList = trimDecimal(dividendAsList);
+            adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
+            dividendInitialLength = dividendAsList.getNumberList().get(LEFT_OF_COMMA).size();
 
-        initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
-        divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);
+            initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
+            divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);
+        }
         return result;
-
     }
 
     protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
+
         while (!dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
             tempDividend = trimDecimal(tempDividend);
