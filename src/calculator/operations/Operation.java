@@ -122,17 +122,25 @@ public abstract class Operation implements ListLocation {
     }
 
     public boolean isEqualTo(Decimal number) {
+
+        if (!isDecimalHigherThanDecimal(this.getResult(), number) && !isDecimalHigherThanDecimal(number, this.getResult())) {
+            return true;
+        }
+        return false;
+    /*
         for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, LEFT_OF_COMMA); i++) {
             if (this.getResult().getNumberList().get(LEFT_OF_COMMA).get(i) != number.getNumberList().get(LEFT_OF_COMMA).get(i))  {
                 return false;
             }
         }
+        if ()
         for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, RIGHT_OF_COMMA); i++) {
             if (this.getResult().getNumberList().get(RIGHT_OF_COMMA).get(i) != number.getNumberList().get(RIGHT_OF_COMMA).get(i)) {
                 return false;
             }
         }
-        return true;
+
+     */
     }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
