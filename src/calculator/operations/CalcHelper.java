@@ -23,19 +23,9 @@ public abstract class CalcHelper implements IListLocation {
     public Decimal getResult() {
         return result;
     }
-/*
-    public Decimal operate(Decimal number1, Decimal number2) {
-        executeOperation(number1, number2);
-        result = trimDecimal(result);
-        return result;
-    }
-
- */
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 
-
-    // needs to be fixed
     public boolean isDecimalHigherThanDecimal(Decimal number1, Decimal number2) {
         // left of comma same size
         if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
@@ -81,9 +71,8 @@ public abstract class CalcHelper implements IListLocation {
             return true;
         }
         // subtrahend bigger
-        else {
+        else
             return false;
-        }
         return false;
     }
 
@@ -133,25 +122,10 @@ public abstract class CalcHelper implements IListLocation {
     }
 
     public boolean isEqualTo(Decimal number) {
-
         if (!isDecimalHigherThanDecimal(this.getResult(), number) && !isDecimalHigherThanDecimal(number, this.getResult())) {
             return true;
         }
         return false;
-    /*
-        for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, LEFT_OF_COMMA); i++) {
-            if (this.getResult().getNumberList().get(LEFT_OF_COMMA).get(i) != number.getNumberList().get(LEFT_OF_COMMA).get(i))  {
-                return false;
-            }
-        }
-        if ()
-        for (int i = 0; i < getLengthOfLongerNumberSection(this.getResult(), number, RIGHT_OF_COMMA); i++) {
-            if (this.getResult().getNumberList().get(RIGHT_OF_COMMA).get(i) != number.getNumberList().get(RIGHT_OF_COMMA).get(i)) {
-                return false;
-            }
-        }
-
-     */
     }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
