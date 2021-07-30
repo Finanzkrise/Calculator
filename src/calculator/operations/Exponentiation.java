@@ -22,12 +22,12 @@ public class Exponentiation extends CalcHelper implements  IOperation {
     }
 
     private Decimal exponantiate(Decimal number1, Decimal number2) {
-        //Decimal zero = new Decimal("0,0");
+        Decimal result = number1;
         while (!isDecimalHigherThanDecimal(new Decimal("2"), number2)) {
             number2 = new Subtraction().operate(number2, new Decimal("1"));
-            number1 = new Multiplication().operate(number1, number1);
-            System.out.println("tempresult: " + number1);
+            result = new Multiplication().operate(result, number1);
+            System.out.println("tempresult: " + result);
         }
-        return number1;
+        return result;
     }
 }
