@@ -3,7 +3,7 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.IListLocation;
 
-public class Addition extends CalcHelper implements IListLocation, IOperation {
+public class Addition extends CalcHelper implements  IOperation {
     boolean overflow = false;
 
     public Addition(Decimal ...numbers) {

@@ -3,7 +3,7 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.IListLocation;
 
-public class Exponentiation extends CalcHelper implements IListLocation, IOperation {
+public class Exponentiation extends CalcHelper implements  IOperation {
 
     public Exponentiation(Decimal number1, Decimal number2) {
         result = operate(number1, number2);

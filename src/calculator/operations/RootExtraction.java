@@ -5,7 +5,7 @@ import calculator.IListLocation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class RootExtraction extends DivisionHelper implements IListLocation, IOperation {
+public class RootExtraction extends DivisionHelper implements IOperation {
     Logger logger = LogManager.getLogger(RootExtraction.class);
 
     public RootExtraction() {

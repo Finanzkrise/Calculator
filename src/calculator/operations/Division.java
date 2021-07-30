@@ -6,7 +6,7 @@ import calculator.IListLocation;
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
-public class Division extends DivisionHelper implements IListLocation, IOperation {
+public class Division extends DivisionHelper implements IOperation {
     Logger logger = LogManager.getLogger(Division.class);
 
     public Division() {

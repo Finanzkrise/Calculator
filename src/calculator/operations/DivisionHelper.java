@@ -3,7 +3,7 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.IListLocation;
 
-public abstract class DivisionHelper extends CalcHelper implements IListLocation {
+public abstract class DivisionHelper extends CalcHelper {
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 

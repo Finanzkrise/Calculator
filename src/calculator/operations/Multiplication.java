@@ -6,7 +6,7 @@ import calculator.IListLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Multiplication extends CalcHelper implements IListLocation, IOperation {
+public class Multiplication extends CalcHelper implements IOperation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
 
