@@ -1,12 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Operation implements ListLocation {
+public abstract class CalcHelper implements IListLocation {
 
     protected List<Integer> resultRightOfComma = new ArrayList<>(); // unnötig?
     protected List<Integer> resultLeftOfComma = new ArrayList<>(); // unnötig?
@@ -24,8 +24,6 @@ public abstract class Operation implements ListLocation {
         return result;
     }
 
-    abstract Decimal operate(Decimal number1, Decimal number2);
-
     abstract void executeOperation(Decimal number1, Decimal number2);
 
     public boolean isDecimalHigherThanDecimal(Decimal number1, Decimal number2) {
@@ -36,7 +34,7 @@ public abstract class Operation implements ListLocation {
                 // minuend bigger
                 if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return true;
-                //subtrahend bigger
+                    //subtrahend bigger
                 } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return false;
                 }
@@ -44,7 +42,6 @@ public abstract class Operation implements ListLocation {
             if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
                 // compare RIGHT_OF_COMMA
                 for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
-
                     // minuend bigger
                     if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
                         return true;
@@ -53,10 +50,19 @@ public abstract class Operation implements ListLocation {
                         return false;
                     }
                 }
-            }else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-                return true;
-            }
-            else {
+            } else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+                for (int i = 0; number1.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                    if (number1.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                for (int i = 0; number2.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                    if (number2.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                        return true;
+                    }
+                }
                 return false;
             }
         }
@@ -65,10 +71,34 @@ public abstract class Operation implements ListLocation {
             return true;
         }
         // subtrahend bigger
-        else {
+        else
             return false;
-        }
         return false;
+    }
+
+    protected Decimal getDecimalAsList(Decimal number) {
+        Decimal divisorAsList = new Decimal();
+        for (int i = 0; number.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(LEFT_OF_COMMA).get(i));
+        }
+        for (int i = 0; number.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(RIGHT_OF_COMMA).get(i));
+        }
+        return divisorAsList;
+    }
+
+    protected void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
+        if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() > dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
+            for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                dividendAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+            //logger.info(divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to dividendAsList");
+        } else if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() < dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
+            for (int i = 0; dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+            }
+            //logger.info(dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to divisorAsList");
+        }
     }
 
     public Decimal trimDecimal(Decimal number) {
@@ -89,6 +119,13 @@ public abstract class Operation implements ListLocation {
             }
         }
         return number;
+    }
+
+    public boolean isEqualTo(Decimal number) {
+        if (!isDecimalHigherThanDecimal(this.getResult(), number) && !isDecimalHigherThanDecimal(number, this.getResult())) {
+            return true;
+        }
+        return false;
     }
 
     public int getLengthOfLongerNumberSection(Decimal number1, Decimal number2, int location) {
@@ -117,6 +154,8 @@ public abstract class Operation implements ListLocation {
     public boolean isIndexInBounds(int index, Decimal number, int location) {
         return index >= 0 && index < number.getNumberList().get(location).size();
     }
+
+
 
 
 }

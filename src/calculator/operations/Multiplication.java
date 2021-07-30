@@ -1,12 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Multiplication extends Operation implements ListLocation {
+public class Multiplication extends CalcHelper implements IOperation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
 
@@ -17,6 +17,7 @@ public class Multiplication extends Operation implements ListLocation {
         result = operate(number1, number2);
     }
 
+    @Override
     public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
         result = trimDecimal(result);
