@@ -50,10 +50,8 @@ public abstract class CalcHelper implements IListLocation {
                 }
             }
             if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-
                 // compare RIGHT_OF_COMMA
                 for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
-
                     // minuend bigger
                     if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
                         return true;
@@ -62,21 +60,20 @@ public abstract class CalcHelper implements IListLocation {
                         return false;
                     }
                 }
-                // 0 vs null
             } else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-                //for (int i = 0; i < number1.getNumberList().get(RIGHT_OF_COMMA).size(); i++) {
-                  //  if (number1.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                for (int i = 0; number1.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                    if (number1.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
                         return true;
-                    //}
-                //}
-                //return false;
+                    }
+                }
+                return false;
             } else {
-                //for (int i = 0; i < number2.getNumberList().get(RIGHT_OF_COMMA).size(); i++) {
-                  //  if (number2.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
-                        return false;
-                    //}
-                //}
-                //return true;
+                for (int i = 0; number2.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
+                    if (number2.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
         //minuend left of comma size bigger

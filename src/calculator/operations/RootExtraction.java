@@ -43,7 +43,7 @@ public class RootExtraction extends DivisionHelper implements IOperation {
             index = new Decimal("1");
             while (isDecimalHigherThanDecimal(degree, index)) {
                 moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
-                index = new Addition(index, new Decimal("1")).getResult();
+                index = index.increment();
             }
             moveDigitFromDividendListToTempDividend(tempDividendBuffer, dividendAsList);
 
@@ -68,8 +68,8 @@ public class RootExtraction extends DivisionHelper implements IOperation {
         Decimal divisor = new Decimal("0");
         //tempDividend <= result*2 * X,
         tempDividend = trimDecimal(tempDividend);
-        while (!isDecimalHigherThanDecimal(new Multiplication(divisor, new Multiplication(tempDivisor, new Decimal("2")).getResult()).getResult(), tempDividend)) {
-            divisor.increment();
+        while (isDecimalHigherThanDecimal(tempDividend, new Multiplication(divisor, new Multiplication(tempDivisor, new Decimal("2")).getResult()).getResult())) {
+            divisor = divisor.increment();
         }
         if (isDecimalHigherThanDecimal(divisor, new Decimal("9"))) {
             divisor =  new Decimal("9");
@@ -80,11 +80,9 @@ public class RootExtraction extends DivisionHelper implements IOperation {
     private Decimal findFirstSubtrahend(Decimal tempDividend) {
         Decimal result = new Decimal("1");
         // tempDividend <= result²
-        while (!isDecimalHigherThanDecimal(new Multiplication(result, result).getResult(), tempDividend)) {
-            result.increment();
+        while (isDecimalHigherThanDecimal( tempDividend, new Multiplication(result, result).getResult())) {
+            result = result.increment();
         }
-        // fixed for now should be handled by isDecimalHigherThanDecimal() in 83
-        result = new Subtraction(result, new Decimal("1")).getResult();
         return result;
     }
 
