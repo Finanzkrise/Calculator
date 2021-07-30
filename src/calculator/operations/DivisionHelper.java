@@ -1,9 +1,9 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
-public abstract class DivisionHelper extends Operation implements ListLocation {
+public abstract class DivisionHelper extends CalcHelper implements IListLocation {
 
     abstract void executeOperation(Decimal number1, Decimal number2);
 

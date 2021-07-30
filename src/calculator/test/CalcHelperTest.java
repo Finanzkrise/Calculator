@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OperationTest {
+public class CalcHelperTest {
     @Test
     void testisNumberOneHigherThanNumberTwoIntInt() {
         Decimal decimal1 = new Decimal("2,0");

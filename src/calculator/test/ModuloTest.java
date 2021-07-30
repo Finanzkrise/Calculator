@@ -1,15 +1,12 @@
 package calculator.test;
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 import calculator.operations.Modulo;
 import org.junit.jupiter.api.Test;
 
-import java.sql.PreparedStatement;
-import java.util.logging.Level;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ModuloTest implements ListLocation {
+public class ModuloTest implements IListLocation {
 
     @Test
     void moduloTestIntInt(){

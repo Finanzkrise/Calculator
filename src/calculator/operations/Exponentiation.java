@@ -1,12 +1,19 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
-public class Exponentiation extends  Operation implements ListLocation {
+public class Exponentiation extends CalcHelper implements IListLocation, IOperation {
 
     public Exponentiation(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
+    }
+
+    @Override
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
     }
 
     @Override

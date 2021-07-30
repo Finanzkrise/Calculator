@@ -1,11 +1,11 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class RootExtraction extends DivisionHelper implements ListLocation {
+public class RootExtraction extends DivisionHelper implements IListLocation, IOperation {
     Logger logger = LogManager.getLogger(RootExtraction.class);
 
     public RootExtraction() {
@@ -38,7 +38,7 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
         tempDividend = new Subtraction(tempDividend, new Multiplication(tempSubtrahend, tempSubtrahend).getResult()).getResult();
 
         // nach dem ersten Schritt
-        while (!tempDividend.toString().equals("0,0") || dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
+        while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
             // tempIndex füllen
             index = new Decimal("1");
             while (isDecimalHigherThanDecimal(degree, index)) {
@@ -69,7 +69,7 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
         //tempDividend <= result*2 * X,
         tempDividend = trimDecimal(tempDividend);
         while (!isDecimalHigherThanDecimal(new Multiplication(divisor, new Multiplication(tempDivisor, new Decimal("2")).getResult()).getResult(), tempDividend)) {
-            divisor = new Addition(divisor, new Decimal(("1"))).getResult();
+            divisor.increment();
         }
         if (isDecimalHigherThanDecimal(divisor, new Decimal("9"))) {
             divisor =  new Decimal("9");
@@ -81,8 +81,10 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
         Decimal result = new Decimal("1");
         // tempDividend <= result²
         while (!isDecimalHigherThanDecimal(new Multiplication(result, result).getResult(), tempDividend)) {
-            result = new Addition(result, new Decimal(("1"))).getResult();
+            result.increment();
         }
+        // fixed for now should be handled by isDecimalHigherThanDecimal() in 83
+        result = new Subtraction(result, new Decimal("1")).getResult();
         return result;
     }
 
@@ -98,5 +100,12 @@ public class RootExtraction extends DivisionHelper implements ListLocation {
                 adjustTempDividend(tempDividend, dividendAsList, degree);
             }
         }
+    }
+
+    @Override
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
     }
 }

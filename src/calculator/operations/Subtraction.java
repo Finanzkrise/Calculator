@@ -1,9 +1,9 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
-public class Subtraction extends Operation implements ListLocation {
+public class Subtraction extends CalcHelper implements IListLocation, IOperation {
     boolean overflow = false;
 
     public Subtraction() {
@@ -11,13 +11,6 @@ public class Subtraction extends Operation implements ListLocation {
 
     public Subtraction(Decimal minuend, Decimal subtrahend) {
         result = operate(minuend, subtrahend);
-    }
-
-    @Override
-    public Decimal operate(Decimal minuend, Decimal subtrahend) {
-        executeOperation(minuend, subtrahend);
-        result = trimDecimal(result);
-        return result;
     }
 
     public Decimal subtract(Decimal minuend, Decimal subtrahend) {
@@ -30,7 +23,7 @@ public class Subtraction extends Operation implements ListLocation {
     @Override
     void executeOperation(Decimal minuend, Decimal subtrahend) {
         // minuend > subtrahend
-        if (!isDecimalHigherThanDecimal(subtrahend, minuend)) {
+        if (!isDecimalHigherThanDecimal(trimDecimal(subtrahend), trimDecimal(minuend))) {
             if (minuend.isNumberPositive() && subtrahend.isNumberPositive()) {
                 result = subtract(minuend, subtrahend);
                 result.setIsPositive(true);
@@ -119,6 +112,13 @@ public class Subtraction extends Operation implements ListLocation {
             return minuend.getNumberList().get(location).size();
         }
         return subtrahend.getNumberList().get(location).size();
+    }
+
+    @Override
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
     }
 
 

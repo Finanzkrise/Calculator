@@ -1,13 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
-public abstract class Operation implements ListLocation {
+public abstract class CalcHelper implements IListLocation {
 
     protected List<Integer> resultRightOfComma = new ArrayList<>(); // unnötig?
     protected List<Integer> resultLeftOfComma = new ArrayList<>(); // unnötig?
@@ -24,15 +23,19 @@ public abstract class Operation implements ListLocation {
     public Decimal getResult() {
         return result;
     }
-
+/*
     public Decimal operate(Decimal number1, Decimal number2) {
         executeOperation(number1, number2);
         result = trimDecimal(result);
         return result;
     }
 
+ */
+
     abstract void executeOperation(Decimal number1, Decimal number2);
 
+
+    // needs to be fixed
     public boolean isDecimalHigherThanDecimal(Decimal number1, Decimal number2) {
         // left of comma same size
         if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
@@ -41,12 +44,13 @@ public abstract class Operation implements ListLocation {
                 // minuend bigger
                 if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return true;
-                //subtrahend bigger
+                    //subtrahend bigger
                 } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
                     return false;
                 }
             }
             if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+
                 // compare RIGHT_OF_COMMA
                 for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
 
@@ -58,11 +62,21 @@ public abstract class Operation implements ListLocation {
                         return false;
                     }
                 }
-            }else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-                return true;
-            }
-            else {
-                return false;
+                // 0 vs null
+            } else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+                //for (int i = 0; i < number1.getNumberList().get(RIGHT_OF_COMMA).size(); i++) {
+                  //  if (number1.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                        return true;
+                    //}
+                //}
+                //return false;
+            } else {
+                //for (int i = 0; i < number2.getNumberList().get(RIGHT_OF_COMMA).size(); i++) {
+                  //  if (number2.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                        return false;
+                    //}
+                //}
+                //return true;
             }
         }
         //minuend left of comma size bigger
@@ -169,6 +183,8 @@ public abstract class Operation implements ListLocation {
     public boolean isIndexInBounds(int index, Decimal number, int location) {
         return index >= 0 && index < number.getNumberList().get(location).size();
     }
+
+
 
 
 }

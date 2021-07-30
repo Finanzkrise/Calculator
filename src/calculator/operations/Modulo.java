@@ -1,12 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
-public class Modulo extends DivisionHelper implements ListLocation {
+public class Modulo extends DivisionHelper implements IListLocation, IOperation {
     Logger logger = LogManager.getLogger(Modulo.class);
 
     public Modulo(Decimal number1, Decimal number2) {

@@ -1,9 +1,9 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
-public class Addition extends Operation implements ListLocation {
+public class Addition extends CalcHelper implements IListLocation, IOperation {
     boolean overflow = false;
 
     public Addition(Decimal ...numbers) {
@@ -93,6 +93,13 @@ public class Addition extends Operation implements ListLocation {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
     }
 
 }

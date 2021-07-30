@@ -1,12 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.ListLocation;
+import calculator.IListLocation;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
-public class Division extends DivisionHelper implements ListLocation {
+public class Division extends DivisionHelper implements IListLocation, IOperation {
     Logger logger = LogManager.getLogger(Division.class);
 
     public Division() {
@@ -52,4 +52,10 @@ public class Division extends DivisionHelper implements ListLocation {
     }
 
 
+    @Override
+    public Decimal operate(Decimal number1, Decimal number2) {
+        executeOperation(number1, number2);
+        result = trimDecimal(result);
+        return result;
+    }
 }

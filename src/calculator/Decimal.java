@@ -1,9 +1,12 @@
 package calculator;
 
+import calculator.operations.Addition;
+import calculator.operations.Subtraction;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Decimal implements ListLocation {
+public class Decimal implements IListLocation {
     List<List<Integer>> numberList = new ArrayList<>(2);
     private boolean isNumberPositive = true;
 
@@ -63,6 +66,14 @@ public class Decimal implements ListLocation {
         } else {
             this.isNumberPositive = isPositive;
         }
+    }
+
+    public Decimal increment() {
+        return new Addition(this, new Decimal("1")).getResult();
+    }
+
+    public Decimal decrement() {
+        return new Subtraction(this, new Decimal("1")).getResult();
     }
 
     public void setNumberListFromString(String input) {
