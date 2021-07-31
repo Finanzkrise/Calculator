@@ -7,6 +7,10 @@ public class Addition extends CalcHelper implements  IOperation {
     boolean overflow = false;
 
     public Addition(Decimal ...numbers) {
+            result = new Decimal("0");
+        for (Decimal number : numbers) {
+            result = new Addition(result, number).getResult();
+        }
     }
 
     public Addition(Decimal number1, Decimal number2) {

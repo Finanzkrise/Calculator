@@ -7,6 +7,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AdditionTest {
+
+    @Test
+    void testConstructorVarArgs(){
+        Decimal number1 = new Decimal("2");
+        Decimal number2 = new Decimal("4");
+        Decimal number3 = new Decimal("5");
+        Decimal number4 = new Decimal("7");
+        Decimal ergebnis = new Addition(number1, number2, number3, number4).getResult();
+
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(8, ergebnis.getNumberList().get(0).get(1));
+    }
+
     @Test
     void testAdditionInt() {
         Decimal decimal1 = new Decimal("1,0");

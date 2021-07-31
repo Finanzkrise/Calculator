@@ -6,7 +6,11 @@ import calculator.IListLocation;
 public class Subtraction extends CalcHelper implements IOperation {
     boolean overflow = false;
 
-    public Subtraction() {
+    public Subtraction(Decimal ...numbers) {
+        result = new Addition(numbers[0], numbers[0]).getResult();
+        for (Decimal number : numbers) {
+            result = new Subtraction(result, number).getResult();
+        }
     }
 
     public Subtraction(Decimal minuend, Decimal subtrahend) {

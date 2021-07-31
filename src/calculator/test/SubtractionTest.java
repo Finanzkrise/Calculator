@@ -1,12 +1,26 @@
 package calculator.test;
 
 import calculator.Decimal;
+import calculator.operations.Addition;
 import calculator.operations.Subtraction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SubtractionTest {
+
+    @Test
+    void testConstructorVarArgs(){
+        Decimal number1 = new Decimal("2");
+        Decimal number2 = new Decimal("4");
+        Decimal number3 = new Decimal("5");
+        Decimal number4 = new Decimal("7");
+        Decimal ergebnis = new Subtraction(number1, number2, number3, number4).getResult();
+
+        assertEquals(1, ergebnis.getNumberList().get(0).get(0));
+        assertEquals(4, ergebnis.getNumberList().get(0).get(1));
+        assertEquals(false, ergebnis.isNumberPositive());
+    }
 
     @Test
     void testSubstractionFromBiggerInt() {
