@@ -2,8 +2,12 @@ package calculator.operations;
 
 import calculator.Decimal;
 import calculator.IListLocation;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 
 public class Exponentiation extends CalcHelper implements  IOperation {
+    Logger logger = LogManager.getLogger(Exponentiation.class);
 
     public Exponentiation(Decimal number1, Decimal number2) {
         result = operate(number1, number2);

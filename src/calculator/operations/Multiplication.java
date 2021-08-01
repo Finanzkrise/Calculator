@@ -2,6 +2,8 @@ package calculator.operations;
 
 import calculator.Decimal;
 import calculator.IListLocation;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 public class Multiplication extends CalcHelper implements IOperation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
+    Logger logger = LogManager.getLogger(Multiplication.class);
 
     public Multiplication() {
     }

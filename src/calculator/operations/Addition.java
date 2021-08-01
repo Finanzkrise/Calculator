@@ -2,9 +2,12 @@ package calculator.operations;
 
 import calculator.Decimal;
 import calculator.IListLocation;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class Addition extends CalcHelper implements  IOperation {
     boolean overflow = false;
+    Logger logger = LogManager.getLogger(Addition.class);
 
     public Addition(Decimal ...numbers) {
     }
