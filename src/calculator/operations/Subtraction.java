@@ -3,13 +3,17 @@ package calculator.operations;
 import calculator.Decimal;
 import calculator.IListLocation;
 
+import java.util.Arrays;
+
 public class Subtraction extends CalcHelper implements IOperation {
     boolean overflow = false;
 
     public Subtraction(Decimal ...numbers) {
-        result = new Addition(numbers[0], numbers[0]).getResult();
-        for (Decimal number : numbers) {
-            result = new Subtraction(result, number).getResult();
+        if (numbers.length > 0) {
+            result = numbers[0];
+            for (int i = 1; i < numbers.length; i++) {
+                result = new Subtraction(result, numbers[i]).getResult();
+            }
         }
     }
 
