@@ -5,11 +5,19 @@ import calculator.IListLocation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.Arrays;
+
 public class Subtraction extends CalcHelper implements IOperation {
     boolean overflow = false;
     Logger logger = LogManager.getLogger(Subtraction.class);
 
-    public Subtraction() {
+    public Subtraction(Decimal ...numbers) {
+        if (numbers.length > 0) {
+            result = numbers[0];
+            for (int i = 1; i < numbers.length; i++) {
+                result = new Subtraction(result, numbers[i]).getResult();
+            }
+        }
     }
 
     public Subtraction(Decimal minuend, Decimal subtrahend) {
