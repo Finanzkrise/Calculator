@@ -18,18 +18,16 @@ public class Decimal implements IListLocation {
         }
     }
 
-
-
     public Decimal(Decimal decimal) {
-        numberList = new ArrayList<>(decimal.numberList);
+        numberList = new ArrayList<>(/*decimal.numberList*/);
         numberList.add(new ArrayList<>());
         numberList.add(new ArrayList<>());
 
-        for (Integer number : decimal.numberList.get(0)) {
-            numberList.get(0).add(number);
+        for (Integer number : decimal.numberList.get(LEFT_OF_COMMA)) {
+            numberList.get(LEFT_OF_COMMA).add(number);
         }
-        for (Integer number : decimal.numberList.get(1)) {
-            numberList.get(1).add(number);
+        for (Integer number : decimal.numberList.get(RIGHT_OF_COMMA)) {
+            numberList.get(RIGHT_OF_COMMA).add(number);
         }
         this.isNumberPositive = decimal.isNumberPositive;
     }
