@@ -18,8 +18,19 @@ public class Decimal implements IListLocation {
         }
     }
 
+
+
     public Decimal(Decimal decimal) {
-        this.numberList = decimal.numberList;
+        numberList = new ArrayList<>(decimal.numberList);
+        numberList.add(new ArrayList<>());
+        numberList.add(new ArrayList<>());
+
+        for (Integer number : decimal.numberList.get(0)) {
+            numberList.get(0).add(number);
+        }
+        for (Integer number : decimal.numberList.get(1)) {
+            numberList.get(1).add(number);
+        }
         this.isNumberPositive = decimal.isNumberPositive;
     }
 
@@ -122,6 +133,8 @@ public class Decimal implements IListLocation {
         return "";
     }
 
+
+    // string buffer implementieren
     @Override
     public String toString() {
         String zahl = getVorzeichen();

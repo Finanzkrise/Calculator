@@ -16,6 +16,8 @@ public class Addition extends CalcHelper implements  IOperation {
         }
     }
 
+
+
     public Addition(Decimal number1, Decimal number2) {
         result = operate(number1, number2);
     }
@@ -31,26 +33,22 @@ public class Addition extends CalcHelper implements  IOperation {
         } else {
             if (isDecimalHigherThanDecimal(number1, number2)) {
                 if (number1.isNumberPositive() && !number2.isNumberPositive()) {
-                    Decimal changedNumber2 = number2;
-                    changedNumber2.setIsPositive(true);
-                    result = new Subtraction().operate(number1, changedNumber2);
+                    number2.setIsPositive(true);
+                    result = new Subtraction().operate(number1, number2);
                     result.setIsPositive(true);
                 } else if (!number1.isNumberPositive() && number2.isNumberPositive()) {
-                    Decimal changedNumber1 = number1;
-                    changedNumber1.setIsPositive(true);
-                    result = new Subtraction().operate(changedNumber1, number2);
+                    number1.setIsPositive(true);
+                    result = new Subtraction().operate(number1, number2);
                     result.setIsPositive(false);
                 }
             } else {
                 if (number1.isNumberPositive() && !number2.isNumberPositive()) {
-                    Decimal changedNumber2 = number2;
-                    changedNumber2.setIsPositive(true);
-                    result = new Subtraction().operate(changedNumber2, number1);
+                    number2.setIsPositive(true);
+                    result = new Subtraction().operate(number2, number1);
                     result.setIsPositive(false);
                 } else if (!number1.isNumberPositive() && number2.isNumberPositive()) {
-                    Decimal changedNumber1 = number1;
-                    changedNumber1.setIsPositive(true);
-                    result = new Subtraction().operate(number2, changedNumber1);
+                    number1.setIsPositive(true);
+                    result = new Subtraction().operate(number2, number1);
                     result.setIsPositive(true);
                 }
             }

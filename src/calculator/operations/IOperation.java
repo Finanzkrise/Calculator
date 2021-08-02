@@ -4,5 +4,5 @@ import calculator.Decimal;
 
 public interface IOperation {
 
-    public Decimal operate(Decimal number1, Decimal number2);
+    Decimal operate(Decimal number1, Decimal number2);
 }
