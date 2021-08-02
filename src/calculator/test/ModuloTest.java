@@ -1,12 +1,12 @@
 package calculator.test;
 import calculator.Decimal;
-import calculator.IListLocation;
+import calculator.Location;
 import calculator.operations.Modulo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ModuloTest implements IListLocation {
+public class ModuloTest {
 
     @Test
     void moduloTestIntInt(){
@@ -14,8 +14,8 @@ public class ModuloTest implements IListLocation {
         Decimal number2 = new Decimal("2");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(LEFT_OF_COMMA).get(0));
-        assertEquals(0, result.getNumberList().get(RIGHT_OF_COMMA).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
     }
 
     @Test
@@ -24,8 +24,8 @@ public class ModuloTest implements IListLocation {
         Decimal number2 = new Decimal("4");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(2, result.getNumberList().get(LEFT_OF_COMMA).get(result.getNumberList().get(LEFT_OF_COMMA).size()-1));
-        assertEquals(0, result.getNumberList().get(RIGHT_OF_COMMA).get(0));
+        assertEquals(2, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size()-1));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
     }
 
     @Test
@@ -34,8 +34,8 @@ public class ModuloTest implements IListLocation {
         Decimal number2 = new Decimal("2,5");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(LEFT_OF_COMMA).get(0));
-        assertEquals(0, result.getNumberList().get(RIGHT_OF_COMMA).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
     }
 
     @Test
@@ -44,8 +44,8 @@ public class ModuloTest implements IListLocation {
         Decimal number2 = new Decimal("100");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(5, result.getNumberList().get(LEFT_OF_COMMA).get(0));
-        assertEquals(0, result.getNumberList().get(RIGHT_OF_COMMA).get(0));
+        assertEquals(5, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
     }
 
     @Test
@@ -54,8 +54,8 @@ public class ModuloTest implements IListLocation {
         Decimal number2 = new Decimal("1,25");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(LEFT_OF_COMMA).get(0));
-        assertEquals(0, result.getNumberList().get(RIGHT_OF_COMMA).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
     }
 
 

@@ -1,16 +1,13 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.IListLocation;
+import calculator.Location;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import java.util.Arrays;
 
 public class Subtraction extends CalcHelper implements IOperation {
     boolean overflow = false;
     Logger logger = LogManager.getLogger(Subtraction.class);
-
     public Subtraction(Decimal ...numbers) {
         if (numbers.length > 0) {
             result = numbers[0];
@@ -82,17 +79,17 @@ public class Subtraction extends CalcHelper implements IOperation {
     }
 
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, LEFT_OF_COMMA);
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.LEFT_OF_COMMA.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, LEFT_OF_COMMA), getDigitLeftOfComma(i, substrahend, LEFT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, Location.LEFT_OF_COMMA.getIndex()), getDigitLeftOfComma(i, substrahend, Location.LEFT_OF_COMMA.getIndex()));
             resultLeftOfComma.add(0, tempResult);
         }
     }
 
     private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, RIGHT_OF_COMMA);
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.RIGHT_OF_COMMA.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, RIGHT_OF_COMMA), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, RIGHT_OF_COMMA));
+            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, Location.RIGHT_OF_COMMA.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, Location.RIGHT_OF_COMMA.getIndex()));
             resultRightOfComma.add(0, tempResult);
         }
     }

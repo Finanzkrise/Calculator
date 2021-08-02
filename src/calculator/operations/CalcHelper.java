@@ -1,13 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.IListLocation;
+import calculator.Location;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CalcHelper implements IListLocation {
-
+public abstract class CalcHelper {
     protected List<Integer> resultRightOfComma = new ArrayList<>(); // unnötig?
     protected List<Integer> resultLeftOfComma = new ArrayList<>(); // unnötig?
     protected Decimal result;
@@ -28,38 +27,38 @@ public abstract class CalcHelper implements IListLocation {
 
     public boolean isDecimalHigherThanDecimal(Decimal number1, Decimal number2) {
         // left of comma same size
-        if (number1.getNumberList().get(LEFT_OF_COMMA).size() == number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+        if (number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() == number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size()) {
             // compare left of comma
-            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, LEFT_OF_COMMA) > i; i++) {
+            for (int i = 0; getLengthOfLongerNumberSection(number1, number2, Location.LEFT_OF_COMMA.getIndex()) > i; i++) {
                 // minuend bigger
-                if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) > number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                if (number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(i) > number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(i)) {
                     return true;
                     //subtrahend bigger
-                } else if (number1.getNumberList().get(LEFT_OF_COMMA).get(i) < number2.getNumberList().get(LEFT_OF_COMMA).get(i)) {
+                } else if (number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(i) < number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(i)) {
                     return false;
                 }
             }
-            if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && !number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
+            if (!number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).isEmpty() && !number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).isEmpty()) {
                 // compare RIGHT_OF_COMMA
-                for (int j = 0; getLengthOfLongerNumberSection(number1, number2, RIGHT_OF_COMMA) > j; j++) {
+                for (int j = 0; getLengthOfLongerNumberSection(number1, number2, Location.RIGHT_OF_COMMA.getIndex()) > j; j++) {
                     // minuend bigger
-                    if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) > number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                    if (number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(j) > number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(j)) {
                         return true;
                         //subtrahend bigger
-                    } else if (number1.getNumberList().get(RIGHT_OF_COMMA).get(j) < number2.getNumberList().get(RIGHT_OF_COMMA).get(j)) {
+                    } else if (number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(j) < number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(j)) {
                         return false;
                     }
                 }
-            } else if (!number1.getNumberList().get(RIGHT_OF_COMMA).isEmpty() && number2.getNumberList().get(RIGHT_OF_COMMA).isEmpty()) {
-                for (int i = 0; number1.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                    if (number1.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+            } else if (!number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).isEmpty() && number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).isEmpty()) {
+                for (int i = 0; number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
+                    if (number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(i) != 0) {
                         return true;
                     }
                 }
                 return false;
             } else {
-                for (int i = 0; number2.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                    if (number2.getNumberList().get(RIGHT_OF_COMMA).get(i) != 0) {
+                for (int i = 0; number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
+                    if (number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(i) != 0) {
                         return true;
                     }
                 }
@@ -67,7 +66,7 @@ public abstract class CalcHelper implements IListLocation {
             }
         }
         //minuend left of comma size bigger
-        else if (number1.getNumberList().get(LEFT_OF_COMMA).size() > number2.getNumberList().get(LEFT_OF_COMMA).size()) {
+        else if (number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size()) {
             return true;
         }
         // subtrahend bigger
@@ -78,42 +77,42 @@ public abstract class CalcHelper implements IListLocation {
 
     protected Decimal getDecimalAsList(Decimal number) {
         Decimal divisorAsList = new Decimal();
-        for (int i = 0; number.getNumberList().get(LEFT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(LEFT_OF_COMMA).get(i));
+        for (int i = 0; number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > i; i++) {
+            divisorAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(i));
         }
-        for (int i = 0; number.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-            divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(number.getNumberList().get(RIGHT_OF_COMMA).get(i));
+        for (int i = 0; number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
+            divisorAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(i));
         }
         return divisorAsList;
     }
 
     protected void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
-        if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() > dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
-            for (int i = 0; divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                dividendAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+        if (divisor.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > dividend.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size()) {
+            for (int i = 0; divisor.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() - dividend.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
+                dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(0);
             }
             //logger.info(divisor.getNumberList().get(RIGHT_OF_COMMA).size() - dividend.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to dividendAsList");
-        } else if (divisor.getNumberList().get(RIGHT_OF_COMMA).size() < dividend.getNumberList().get(RIGHT_OF_COMMA).size()) {
-            for (int i = 0; dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() > i; i++) {
-                divisorAsList.getNumberList().get(LEFT_OF_COMMA).add(0);
+        } else if (divisor.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() < dividend.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size()) {
+            for (int i = 0; dividend.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() - divisor.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
+                divisorAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(0);
             }
             //logger.info(dividend.getNumberList().get(RIGHT_OF_COMMA).size() - divisor.getNumberList().get(RIGHT_OF_COMMA).size() + " zeroes written to divisorAsList");
         }
     }
 
     public Decimal trimDecimal(Decimal number) {
-        if (number.getNumberList().get(LEFT_OF_COMMA).size() > 1) {
-            while (number.getNumberList().get(LEFT_OF_COMMA).get(0) == 0) {
-                number.getNumberList().get(LEFT_OF_COMMA).remove(0);
-                if (number.getNumberList().get(LEFT_OF_COMMA).size() == 1) {
+        if (number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > 1) {
+            while (number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0) == 0) {
+                number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).remove(0);
+                if (number.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() == 1) {
                     break;
                 }
             }
         }
-        if (number.getNumberList().get(RIGHT_OF_COMMA).size() > 1) {
-            while (number.getNumberList().get(RIGHT_OF_COMMA).get(number.getNumberList().get(RIGHT_OF_COMMA).size() - 1) == 0) {
-                number.getNumberList().get(RIGHT_OF_COMMA).remove(number.getNumberList().get(RIGHT_OF_COMMA).size() - 1);
-                if (number.getNumberList().get(RIGHT_OF_COMMA).size() < 2) {
+        if (number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > 1) {
+            while (number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() - 1) == 0) {
+                number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).remove(number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() - 1);
+                if (number.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() < 2) {
                     break;
                 }
             }

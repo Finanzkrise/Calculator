@@ -1,12 +1,13 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.IListLocation;
 
+import calculator.Location;
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
 public class Modulo extends DivisionHelper implements  IOperation {
+
     Logger logger = LogManager.getLogger(Modulo.class);
 
     public Modulo(Decimal number1, Decimal number2) {
@@ -39,7 +40,7 @@ public class Modulo extends DivisionHelper implements  IOperation {
             Decimal dividendAsList = getDecimalAsList(dividend);
             dividendAsList = trimDecimal(dividendAsList);
             adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
-            dividendInitialLength = dividendAsList.getNumberList().get(LEFT_OF_COMMA).size();
+            dividendInitialLength = dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size();
 
             initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
             divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);
@@ -49,7 +50,7 @@ public class Modulo extends DivisionHelper implements  IOperation {
 
     protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
 
-        while (!dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
+        while (!dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).isEmpty()) {
             moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
             tempDividend = trimDecimal(tempDividend);
             logger.info("tempDividend before division: " + tempDividend);

@@ -1,7 +1,7 @@
 package calculator.operations;
 
 import calculator.Decimal;
-import calculator.IListLocation;
+import calculator.Location;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -34,11 +34,11 @@ public class RootExtraction extends DivisionHelper implements IOperation {
         // erster Schritt
         initializeTempDividend(tempDividend, dividendAsList, divisorAsList);
         tempSubtrahend = findFirstSubtrahend(tempDividend);
-        result.getNumberList().get(LEFT_OF_COMMA).add(tempSubtrahend.getNumberList().get(LEFT_OF_COMMA).get(0));
+        result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(tempSubtrahend.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
         tempDividend = new Subtraction(tempDividend, new Multiplication(tempSubtrahend, tempSubtrahend).getResult()).getResult();
 
         // nach dem ersten Schritt
-        while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(LEFT_OF_COMMA).isEmpty()) {
+        while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).isEmpty()) {
             // tempIndex füllen
             index = new Decimal("1");
             while (isDecimalHigherThanDecimal(degree, index)) {
@@ -55,7 +55,7 @@ public class RootExtraction extends DivisionHelper implements IOperation {
                 tempDivisor = new Subtraction(tempDivisor, new Decimal("1")).getResult();
             }
             tempDividend = new Subtraction(tempDividend, getSubtrahendCandidate(result, tempDivisor)).getResult();
-            result.getNumberList().get(LEFT_OF_COMMA).add(tempDivisor.getNumberList().get(LEFT_OF_COMMA).get(0));
+            result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).add(tempDivisor.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
         }
         return result;
     }
@@ -92,8 +92,8 @@ public class RootExtraction extends DivisionHelper implements IOperation {
     }
 
     private void adjustTempDividend(Decimal tempDividend, Decimal dividendAsList, Decimal degree) {
-        if (dividendAsList.getNumberList().get(LEFT_OF_COMMA).size() > 0) {
-            if (!(new Modulo(new Decimal(String.valueOf(dividendAsList.getNumberList().get(LEFT_OF_COMMA).size())), degree).isEqualTo(new Decimal("0,0")))) {
+        if (dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > 0) {
+            if (!(new Modulo(new Decimal(String.valueOf(dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size())), degree).isEqualTo(new Decimal("0,0")))) {
                 moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
                 adjustTempDividend(tempDividend, dividendAsList, degree);
             }
