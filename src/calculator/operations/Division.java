@@ -43,7 +43,7 @@ public class Division extends DivisionHelper implements IOperation {
         Decimal dividendAsList = getDecimalAsList(dividend);
         dividendAsList = trimDecimal(dividendAsList);
         adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
-        dividendInitialLength = dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size();
+        dividendInitialLength = dividendAsList.getNumberList().get(Location.LEFT.getIndex()).size();
 
         initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
         divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);

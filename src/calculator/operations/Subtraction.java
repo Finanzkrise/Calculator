@@ -79,17 +79,17 @@ public class Subtraction extends CalcHelper implements IOperation {
     }
 
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.LEFT_OF_COMMA.getIndex());
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.LEFT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, Location.LEFT_OF_COMMA.getIndex()), getDigitLeftOfComma(i, substrahend, Location.LEFT_OF_COMMA.getIndex()));
+            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, Location.LEFT.getIndex()), getDigitLeftOfComma(i, substrahend, Location.LEFT.getIndex()));
             resultLeftOfComma.add(0, tempResult);
         }
     }
 
     private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.RIGHT_OF_COMMA.getIndex());
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.RIGHT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, Location.RIGHT_OF_COMMA.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, Location.RIGHT_OF_COMMA.getIndex()));
+            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, Location.RIGHT.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, Location.RIGHT.getIndex()));
             resultRightOfComma.add(0, tempResult);
         }
     }

@@ -56,13 +56,13 @@ public class Multiplication extends CalcHelper implements IOperation {
 
     private void multiplyDecimalDecimal(Decimal number1, Decimal number2) {
         // for length of number2 Right of Comma
-        for (int numberTwoIndex = 0; number2.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
+        for (int numberTwoIndex = 0; number2.getNumberList().get(Location.RIGHT.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
             resultRightOfComma = new ArrayList<>();
 
-            for (int numberOneIndex = 0; number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > numberOneIndex; numberOneIndex++) {
+            for (int numberOneIndex = 0; number1.getNumberList().get(Location.RIGHT.getIndex()).size() > numberOneIndex; numberOneIndex++) {
                 int tempResult = multiplyTwoDigits(
-                        getDigit(number1.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() - 1 - numberOneIndex, number1, Location.RIGHT_OF_COMMA.getIndex()),
-                        getDigit(numberTwoIndex, number2, Location.RIGHT_OF_COMMA.getIndex())
+                        getDigit(number1.getNumberList().get(Location.RIGHT.getIndex()).size() - 1 - numberOneIndex, number1, Location.RIGHT.getIndex()),
+                        getDigit(numberTwoIndex, number2, Location.RIGHT.getIndex())
                 );
                 getResultRightOfComma().add(0, tempResult);
             }
@@ -75,18 +75,18 @@ public class Multiplication extends CalcHelper implements IOperation {
 
     private void multiplayIntInt(Decimal number1, Decimal number2) {
         // for length of number2 Left of Comma
-        for (int numberTwoIndex = 0; number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
+        for (int numberTwoIndex = 0; number2.getNumberList().get(Location.LEFT.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
             resultLeftOfComma = new ArrayList<>();
 
-            for (int numberOneIndex = 0; number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > numberOneIndex; numberOneIndex++) {
+            for (int numberOneIndex = 0; number1.getNumberList().get(Location.LEFT.getIndex()).size() > numberOneIndex; numberOneIndex++) {
                 int tempResult = multiplyTwoDigits(
-                        getDigit(number1.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() - 1 - numberOneIndex, number1, Location.LEFT_OF_COMMA.getIndex()),
-                        getDigit(numberTwoIndex, number2, Location.LEFT_OF_COMMA.getIndex())
+                        getDigit(number1.getNumberList().get(Location.LEFT.getIndex()).size() - 1 - numberOneIndex, number1, Location.LEFT.getIndex()),
+                        getDigit(numberTwoIndex, number2, Location.LEFT.getIndex())
                 );
                 getResultLeftOfComma().add(0, tempResult);
             }
             getResultLeftOfComma().add(0, multiplyTwoDigits(0, 0));
-            for (int i = number2.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() - 1 - numberTwoIndex; 0 < i; i--) {
+            for (int i = number2.getNumberList().get(Location.LEFT.getIndex()).size() - 1 - numberTwoIndex; 0 < i; i--) {
                 getResultLeftOfComma().add(0);
             }
             decimalList.add(new Decimal(false, getResultLeftOfComma()));
@@ -96,14 +96,14 @@ public class Multiplication extends CalcHelper implements IOperation {
     public void multiplyIntDecimal(Decimal integer, Decimal decimal) {
         int numberOneIndex;
 
-        for (int numberTwoIndex = 0; decimal.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
+        for (int numberTwoIndex = 0; decimal.getNumberList().get(Location.RIGHT.getIndex()).size() > numberTwoIndex; numberTwoIndex++) {
             resultRightOfComma = new ArrayList<>();
             resultLeftOfComma = new ArrayList<>();
 
-            for (numberOneIndex = 0; integer.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() > numberOneIndex; numberOneIndex++) {
+            for (numberOneIndex = 0; integer.getNumberList().get(Location.LEFT.getIndex()).size() > numberOneIndex; numberOneIndex++) {
                 int tempResult = multiplyTwoDigits(
-                        getDigit(integer.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size() - 1 - numberOneIndex, integer, Location.LEFT_OF_COMMA.getIndex()),
-                        getDigit(numberTwoIndex, decimal, Location.RIGHT_OF_COMMA.getIndex())
+                        getDigit(integer.getNumberList().get(Location.LEFT.getIndex()).size() - 1 - numberOneIndex, integer, Location.LEFT.getIndex()),
+                        getDigit(numberTwoIndex, decimal, Location.RIGHT.getIndex())
                 );
                 if (numberTwoIndex >= numberOneIndex) {
                     resultRightOfComma.add(0, tempResult);

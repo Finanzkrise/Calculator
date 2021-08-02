@@ -24,11 +24,11 @@ public class Decimal {
         numberList.add(new ArrayList<>());
         numberList.add(new ArrayList<>());
 
-        for (Integer number : decimal.numberList.get(Location.LEFT_OF_COMMA.getIndex())) {
-            numberList.get(Location.LEFT_OF_COMMA.getIndex()).add(number);
+        for (Integer number : decimal.numberList.get(Location.LEFT.getIndex())) {
+            numberList.get(Location.LEFT.getIndex()).add(number);
         }
-        for (Integer number : decimal.numberList.get(Location.RIGHT_OF_COMMA.getIndex())) {
-            numberList.get(Location.RIGHT_OF_COMMA.getIndex()).add(number);
+        for (Integer number : decimal.numberList.get(Location.RIGHT.getIndex())) {
+            numberList.get(Location.RIGHT.getIndex()).add(number);
         }
         this.isNumberPositive = decimal.isNumberPositive;
     }
@@ -36,12 +36,12 @@ public class Decimal {
     public Decimal(boolean isListRightOfComma, List<Integer> list) {
         if (isListRightOfComma) {
             this.numberList.add(new ArrayList<>());
-            this.numberList.get(Location.LEFT_OF_COMMA.getIndex()).add(0);
+            this.numberList.get(Location.LEFT.getIndex()).add(0);
             this.numberList.add(list);
         } else {
             this.numberList.add(list);
             this.numberList.add(new ArrayList<>());
-            this.numberList.get(Location.RIGHT_OF_COMMA.getIndex()).add(0);
+            this.numberList.get(Location.RIGHT.getIndex()).add(0);
         }
     }
 
@@ -96,23 +96,23 @@ public class Decimal {
         input = setNumberIsPositive(input);
         if (input.matches("[\\d?]*[,.][\\d?][\\d?]*")) {
             splitAtComma = input.split("[,.]");
-            numberAsStringLeftOfComma = splitAtComma[Location.LEFT_OF_COMMA.getIndex()].split("");
-            numberAsStringRightOfComma = splitAtComma[Location.RIGHT_OF_COMMA.getIndex()].split("");
+            numberAsStringLeftOfComma = splitAtComma[Location.LEFT.getIndex()].split("");
+            numberAsStringRightOfComma = splitAtComma[Location.RIGHT.getIndex()].split("");
 
             for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
                 if (numberAsStringLeftOfComma[0].equals("")) {
                     numberAsStringLeftOfComma = new String[]{"0"};
                 }
-                numberList.get(Location.LEFT_OF_COMMA.getIndex()).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
+                numberList.get(Location.LEFT.getIndex()).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
             }
             for (int i = 0; i < numberAsStringRightOfComma.length; i++) {
-                numberList.get(Location.RIGHT_OF_COMMA.getIndex()).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
+                numberList.get(Location.RIGHT.getIndex()).add(0, Integer.parseInt(numberAsStringRightOfComma[numberAsStringRightOfComma.length - i - 1]));
             }
         } else {
             numberAsStringLeftOfComma = input.split("");
             // left of comma
             for (int i = 0; i < numberAsStringLeftOfComma.length; i++) {
-                numberList.get(Location.LEFT_OF_COMMA.getIndex()).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
+                numberList.get(Location.LEFT.getIndex()).add(0, Integer.parseInt(numberAsStringLeftOfComma[numberAsStringLeftOfComma.length - i - 1]));
             }
         }
     }
@@ -137,8 +137,8 @@ public class Decimal {
     @Override
     public String toString() {
         String zahl = getVorzeichen();
-        for (int i = 0; numberList.get(Location.LEFT_OF_COMMA.getIndex()).size() > i; i++) {
-            zahl += numberList.get(Location.LEFT_OF_COMMA.getIndex()).get(i);
+        for (int i = 0; numberList.get(Location.LEFT.getIndex()).size() > i; i++) {
+            zahl += numberList.get(Location.LEFT.getIndex()).get(i);
         }
         /*
         if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)) {
@@ -146,8 +146,8 @@ public class Decimal {
         }
          */
         zahl += ",";
-        for (int i = 0; numberList.get(Location.RIGHT_OF_COMMA.getIndex()).size() > i; i++) {
-            zahl += numberList.get(Location.RIGHT_OF_COMMA.getIndex()).get(i);
+        for (int i = 0; numberList.get(Location.RIGHT.getIndex()).size() > i; i++) {
+            zahl += numberList.get(Location.RIGHT.getIndex()).get(i);
         }
         return zahl;
     }

@@ -64,9 +64,9 @@ public class Addition extends CalcHelper implements  IOperation {
     }
 
     private void addNumbersLeftOfComma(Decimal number1, Decimal number2) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, Location.LEFT_OF_COMMA.getIndex());
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, Location.LEFT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = addTwoDigits(getDigitLeftOfComma(i, number1, Location.LEFT_OF_COMMA.getIndex()), getDigitLeftOfComma(i, number2, Location.LEFT_OF_COMMA.getIndex()));
+            int tempResult = addTwoDigits(getDigitLeftOfComma(i, number1, Location.LEFT.getIndex()), getDigitLeftOfComma(i, number2, Location.LEFT.getIndex()));
             getResultLeftOfComma().add(0, tempResult);
         }
         if (overflow) {
@@ -75,9 +75,9 @@ public class Addition extends CalcHelper implements  IOperation {
     }
 
     private void addNumbersRightOfComma(Decimal number1, Decimal number2) {
-        int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, Location.RIGHT_OF_COMMA.getIndex());
+        int lengthOfLongerNumber = getLengthOfLongerNumberSection(number1, number2, Location.RIGHT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = addTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, number1, Location.RIGHT_OF_COMMA.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, number2, Location.RIGHT_OF_COMMA.getIndex()));
+            int tempResult = addTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, number1, Location.RIGHT.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, number2, Location.RIGHT.getIndex()));
             getResultRightOfComma().add(0, tempResult);
         }
     }

@@ -6,7 +6,7 @@ import calculator.Location;
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
-public class Modulo extends DivisionHelper implements  IOperation {
+public class Modulo extends CalcHelper implements  IOperation {
 
     Logger logger = LogManager.getLogger(Modulo.class);
 
@@ -27,42 +27,12 @@ public class Modulo extends DivisionHelper implements  IOperation {
     }
 
     public Decimal modulo(Decimal dividend, Decimal divisor) {
-        Decimal tempDividend = new Decimal();
-        int numbersWritten = 0;
-        int dividendInitialLength;
 
-        if (isDecimalHigherThanDecimal(divisor, dividend)) {
-            result = dividend;
-        }
-        else {
-            Decimal divisorAsList = getDecimalAsList(divisor);
-            divisorAsList = trimDecimal(divisorAsList);
-            Decimal dividendAsList = getDecimalAsList(dividend);
-            dividendAsList = trimDecimal(dividendAsList);
-            adjustForComma(divisor, dividend, divisorAsList, dividendAsList);
-            dividendInitialLength = dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size();
-
-            initializeTempDividend(tempDividend, divisorAsList, dividendAsList);
-            divisionSteps(tempDividend, numbersWritten, dividendInitialLength, divisorAsList, dividendAsList);
+        result = dividend;
+        while (!isDecimalHigherThanDecimal(divisor, result)) {
+            result = new Subtraction(result, divisor).getResult();
         }
         return result;
     }
-
-    protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
-
-        while (!dividendAsList.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).isEmpty()) {
-            moveDigitFromDividendListToTempDividend(tempDividend, dividendAsList);
-            tempDividend = trimDecimal(tempDividend);
-            logger.info("tempDividend before division: " + tempDividend);
-
-            while (!isDecimalHigherThanDecimal(divisorAsList, tempDividend)) {
-                tempDividend = new Subtraction().operate(tempDividend, divisorAsList);
-                tempDividend = trimDecimal(tempDividend);
-            }
-            logger.info("remainder: " + tempDividend);
-            result = tempDividend;
-        }
-    }
-
 
 }

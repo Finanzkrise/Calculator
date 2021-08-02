@@ -14,8 +14,8 @@ public class ModuloTest {
         Decimal number2 = new Decimal("2");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
-        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT.getIndex()).get(0));
     }
 
     @Test
@@ -24,8 +24,8 @@ public class ModuloTest {
         Decimal number2 = new Decimal("4");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(2, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).size()-1));
-        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
+        assertEquals(2, result.getNumberList().get(Location.LEFT.getIndex()).get(result.getNumberList().get(Location.LEFT.getIndex()).size()-1));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT.getIndex()).get(0));
     }
 
     @Test
@@ -34,8 +34,8 @@ public class ModuloTest {
         Decimal number2 = new Decimal("2,5");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
-        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT.getIndex()).get(0));
     }
 
     @Test
@@ -44,8 +44,8 @@ public class ModuloTest {
         Decimal number2 = new Decimal("100");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(5, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
-        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
+        assertEquals(5, result.getNumberList().get(Location.LEFT.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT.getIndex()).get(0));
     }
 
     @Test
@@ -54,8 +54,8 @@ public class ModuloTest {
         Decimal number2 = new Decimal("1,25");
         Decimal result = new Modulo(number1, number2).getResult();
 
-        assertEquals(0, result.getNumberList().get(Location.LEFT_OF_COMMA.getIndex()).get(0));
-        assertEquals(0, result.getNumberList().get(Location.RIGHT_OF_COMMA.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.LEFT.getIndex()).get(0));
+        assertEquals(0, result.getNumberList().get(Location.RIGHT.getIndex()).get(0));
     }
 
 
