@@ -31,6 +31,17 @@ public abstract class DivisionHelper extends CalcHelper {
         }
     }
 
+    protected Decimal getDecimalAsList(Decimal number) {
+        Decimal divisorAsList = new Decimal();
+        for (int i = 0; number.getNumberList().get(Location.LEFT.getIndex()).size() > i; i++) {
+            divisorAsList.getNumberList().get(Location.LEFT.getIndex()).add(number.getNumberList().get(Location.LEFT.getIndex()).get(i));
+        }
+        for (int i = 0; number.getNumberList().get(Location.RIGHT.getIndex()).size() > i; i++) {
+            divisorAsList.getNumberList().get(Location.LEFT.getIndex()).add(number.getNumberList().get(Location.RIGHT.getIndex()).get(i));
+        }
+        return divisorAsList;
+    }
+
     protected void moveDigitFromDividendListToTempDividend(Decimal tempDividend, Decimal dividendAsList) {
         if (dividendAsList.getNumberList().get(Location.LEFT.getIndex()).size() > 0) {
             tempDividend.getNumberList().get(Location.LEFT.getIndex()).add(dividendAsList.getNumberList().get(Location.LEFT.getIndex()).get(0));

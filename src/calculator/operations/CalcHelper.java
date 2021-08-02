@@ -75,17 +75,6 @@ public abstract class CalcHelper {
         return false;
     }
 
-    protected Decimal getDecimalAsList(Decimal number) {
-        Decimal divisorAsList = new Decimal();
-        for (int i = 0; number.getNumberList().get(Location.LEFT.getIndex()).size() > i; i++) {
-            divisorAsList.getNumberList().get(Location.LEFT.getIndex()).add(number.getNumberList().get(Location.LEFT.getIndex()).get(i));
-        }
-        for (int i = 0; number.getNumberList().get(Location.RIGHT.getIndex()).size() > i; i++) {
-            divisorAsList.getNumberList().get(Location.LEFT.getIndex()).add(number.getNumberList().get(Location.RIGHT.getIndex()).get(i));
-        }
-        return divisorAsList;
-    }
-
     protected void adjustForComma(Decimal divisor, Decimal dividend, Decimal divisorAsList, Decimal dividendAsList) {
         if (divisor.getNumberList().get(Location.RIGHT.getIndex()).size() > dividend.getNumberList().get(Location.RIGHT.getIndex()).size()) {
             for (int i = 0; divisor.getNumberList().get(Location.RIGHT.getIndex()).size() - dividend.getNumberList().get(Location.RIGHT.getIndex()).size() > i; i++) {

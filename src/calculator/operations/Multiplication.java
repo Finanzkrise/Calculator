@@ -45,7 +45,7 @@ public class Multiplication extends CalcHelper implements IOperation {
 
         multiplayIntInt(number1, number2);
         multiplyIntDecimal(number1, number2);
-        multiplyIntDecimal(number2, number1);
+        multiplyIntDecimal(number2, number1);   //
         multiplyDecimalDecimal(number1, number2);
 
         for (Decimal tempResult : decimalList) {
@@ -111,13 +111,13 @@ public class Multiplication extends CalcHelper implements IOperation {
                     resultLeftOfComma.add(0, tempResult);
                 }
             }
-            if (numberTwoIndex >= numberOneIndex) {
+            while (resultRightOfComma.size() <= numberTwoIndex) {
                 resultRightOfComma.add(0, multiplyTwoDigits(0, 0));
-
-            } else {
-                resultLeftOfComma.add(0, multiplyTwoDigits(0, 0));
             }
+            resultLeftOfComma.add(0, multiplyTwoDigits(0, 0));
+
             decimalList.add(new Decimal(resultLeftOfComma, resultRightOfComma));
+            System.out.println(decimalList);
         }
     }
 
