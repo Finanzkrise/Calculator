@@ -132,26 +132,24 @@ public class Decimal {
         return "";
     }
 
-
-    // string buffer implementieren
     @Override
     public String toString() {
-        StringBuffer zahl = new StringBuffer();
-        zahl.append(getVorzeichen());
+        StringBuilder result = new StringBuilder();
+        result.append(getVorzeichen());
         for (int i = 0; numberList.get(Location.LEFT.getIndex()).size() > i; i++) {
-            zahl.append(numberList.get(Location.LEFT.getIndex()).get(i));
+            result.append(numberList.get(Location.LEFT.getIndex()).get(i));
         }
-        /*
-        if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)) {
-            return zahl;
+    /*
+        if (getNumberList().get(Location.RIGHT.getIndex()).isEmpty() || (this.getNumberList().get(Location.RIGHT.getIndex()).size() == 1 && this.getNumberList().get(Location.RIGHT.getIndex()).get(0) == 0)) {
+            return result.toString();
         }
-         */
-        zahl.append(",");
+     */
+        result.append(",");
         for (int i = 0; numberList.get(Location.RIGHT.getIndex()).size() > i; i++) {
-            zahl.append(numberList.get(Location.RIGHT.getIndex()).get(i));
+            result.append(numberList.get(Location.RIGHT.getIndex()).get(i));
         }
 
-        return zahl.toString();
+        return result.toString();
     }
 
 }

@@ -138,8 +138,7 @@ public class Multiplication extends CalcHelper implements IOperation {
     }
 
     public int setOverflow(int product) {
-        int overflow = product / 10;
-        return overflow;
+        return product / 10;
     }
 
 }

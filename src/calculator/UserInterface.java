@@ -5,7 +5,7 @@ import calculator.operations.*;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private static final String VALID_OPERATORS = "[*+-/^%r]";
 
     public void useProgram() {
@@ -13,27 +13,13 @@ public class UserInterface {
         String operatorSign = getOperator();
         Decimal number2 = getNumber();
         switch (operatorSign) {
-            case "+":
-                System.out.println("Ergebnis: " + new Addition(number1, number2).getResult());
-                break;
-            case "-":
-                System.out.println("Ergebnis: " + new Subtraction(number1, number2).getResult());
-                break;
-            case "*":
-                System.out.println("Ergebnis: " + new Multiplication(number1, number2).getResult());
-                break;
-            case "/":
-                System.out.println("Ergebnis: " + new Division(number1, number2).getResult());
-                break;
-            case "^":
-                System.out.println("Ergebnis: " + new Exponentiation(number1, number2).getResult());
-                break;
-            case "%":
-                System.out.println("Ergebnis: " + new Modulo(number1, number2).getResult());
-                break;
-            case "r":
-                System.out.println("Ergebnis: " + new RootExtraction(number1, number2).getResult());
-                break;
+            case "+" -> System.out.println("Ergebnis: " + new Addition(number1, number2).getResult());
+            case "-" -> System.out.println("Ergebnis: " + new Subtraction(number1, number2).getResult());
+            case "*" -> System.out.println("Ergebnis: " + new Multiplication(number1, number2).getResult());
+            case "/" -> System.out.println("Ergebnis: " + new Division(number1, number2).getResult());
+            case "^" -> System.out.println("Ergebnis: " + new Exponentiation(number1, number2).getResult());
+            case "%" -> System.out.println("Ergebnis: " + new Modulo(number1, number2).getResult());
+            case "r" -> System.out.println("Ergebnis: " + new RootExtraction(number1, number2).getResult());
         }
     }
 

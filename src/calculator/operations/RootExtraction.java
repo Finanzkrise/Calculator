@@ -24,9 +24,8 @@ public class RootExtraction extends DivisionHelper implements IOperation {
         Decimal result = new Decimal();
         Decimal tempDividend = new Decimal();
         Decimal tempDividendBuffer = new Decimal();
-        Decimal tempSubtrahend = new Decimal();
-        Decimal index = new Decimal("1");
-        int numbersWritten = 0;
+        Decimal tempSubtrahend;
+        Decimal index;
 
         Decimal radicand = getDecimalAsList(number1);
         Decimal degree = getDecimalAsList(number2);

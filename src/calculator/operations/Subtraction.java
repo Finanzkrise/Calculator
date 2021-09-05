@@ -22,7 +22,7 @@ public class Subtraction extends CalcHelper implements IOperation {
     }
 
     public Decimal subtract(Decimal minuend, Decimal subtrahend) {
-        substractNumbersRightOfComma(minuend, subtrahend);
+        subtractNumbersRightOfComma(minuend, subtrahend);
         substractNumbersLeftOfComma(minuend, subtrahend);
         result = new Decimal(resultLeftOfComma, resultRightOfComma);
         return result;
@@ -81,20 +81,20 @@ public class Subtraction extends CalcHelper implements IOperation {
     private void substractNumbersLeftOfComma(Decimal minuend, Decimal substrahend) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.LEFT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitLeftOfComma(i, minuend, Location.LEFT.getIndex()), getDigitLeftOfComma(i, substrahend, Location.LEFT.getIndex()));
+            int tempResult = subtractTwoDigits(getDigitLeftOfComma(i, minuend, Location.LEFT.getIndex()), getDigitLeftOfComma(i, substrahend, Location.LEFT.getIndex()));
             resultLeftOfComma.add(0, tempResult);
         }
     }
 
-    private void substractNumbersRightOfComma(Decimal minuend, Decimal substrahend) {
+    private void subtractNumbersRightOfComma(Decimal minuend, Decimal substrahend) {
         int lengthOfLongerNumber = getLengthOfLongerNumberSection(minuend, substrahend, Location.RIGHT.getIndex());
         for (int i = 0; lengthOfLongerNumber > i; i++) {
-            int tempResult = substractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, Location.RIGHT.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, Location.RIGHT.getIndex()));
+            int tempResult = subtractTwoDigits(getDigitRightOfComma(lengthOfLongerNumber, i, minuend, Location.RIGHT.getIndex()), getDigitRightOfComma(lengthOfLongerNumber, i, substrahend, Location.RIGHT.getIndex()));
             resultRightOfComma.add(0, tempResult);
         }
     }
 
-    public int substractTwoDigits(int minuend, int subtrahend) {
+    public int subtractTwoDigits(int minuend, int subtrahend) {
         int result = (minuend - subtrahend) - isOverflow();
         result = setOverflow(result);
         return result;
