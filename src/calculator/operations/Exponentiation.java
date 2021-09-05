@@ -1,11 +1,12 @@
 package calculator.operations;
 
 import calculator.Decimal;
+import calculator.Location;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 
-public class Exponentiation extends CalcHelper implements  IOperation {
+public class Exponentiation extends DivisionHelper implements IOperation {
     Logger logger = LogManager.getLogger(Exponentiation.class);
 
     public Exponentiation(Decimal number1, Decimal number2) {
@@ -21,15 +22,21 @@ public class Exponentiation extends CalcHelper implements  IOperation {
 
     @Override
     void executeOperation(Decimal number1, Decimal number2) {
-        result = exponantiate(number1,number2);
+        result = exponantiate(number1, number2);
     }
 
     private Decimal exponantiate(Decimal number1, Decimal number2) {
-        Decimal result = number1;
-        while (!isDecimalHigherThanDecimal(new Decimal("2"), number2)) {
-            number2 = new Subtraction().operate(number2, new Decimal("1"));
+        Decimal result = new Decimal(number1);
+        Decimal exponent = getDecimalAsList(number2);
+        Decimal degree = new Decimal(String.valueOf(number2.getNumberList().get(Location.RIGHT.getIndex()).size() * 10));
+
+        while (!isDecimalHigherThanDecimal(new Decimal("2"), exponent)) {
+            exponent = exponent.decrement();
             result = new Multiplication().operate(result, number1);
             System.out.println("tempresult: " + result);
+        }
+        if (isDecimalHigherThanDecimal(degree, new Decimal("0"))) {
+            result = new RootExtraction(result, degree).getResult();
         }
         return result;
     }

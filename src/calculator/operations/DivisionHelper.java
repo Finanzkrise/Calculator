@@ -15,6 +15,7 @@ public abstract class DivisionHelper extends CalcHelper {
 
     protected void divisionSteps(Decimal tempDividend, int numbersWritten, int dividendInitialLength, Decimal divisorAsList, Decimal dividendAsList) {
         int digitOfResult;
+
         while (!tempDividend.toString().equals("0,0") || !dividendAsList.getNumberList().get(Location.LEFT.getIndex()).isEmpty()) {
             digitOfResult = 0;
 
@@ -33,6 +34,7 @@ public abstract class DivisionHelper extends CalcHelper {
 
     protected Decimal getDecimalAsList(Decimal number) {
         Decimal divisorAsList = new Decimal();
+
         for (int i = 0; number.getNumberList().get(Location.LEFT.getIndex()).size() > i; i++) {
             divisorAsList.getNumberList().get(Location.LEFT.getIndex()).add(number.getNumberList().get(Location.LEFT.getIndex()).get(i));
         }

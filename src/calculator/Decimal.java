@@ -136,20 +136,22 @@ public class Decimal {
     // string buffer implementieren
     @Override
     public String toString() {
-        String zahl = getVorzeichen();
+        StringBuffer zahl = new StringBuffer();
+        zahl.append(getVorzeichen());
         for (int i = 0; numberList.get(Location.LEFT.getIndex()).size() > i; i++) {
-            zahl += numberList.get(Location.LEFT.getIndex()).get(i);
+            zahl.append(numberList.get(Location.LEFT.getIndex()).get(i));
         }
         /*
         if (this.getNumberList().get(RIGHT_OF_COMMA).isEmpty() || (this.getNumberList().get(RIGHT_OF_COMMA).size() == 1 && this.getNumberList().get(RIGHT_OF_COMMA).get(0) == 0)) {
             return zahl;
         }
          */
-        zahl += ",";
+        zahl.append(",");
         for (int i = 0; numberList.get(Location.RIGHT.getIndex()).size() > i; i++) {
-            zahl += numberList.get(Location.RIGHT.getIndex()).get(i);
+            zahl.append(numberList.get(Location.RIGHT.getIndex()).get(i));
         }
-        return zahl;
+
+        return zahl.toString();
     }
 
 }

@@ -144,6 +144,4 @@ public abstract class CalcHelper {
     }
 
 
-
-
 }

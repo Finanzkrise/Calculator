@@ -12,6 +12,7 @@ public class Multiplication extends CalcHelper implements IOperation {
     int overflow = 0;
     List<Decimal> decimalList = new ArrayList<>();
     Logger logger = LogManager.getLogger(Multiplication.class);
+
     public Multiplication() {
     }
 
@@ -45,7 +46,7 @@ public class Multiplication extends CalcHelper implements IOperation {
 
         multiplayIntInt(number1, number2);
         multiplyIntDecimal(number1, number2);
-        multiplyIntDecimal(number2, number1);   //
+        multiplyIntDecimal(number2, number1);
         multiplyDecimalDecimal(number1, number2);
 
         for (Decimal tempResult : decimalList) {
